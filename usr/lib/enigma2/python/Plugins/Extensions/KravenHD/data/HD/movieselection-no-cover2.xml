@@ -1,0 +1,31 @@
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="MovieSelection" position="0,0" size="1280,720" title="">
+	<!--*MovieSelection*-->
+    <widget name="waitingtext" position="0,0" size="0,0" />
+	<eLabel text="MovieSelection" position="42,7" size="736,46" backgroundColor="KravenIBbg2" font="Regular2;34" foregroundColor="KravenIBGFont2" halign="left" valign="center" transparent="1" />
+    <widget backgroundColor="Kravenbg" name="list" position="491,102" size="747,540" fontName="Regular" fontSizesOriginal="22,20,20" fontSizesCompact="22,20" fontSizesMinimal="22,20" itemHeights="90,54,30" selectionPixmap="KravenHD/graphics/sel_90.png" pbarShift="7" pbarHeight="16" pbarLargeWidth="48" partIconeShiftMinimal="5" partIconeShiftCompact="5" partIconeShiftOriginal="5" spaceIconeText="4" iconsWidth="25" trashShift="3" dirShift="3" spaceRight="2" columnsOriginal="200,220" columnsCompactDescription="140,160,180" compactColumn="220" treeDescription="180" foregroundColor="KravenFont1" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" />
+	<widget source="Service" render="Label" position="497,70" size="444,27" font="Regular;22" foregroundColor="KravenFont2" backgroundColor="Kravenbg" transparent="1" noWrap="1" halign="left">
+	  <convert type="KravenHDDiskSpace">path</convert>
+	</widget>
+	<widget source="Service" render="Label" position="946,70" size="292,27" font="Regular;22" foregroundColor="KravenFont2" backgroundColor="Kravenbg" transparent="1" halign="right">
+	  <convert type="KravenHDDiskSpace">both</convert>
+	</widget>
+	<widget source="Service" render="Label" position="42,65" size="432,60" font="Regular;24" halign="left" backgroundColor="Kravenbg" foregroundColor="KravenFont2" transparent="1">
+	  <convert type="EventName">Name</convert>
+	</widget>
+	<widget source="Service" render="Label" position="42,135" size="432,27" font="Regular;22" halign="left" backgroundColor="Kravenbg" foregroundColor="KravenFont1" noWrap="1" transparent="1" zPosition="1">
+	  <convert type="MovieInfo">RecordServiceName</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg" font="Regular;24" foregroundColor="KravenFont1" position="42,175" render="KravenHDRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=5000,steptime=90,wrap=1,always=0,repeat=2,oneshot=1" size="432,420" source="Service" transparent="1" valign="top">
+	  <convert type="EventName">FullDescription</convert>
+	</widget>
+	<widget source="Service" render="Label" position="42,615" size="100,25" font="Regular;20" halign="left" backgroundColor="Kravenbg" foregroundColor="KravenFont2" transparent="1" zPosition="1">
+	  <convert type="ServiceTime">Duration</convert>
+	  <convert type="ClockToText">AsLength</convert>
+	</widget>
+	<widget source="Service" render="Label" position="307,615" size="162,25" font="Regular;20" halign="right" backgroundColor="Kravenbg" foregroundColor="KravenFont2" transparent="1" zPosition="1">
+	  <convert type="MovieInfo">FileSize</convert>
+	</widget>
+	<panel name="EMCSelection-template"/>
+    <panel name="gradient-emc"/>
+  </screen>

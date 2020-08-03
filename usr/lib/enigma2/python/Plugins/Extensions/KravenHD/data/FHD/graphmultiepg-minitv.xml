@@ -1,0 +1,49 @@
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="GraphMultiEPG" position="0,0" size="1920,1080" title="Electronic Program Guide">
+	<!--*GraphMultiEPG*-->
+    <eLabel text="GraphMultiEPG" position="63,10" size="537,69" backgroundColor="KravenIBbg5" font="Regular2;51" foregroundColor="KravenIBGFont2" transparent="1" halign="left" valign="center" />
+    <widget backgroundColor="KravenIBbg5" source="Title" render="Label" font="Regular;32" foregroundColor="KravenIBGFont2" position="660,24" size="600,41" halign="center" transparent="1" zPosition="3" />
+	<widget source="global.CurrentTime" render="Label" backgroundColor="KravenIBbg5" foregroundColor="KravenIBGFont1" position="1707,24" size="150,42" font="Regular;39" halign="right" transparent="1" valign="center">
+      <convert type="KravenHDClockToText">Default</convert>
+    </widget>
+    <widget backgroundColor="black" name="list" position="63,498" size="1794,450" EventBorderWidth="2" font="Regular;30" itemHeight="90" EntryFont="Regular;30" ServiceFont="Regular;30" scrollbarMode="never" transparent="0" />
+    <widget backgroundColor="Kravenbg2" font="Regular2;42" foregroundColor="KravenFont2" position="63,112" render="Label" size="1140,58" source="Event" transparent="1">
+      <convert type="KravenHDEventName">Name</convert>
+    </widget>
+    <widget backgroundColor="Kravenbg2" font="Regular;30" foregroundColor="KravenFont1" halign="left" position="63,178" render="Label" size="97,33" source="Event" transparent="1">
+      <convert type="KravenHDEventTime">StartTime</convert>
+      <convert type="KravenHDClockToText">Format:%H:%M </convert>
+    </widget>
+    <widget backgroundColor="Kravenbg2" borderWidth="0" position="160,196" render="Progress" size="720,7" source="Event" transparent="1" zPosition="20" foregroundColor="KravenProgress" pixmap="KravenHD/progress/progress480.png">
+      <convert type="KravenHDEventTime">Progress</convert>
+    </widget>
+    <eLabel backgroundColor="KravenLine" position="160,199" size="720,1" />
+    <widget backgroundColor="Kravenbg2" font="Regular;30" foregroundColor="KravenFont1" halign="right" position="880,178" render="Label" size="97,33" source="Event" transparent="1">
+      <convert type="KravenHDEventTime">EndTime</convert>
+      <convert type="KravenHDClockToText">Format:%H:%M</convert>
+    </widget>
+	<widget backgroundColor="Kravenbg2" render="Label" source="Event" font="Regular2;30" foregroundColor="KravenFont2" position="1020,178" size="225,38" halign="right" transparent="1">
+	  <convert type="EventTime">StartTime</convert>
+	  <convert type="KravenHDClockToText">Format:%a %d.%b</convert>
+	</widget>
+    <widget source="session.VideoPicture" render="Pig" position="1305,120" size="552,310" zPosition="3" backgroundColor="transparent" />
+    <eLabel backgroundColor="#00000000" position="1305,120" size="552,310" transparent="0" zPosition="2" />
+    <eLabel backgroundColor="KravenBorder2" position="1305,120" size="552,4" transparent="0" zPosition="4" />
+    <eLabel backgroundColor="KravenBorder2" position="1305,426" size="552,4" transparent="0" zPosition="4" />
+    <eLabel backgroundColor="KravenBorder2" position="1305,120" size="4,310" transparent="0" zPosition="4" />
+    <eLabel backgroundColor="KravenBorder2" position="1853,120" size="4,310" transparent="0" zPosition="4" />
+	<widget name="timeline_text" position="63,457" size="1794,37" font="Regular;30" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg2" foregroundColor="KravenFont1" />
+    <widget name="timeline0" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
+    <widget name="timeline1" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
+    <widget name="timeline2" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
+    <widget name="timeline3" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
+    <widget name="timeline4" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
+    <widget name="timeline5" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
+	<widget name="timeline_now" position="0,490" zPosition="2" size="22,465" pixmap="KravenHD/epg/timeline-gme.png" alphatest="blend" />
+    <!-- nontransbg */-->
+	<panel name="gradient-menu"/>
+    <panel name="GEMT-small"/>
+    <panel name="NameRedGreenYellowBlue2"/>
+    <constant-widget name="Colorbuttons"/>
+    <constant-widget name="MenuOKExit"/>
+  </screen>

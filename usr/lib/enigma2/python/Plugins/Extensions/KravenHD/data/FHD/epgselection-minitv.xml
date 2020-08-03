@@ -1,0 +1,49 @@
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="EPGSelection" position="0,0" size="1920,1080" title="EPG Selection">
+	<!--*EPGSelection*-->
+    <widget backgroundColor="Kravenbg2" alphatest="blend" position="63,120" render="Picon" size="96,54" source="Service" transparent="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget backgroundColor="Kravenbg2" font="Regular2;35" halign="left" noWrap="1" foregroundColor="KravenFont2" position="195,124" size="972,45" render="Label" source="Service" valign="center" transparent="1">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+	<widget backgroundColor="Kravenbg2" name="list" foregroundColor="KravenFont1" setEventItemFont="Regular;35" setEventTimeFont="Regular;29" setTimeWidth="150" setIconDistance="12" setIconShift="0" setColWidths="90,204" setColGap="15" itemHeight="48" position="63,210" size="1104,720" selectionPixmap="KravenHD/graphics/sel_36.png" zPosition="3" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="MenuOKExit"/>
+    <panel name="EPGSelection-nontransbg-template"/>
+  </screen>
+
+  <screen name="EPGSelectionMulti" position="0,0" size="1920,1080" title="EPG Selection" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*EPGSelectionMulti*-->
+    <widget name="now_button_sel" pixmap="KravenHD/now.png" position="63,177" size="225,7" />
+    <widget name="next_button_sel" pixmap="KravenHD/next.png" position="288,177" size="225,7" />
+    <widget name="more_button_sel" pixmap="KravenHD/next.png" position="513,177" size="225,7" />
+    <widget backgroundColor="Kravenbg2" font="Regular2;33" foregroundColor="KravenFont2" halign="center" name="now_text" position="63,120" size="225,45" text="NOW" valign="center" transparent="1" />
+    <widget backgroundColor="Kravenbg2" font="Regular2;33" foregroundColor="KravenFont2" halign="center" name="next_text" position="288,120" size="225,45" text="NEXT" valign="center" transparent="1" />
+    <widget backgroundColor="Kravenbg2" font="Regular2;33" foregroundColor="KravenFont2" halign="center" name="more_text" position="513,120" size="225,45" text="MORE" valign="center" transparent="1" />
+    <widget backgroundColor="Kravenbg2" font="Regular2;33" foregroundColor="KravenFont2" halign="right" name="date" position="792,120" size="375,45" valign="center" transparent="1" />
+	<widget backgroundColor="Kravenbg2" name="list" foregroundColor="KravenFont1" setEventItemFont="Regular;37" setEventTimeFont="Regular;30" setTimeWidth="155" setIconDistance="12" setIconShift="0" setColWidths="345,173" setColGap="15" itemHeight="52" position="63,202" size="1104,735" selectionPixmap="KravenHD/graphics/sel_36.png" zPosition="3" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="MenuOKExit"/>
+    <panel name="EPGSelection-nontransbg-template"/>
+  </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="EventView" position="0,0" size="1920,1080" title="Eventview">
+	<!--*EventView*-->
+    <panel name="Background"/>
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="MenuOKExit"/>
+    <panel name="EventView-nontransbg-template"/>
+  </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="EventViewSimple" position="0,0" size="1920,1080" title="Eventview">
+	<!--*EventViewSimple*-->
+    <panel name="Background"/>
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="MenuOKExit"/>
+    <panel name="EventView-nontransbg-template"/>
+  </screen>
