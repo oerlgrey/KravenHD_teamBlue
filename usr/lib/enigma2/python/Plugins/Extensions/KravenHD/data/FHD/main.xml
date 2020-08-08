@@ -2073,29 +2073,7 @@
   <screen name="About" position="0,0" size="1920,1080" title="About" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*About*-->
     <widget source="AboutHeader" render="Label" position="63,10" size="1500,69" backgroundColor="KravenIBbg3" font="Regular2;50" foregroundColor="KravenIBGFont2" transparent="1" halign="left" valign="center" />
-    <widget source="KernelVersion" render="Label" position="63,120" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="session.CurrentService" render="Label" position="63,165" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1">
-      <convert type="STBInfo">DriverInfo,Full</convert>
-    </widget>
-    <widget source="EnigmaVersion" render="Label" position="63,210" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="FlashDate" render="Label" position="63,255" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="ImageVersion" render="Label" position="63,300" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="session.CurrentService" render="Label" position="63,345" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1">
-      <convert type="STBInfo">LoadAvg,Full</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="63,390" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1">
-      <convert type="STBInfo">FlashInfo,Full</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="63,435" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1">
-      <convert type="STBInfo">MemTotal,Full</convert>
-    </widget>
-    <widget source="TunerHeader" render="Label" position="63,480" size="1104,41" font="Regular2;32" foregroundColor="KravenFont2" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="Tuner0" render="Label" position="63,525" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="Tuner1" render="Label" position="63,570" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="Tuner2" render="Label" position="63,615" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="Tuner3" render="Label" position="63,660" size="1104,41" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="HDDHeader" render="Label" position="63,705" size="1104,41" font="Regular2;32" foregroundColor="KravenFont2" backgroundColor="Kravenbg3" transparent="1" />
-    <widget source="hddA" render="Label" position="63,750" size="1104,164" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
+	<widget name="AboutScrollLabel" split="1" dividechar=":" position="63,120" size="1104,810" valign="top" font="Regular;32" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" halign="left" noWrap="1"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
 	<panel name="Colorbuttons"/>
@@ -2657,6 +2635,16 @@
 	<panel name="Exit"/>
   </screen>
 
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="ZapHistoryConfigurator" position="0,0" size="1920,1080" title="Setup">
+	<!--*ZapHistoryConfigurator*-->
+	<widget backgroundColor="Kravenbg3" name="config" font="Regular;32" foregroundColor="KravenFont1" itemHeight="45" selectionPixmap="KravenHD/graphics/sel_30.png" position="63,120" size="1104,810" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" />
+    <panel name="Title-big"/>
+  	<!-- Logo -->
+	<panel name="gradient-menu"/>
+	<panel name="Colorbuttons"/>
+	<panel name="OKExit"/>
+  </screen>
+
   <screen backgroundColor="transparent" flags="wfNoBorder" name="SoftcamStartup" position="0,0" size="1920,1080" title="SoftcamSetup">
 	<!--*SoftcamStartup*-->
 	<widget backgroundColor="Kravenbg3" name="config" font="Regular;32" foregroundColor="KravenFont1" itemHeight="45" selectionPixmap="KravenHD/graphics/sel_30.png" position="63,120" size="1104,810" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" />
@@ -2811,7 +2799,7 @@
       <convert type="KravenHDClockToText">Default</convert>
     </widget>
     <widget backgroundColor="black" name="list" position="63,160" size="1794,765" EventBorderWidth="2" font="Regular;30" itemHeight="90" EntryFont="Regular;30" ServiceFont="Regular;30" scrollbarMode="never" transparent="0" />
-	<widget name="timeline_text" position="63,120" size="1794,37" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg2" foregroundColor="KravenFont1" />
+	<widget name="timeline_text" position="63,107" size="1794,45" font="Regular;32" itemHeight="45" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg2" foregroundColor="KravenFont1" />
     <widget name="timeline0" backgroundColor="orange" position="0,160" size="1,765" zPosition="1" />
     <widget name="timeline1" backgroundColor="orange" position="0,160" size="1,765" zPosition="1" />
     <widget name="timeline2" backgroundColor="orange" position="0,160" size="1,765" zPosition="1" />
@@ -2822,19 +2810,20 @@
     <!-- nontransbg */-->
 	<panel name="gradient-menu"/>
     <panel name="NameRedGreenYellowBlue2"/>
-    <constant-widget name="Colorbuttons"/>
-    <constant-widget name="MenuOKExit"/>
+    <panel name="Colorbuttons"/>
+    <panel name="MenuOKExit"/>
   </screen>
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="GraphMultiEpgSetup" position="0,0" size="1920,1080" title="Electronic Program Guide Setup">
 	<!--*GraphMultiEpgSetup*-->
-    <constant-widget name="Title-big"/>
+    <panel name="Title-big"/>
  	<widget backgroundColor="Kravenbg3" name="config" font="Regular;32" foregroundColor="KravenFont1" itemHeight="45" selectionPixmap="KravenHD/graphics/sel_30.png"  position="63,120" size="1104,810" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
  	<!-- Logo -->
+	<panel name="gradient-menu"/>
     <widget font="Regular;30" halign="left" valign="center" name="canceltext" position="71,1004" size="330,39" backgroundColor="KravenIBbg3" foregroundColor="KravenButton" transparent="1" zPosition="1" />
 	<widget font="Regular;30" halign="left" valign="center" name="oktext" position="446,1004" size="330,39" backgroundColor="KravenIBbg3" foregroundColor="KravenButton" transparent="1" zPosition="1" />
-	<constant-widget name="Colorbuttons"/>
-	<constant-widget name="Exit"/>
+	<panel name="Colorbuttons"/>
+	<panel name="Exit"/>
   </screen>
 
   <screen name="NetworkAfp" position="0,0" size="1920,1080" title="AFP Setup" flags="wfNoBorder" backgroundColor="transparent">

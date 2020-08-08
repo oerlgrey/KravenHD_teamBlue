@@ -32,7 +32,7 @@
     <eLabel backgroundColor="KravenBorder2" position="870,284" size="368,3" transparent="0" zPosition="4" />
     <eLabel backgroundColor="KravenBorder2" position="870,80" size="3,207" transparent="0" zPosition="4" />
     <eLabel backgroundColor="KravenBorder2" position="1235,80" size="3,207" transparent="0" zPosition="4" />
-	<widget name="timeline_text" position="70,305" size="1168,25" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg2" foregroundColor="KravenFont1" />
+	<widget name="timeline_text" position="70,296" size="1168,30" font="Regular;22" itemHeight="30" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg2" foregroundColor="KravenFont1" />
     <widget name="timeline0" backgroundColor="orange" position="0,332" size="1,300" zPosition="1" />
     <widget name="timeline1" backgroundColor="orange" position="0,332" size="1,300" zPosition="1" />
     <widget name="timeline2" backgroundColor="orange" position="0,332" size="1,300" zPosition="1" />

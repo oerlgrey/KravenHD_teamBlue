@@ -26,7 +26,7 @@
 	  <convert type="EventTime">StartTime</convert>
 	  <convert type="KravenHDClockToText">Format:%a %d.%b</convert>
 	</widget>
-	<widget name="timeline_text" position="63,457" size="1794,37" font="Regular;30" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg" foregroundColor="KravenFont1" />
+	<widget name="timeline_text" position="63,444" size="1794,45" font="Regular;32" itemHeight="45" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg" foregroundColor="KravenFont1" />
     <widget name="timeline0" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
     <widget name="timeline1" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
     <widget name="timeline2" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
@@ -36,7 +36,7 @@
 	<widget name="timeline_now" position="0,490" zPosition="2" size="23,465" pixmap="KravenHD/epg/timeline-ge.png" alphatest="blend" />
     <panel name="GE-small"/>
     <panel name="NameRedGreenYellowBlue2"/>
-    <constant-widget name="Colorbuttons"/>
-    <constant-widget name="Background"/>
-    <constant-widget name="MenuOKExit"/>
+    <panel name="Colorbuttons"/>
+    <panel name="Background"/>
+    <panel name="MenuOKExit"/>
   </screen>

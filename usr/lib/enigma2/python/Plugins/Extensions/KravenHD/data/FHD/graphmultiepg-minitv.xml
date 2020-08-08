@@ -32,7 +32,7 @@
     <eLabel backgroundColor="KravenBorder2" position="1305,426" size="552,4" transparent="0" zPosition="4" />
     <eLabel backgroundColor="KravenBorder2" position="1305,120" size="4,310" transparent="0" zPosition="4" />
     <eLabel backgroundColor="KravenBorder2" position="1853,120" size="4,310" transparent="0" zPosition="4" />
-	<widget name="timeline_text" position="63,457" size="1794,37" font="Regular;30" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg2" foregroundColor="KravenFont1" />
+	<widget name="timeline_text" position="63,444" size="1794,45" font="Regular;32" itemHeight="45" selectionDisabled="1" transparent="1" zPosition="5" backgroundColor="Kravenbg2" foregroundColor="KravenFont1" />
     <widget name="timeline0" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
     <widget name="timeline1" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
     <widget name="timeline2" backgroundColor="orange" position="0,498" size="1,450" zPosition="1" />
@@ -44,6 +44,6 @@
 	<panel name="gradient-menu"/>
     <panel name="GEMT-small"/>
     <panel name="NameRedGreenYellowBlue2"/>
-    <constant-widget name="Colorbuttons"/>
-    <constant-widget name="MenuOKExit"/>
+    <panel name="Colorbuttons"/>
+    <panel name="MenuOKExit"/>
   </screen>

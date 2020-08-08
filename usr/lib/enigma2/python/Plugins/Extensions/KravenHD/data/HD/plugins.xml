@@ -2479,3 +2479,32 @@
     <panel name="NameRedGreenYellow"/>
     <panel name="OKExit"/>
   </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="PiconsUpdaterView" position="0,0" size="1280,720" title=" ">
+	<!--*PiconsUpdaterView*-->
+    <eLabel backgroundColor="KravenIBbg3" text="PiconsUpdater" font="Regular2;34" foregroundColor="KravenIBGFont2" position="42,7" size="1000,46" transparent="1" halign="left" valign="center" />
+    <widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,180" scrollbarMode="showOnDemand" zPosition="1" transparent="1" />
+	<widget backgroundColor="transparent" name="backgroundImage" position="160,260" size="500,300" zPosition="1" alphatest="blend" transparent="1"/>
+	<widget backgroundColor="transparent" name="previewImage" position="185,275" size="450,270" zPosition="1" alphatest="blend" transparent="1"/>
+	<widget backgroundColor="transparent" name="foregroundImage" position="160,260" size="500,300" zPosition="1" alphatest="blend" transparent="1"/>
+	<eLabel backgroundColor="Kravenbg3" text="coded by svox, idea by arn354" position="42,575" size="736,27" font="Regular2;22" foregroundColor="KravenFont2" halign="center" valign="center" zPosition="1" transparent="1"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <eLabel text="Cancel" position="47,670" size="220,26" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="KravenIBbg3" foregroundColor="KravenButton" transparent="1" />
+    <eLabel text="Save" position="297,670" size="220,26" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="KravenIBbg3" foregroundColor="KravenButton" transparent="1" />
+    <eLabel text="Download Picons" position="547,670" size="220,26" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="KravenIBbg3" foregroundColor="KravenButton" transparent="1" />
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="JobProgressView" position="0,0" size="1280,720" title="Job Progress">
+	<!--*JobProgressView*-->
+	<widget backgroundColor="Kravenbg3" source="titleText" render="Label" position="42,80" size="736,27" font="Regular;22" foregroundColor="KravenFont1" zPosition="1" transparent="1" />
+    <widget name="downloadProgress" borderColor="KravenBorder" borderWidth="3" position="42,120" size="736,15" transparent="1" foregroundColor="KravenProgress" pixmap="KravenHD/progress/progress736.png" />
+	<widget backgroundColor="Kravenbg3" source="downloadProgressText" render="Label" position="42,148" size="736,27" font="Regular;22" foregroundColor="KravenFont1" zPosition="1" transparent="1" />
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Title-big"/>
+    <panel name="Colorbuttons"/>
+    <panel name="OKExit"/>
+  </screen>
