@@ -86,6 +86,9 @@
     <parameter name="ServiceInfo_I" value="20,0,1100,40" />
     <parameter name="ServiceInfo_II" value="20,0,1100,40" />
     <parameter name="ServiceInfo_III" value="630,0,1100,40" />
+	<parameter name="ServiceInfo" value="9,1,480,41" />
+	<parameter name="ServiceInfoLeft" value="9,1,480,41" />
+	<parameter name="ServiceInfoRight" value="495,1,600,41" />
     <!-- AudioSelection -->
     <parameter name="AudioSelectionSliderSeparation" value="300" />
     <!-- general slider separation in config menues -->
@@ -136,6 +139,22 @@
 	<parameter name="EpgListMulti" value="240,150,120,15"/>
 	<parameter name="EpgListMultiProgressBar" value="105,15,1"/>
 	<parameter name="EpgListSingle" value="88,220"/>
+	<!-- Time settings -->
+	<parameter name="AllowUserDatesAndTimes" value="1,1"/>
+	<!-- WeatherPlugin -->
+	<parameter name="WeatherPluginEntryListFont1" value="Regular;32"/>
+	<parameter name="WeatherPluginEntryListFont2" value="Regular;30"/>
+	<parameter name="WeatherPluginCity" value="15,2,892,41"/>
+	<parameter name="WeatherPluginDegreetype" value="909,2,180,41"/>
+	<parameter name="WeatherPluginSearchResultListFont1" value="Regular;32"/>
+	<parameter name="WeatherPluginSearchResultListFont2" value="Regular;32"/>
+	<parameter name="WeatherPluginSearchlocation" value="15,2,1074,41"/>
+	<parameter name="WeatherPluginSearchresult" value="15,47,1074,41"/>
+	<!-- ZapHistoryBrowser -->
+	<parameter name="ZapHistoryBrowserListFont1" value="Regular;32"/>
+	<parameter name="ZapHistoryBrowserListFont2" value="Regular;30"/>
+	<parameter name="ZapHistoryBrowserServiceName" value="15,3,1074,41"/>
+	<parameter name="ZapHistoryBrowserEventName" value="15,45,1074,38"/>
   </parameters>
   <fonts>
 	<alias name="FileList" font="Regular" size="32" height="45" />

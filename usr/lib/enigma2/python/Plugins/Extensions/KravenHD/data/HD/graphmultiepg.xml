@@ -6,7 +6,7 @@
 	<widget source="global.CurrentTime" render="Label" backgroundColor="KravenIBbg2" foregroundColor="KravenIBGFont1" position="1138,16" size="100,28" font="Regular;26" halign="right" transparent="1" valign="center">
       <convert type="KravenHDClockToText">Default</convert>
     </widget>
-    <widget backgroundColor="black" name="list" position="42,332" size="1196,300" EventBorderWidth="2" font="Regular;20" itemHeight="60" EntryFont="Regular;20" ServiceFont="Regular;20" scrollbarMode="never" transparent="0" />
+    <widget backgroundColor="black" name="list" position="42,332" size="1196,300" EventBorderWidth="2" font="Regular;20" itemHeight="60" EntryFont="Regular;20" ServiceFont="Regular;20" EntryForegroundColorSelected="KravenSelFont" scrollbarMode="never" transparent="0" />
     <widget backgroundColor="Kravenbg" font="Regular2;28" foregroundColor="KravenFont2" position="42,75" render="Label" size="1196,39" source="Event" transparent="1">
       <convert type="KravenHDEventName">Name</convert>
     </widget>

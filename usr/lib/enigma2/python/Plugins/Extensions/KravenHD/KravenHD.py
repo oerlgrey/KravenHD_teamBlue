@@ -442,6 +442,7 @@ config.plugins.KravenHD.InfobarStyle = ConfigSelection(default="infobar-style-x3
 				("infobar-style-x1", _("X1")),
 				("infobar-style-x2", _("X2")),
 				("infobar-style-x3", _("X3")),
+				("infobar-style-x4", _("X4")),
 				("infobar-style-z1", _("Z1")),
 				("infobar-style-z2", _("Z2")),
 				("infobar-style-zz1", _("ZZ1")),
@@ -507,14 +508,6 @@ config.plugins.KravenHD.ChannelSelectionServiceNAList = ConfigSelection(default=
 config.plugins.KravenHD.ChannelSelectionServiceNASelf = ConfigText(default="FFEA04")
 config.plugins.KravenHD.ChannelSelectionServiceNA = ConfigText(default="FFEA04")
 
-config.plugins.KravenHD.NumberZapExt = ConfigSelection(default="none", choices = [
-				("none", _("off")),
-				("numberzapext-xpicon", _("X-Picons")),
-				("numberzapext-zpicon", _("Z-Picons")),
-				("numberzapext-zzpicon", _("ZZ-Picons")),
-				("numberzapext-zzzpicon", _("ZZZ-Picons"))
-				])
-
 config.plugins.KravenHD.NZBorderList = ConfigSelection(default="ffffff", choices = ColorSelfList)
 config.plugins.KravenHD.NZBorderSelf = ConfigText(default="ffffff")
 config.plugins.KravenHD.NZBorder = ConfigText(default="ffffff")
@@ -546,6 +539,16 @@ config.plugins.KravenHD.MovieSelection = ConfigSelection(default="movieselection
 config.plugins.KravenHD.EPGSelection = ConfigSelection(default="epgselection-standard", choices = [
 				("epgselection-standard", _("standard")),
 				("epgselection-minitv", _("MiniTV"))
+				])
+
+config.plugins.KravenHD.EPGListSize = ConfigSelection(default="small", choices = [
+				("small", _("small")),
+				("big", _("big"))
+				])
+
+config.plugins.KravenHD.EPGSelectionEPGSize = ConfigSelection(default="small", choices = [
+				("small", _("small")),
+				("big", _("big"))
 				])
 
 config.plugins.KravenHD.EMCStyle = ConfigSelection(default="emc-minitv", choices = [
@@ -725,11 +728,6 @@ config.plugins.KravenHD.ShowUnusedTuner = ConfigSelection(default="on", choices 
 				("on", _("on")),
 				("none", _("off"))
 				])
-
-config.plugins.KravenHD.ShowAgcSnr = ConfigSelection(default="none", choices = [
-				("on", _("on")),
-				("none", _("off"))
-				])
 				
 config.plugins.KravenHD.Infobox = ConfigSelection(default="sat", choices = [
 				("sat", _("Tuner/Satellite + SNR")),
@@ -771,14 +769,6 @@ config.plugins.KravenHD.MainmenuFontsize = ConfigSelection(default="mainmenu-big
 				("mainmenu-middle", _("middle")),
 				("mainmenu-big", _("big"))
 				])
-
-config.plugins.KravenHD.MainmenuHorTitleFontList = ConfigSelection(default="F0A30A", choices = ColorSelfList)
-config.plugins.KravenHD.MainmenuHorTitleFontSelf = ConfigText(default="F0A30A")
-config.plugins.KravenHD.MainmenuHorTitleFont = ConfigText(default="F0A30A")
-
-config.plugins.KravenHD.MainmenuHorIconColorList = ConfigSelection(default="3F3F3F", choices = ColorSelfList)
-config.plugins.KravenHD.MainmenuHorIconColorSelf = ConfigText(default="3F3F3F")
-config.plugins.KravenHD.MainmenuHorIconColor = ConfigText(default="3F3F3F")
 
 config.plugins.KravenHD.MenuIcons = ConfigSelection(default="stony272", choices = [
 				("stony272", _("stony272")),
@@ -905,7 +895,7 @@ config.plugins.KravenHD.CategoryChannellist = ConfigSelection(default="category"
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryNumberZap = ConfigSelection(default="category", choices = [
+config.plugins.KravenHD.CategoryEPGSelection = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
@@ -1174,9 +1164,7 @@ class KravenHD(ConfigListScreen, Screen):
 			self.actMenustyle=config.plugins.KravenHD.LogoNoInternet.value
 			emptyLines+=1
 		list.append(getConfigListEntry(_("Mainmenu Fontsize ('Standard' Style)"), config.plugins.KravenHD.MainmenuFontsize, _("Choose the font size for 'Standard' mainmenus.")))
-		list.append(getConfigListEntry(_("Mainmenu Title Color ('Horizontal' Styles)"), config.plugins.KravenHD.MainmenuHorTitleFontList, _("Choose the title font color for 'Horizontal' and 'Horizontal-Icons' mainmenus.")))
-		list.append(getConfigListEntry(_("Mainmenu Icons Gradient Color ('Horizontal-Icons' Style)"), config.plugins.KravenHD.MainmenuHorIconColorList, _("Choose the gradient color of the icons for 'Horizontal-Icons' mainmenus.")))
-		for i in range(emptyLines):
+		for i in range(emptyLines+2):
 			list.append(getConfigListEntry(_(" "), ))
 
 		# page 2
@@ -1261,7 +1249,7 @@ class KravenHD(ConfigListScreen, Screen):
 		# page 4
 		emptyLines=0
 		list.append(getConfigListEntry(_("INFOBAR-CONTENTS ________________________________________________________________________________"), config.plugins.KravenHD.CategoryInfobarContents, _("This sections offers all settings for infobar-contents.")))
-		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x2","infobar-style-z1","infobar-style-zz1","infobar-style-zzz1"):
+		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x2","infobar-style-x4","infobar-style-z1","infobar-style-zz1","infobar-style-zzz1"):
 			list.append(getConfigListEntry(_("Busy color"), config.plugins.KravenHD.TunerBusyList, _("Choose the color for engaged tuners. Press OK to define your own RGB color.")))
 			list.append(getConfigListEntry(_("Active color"), config.plugins.KravenHD.TunerLiveList, _("Choose the color for the current live tuner. Press OK to define your own RGB color.")))
 			list.append(getConfigListEntry(_("Record color"), config.plugins.KravenHD.TunerRecordList, _("Choose the color for recording tuners. Press OK to define your own RGB color.")))
@@ -1269,21 +1257,15 @@ class KravenHD(ConfigListScreen, Screen):
 			list.append(getConfigListEntry(_("Show unused Tuners"), config.plugins.KravenHD.ShowUnusedTuner, _("Choose whether unused tuners are displayed or not.")))
 		else:
 			emptyLines+=5
-		if config.plugins.KravenHD.InfobarStyle.value == "infobar-style-nopicon":
+		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x4","infobar-style-zz1","infobar-style-zzz1"):
 			list.append(getConfigListEntry(_("Infobox-Contents"), config.plugins.KravenHD.Infobox2, _("Choose which informations will be shown in the info box.")))
 			emptyLines+=1
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x1","infobar-style-x2","infobar-style-z1"):
 			list.append(getConfigListEntry(_("Infobox-Contents"), config.plugins.KravenHD.Infobox, _("Choose which informations will be shown in the info box.")))
 			emptyLines+=1
-		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zzz1"):
-			list.append(getConfigListEntry(_("Show AGC/SNR"), config.plugins.KravenHD.ShowAgcSnr, _("Choose whether AGC/SNR are displayed or not.")))
-			if config.plugins.KravenHD.ShowAgcSnr.value == "on":
-				list.append(getConfigListEntry(_("Infobox-Contents"), config.plugins.KravenHD.Infobox2, _("Choose which informations will be shown in the info box.")))
-			else:
-				list.append(getConfigListEntry(_("Infobox-Contents"), config.plugins.KravenHD.Infobox, _("Choose which informations will be shown in the info box.")))
 		else:
 			emptyLines+=2
-		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x2","infobar-style-x3","infobar-style-z1","infobar-style-z2","infobar-style-zz1"):
+		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x2","infobar-style-x3","infobar-style-x4","infobar-style-z1","infobar-style-z2","infobar-style-zz1"):
 			list.append(getConfigListEntry(_("Channelname/-number"), config.plugins.KravenHD.InfobarChannelName, _("Choose from different options to show the channel name and number in the infobar.")))
 			if not config.plugins.KravenHD.InfobarChannelName.value == "none":
 				list.append(getConfigListEntry(_("Channelname/-number-Font"), config.plugins.KravenHD.ChannelnameFontList, _("Choose the font color of channel name and number. Press OK to define your own RGB color.")))
@@ -1303,7 +1285,7 @@ class KravenHD(ConfigListScreen, Screen):
 		emptyLines=0
 		list.append(getConfigListEntry(_("WEATHER ________________________________________________________________________________"), config.plugins.KravenHD.CategoryWeather, _("This sections offers all weather settings.")))
 		if self.InternetAvailable:
-			if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x3","infobar-style-z2","infobar-style-zz1","infobar-style-zz2","infobar-style-zz3","infobar-style-zzz1"):
+			if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x3","infobar-style-x4","infobar-style-z2","infobar-style-zz1","infobar-style-zz2","infobar-style-zz3","infobar-style-zzz1"):
 				list.append(getConfigListEntry(_("Weather"), config.plugins.KravenHD.WeatherStyle, _("Choose from different options to show the weather in the infobar.")))
 				self.actWeatherstyle=config.plugins.KravenHD.WeatherStyle.value
 			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2","infobar-style-z1"):
@@ -1364,7 +1346,7 @@ class KravenHD(ConfigListScreen, Screen):
 			list.append(getConfigListEntry(_("ECM Infos"), config.plugins.KravenHD.ECMLine2, _("Choose from different options to display the ECM informations.")))
 			list.append(getConfigListEntry(_("Show 'free to air'"), config.plugins.KravenHD.FTA, _("Choose whether 'free to air' is displayed or not for unencrypted channels.")))
 			list.append(getConfigListEntry(_("ECM-Font"), config.plugins.KravenHD.ECMFontList, _("Choose the font color of the ECM information. Press OK to define your own RGB color.")))
-		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zz2","infobar-style-zz3","infobar-style-zzz1") and not config.plugins.KravenHD.ECMVisible.value == "none":
+		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1","infobar-style-zz2","infobar-style-zz3","infobar-style-zzz1") and not config.plugins.KravenHD.ECMVisible.value == "none":
 			list.append(getConfigListEntry(_("ECM Infos"), config.plugins.KravenHD.ECMLine3, _("Choose from different options to display the ECM informations.")))
 			list.append(getConfigListEntry(_("Show 'free to air'"), config.plugins.KravenHD.FTA, _("Choose whether 'free to air' is displayed or not for unencrypted channels.")))
 			list.append(getConfigListEntry(_("ECM-Font"), config.plugins.KravenHD.ECMFontList, _("Choose the font color of the ECM information. Press OK to define your own RGB color.")))
@@ -1380,7 +1362,6 @@ class KravenHD(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("SecondInfobar"), config.plugins.KravenHD.SIB, _("Choose from different styles for SecondInfobar. \nActivate the SecondInfobar in the \nOSD settings. \n2nd infobar -> 2nd Infobar INFO")))
 		list.append(getConfigListEntry(_("CoolTVGuide"), config.plugins.KravenHD.CoolTVGuide, _("Choose from different styles for CoolTVGuide.")))
 		list.append(getConfigListEntry(_("MovieSelection"), config.plugins.KravenHD.MovieSelection, _("Choose from different styles for MovieSelection.")))
-		list.append(getConfigListEntry(_("EPGSelection"), config.plugins.KravenHD.EPGSelection, _("Choose from different styles to display EPGSelection.")))
 		list.append(getConfigListEntry(_("SerienRecorder"), config.plugins.KravenHD.SerienRecorder, _("Choose whether you want the Kraven skin to be applied to 'Serienrecorder' or not. Activation of this option prohibits the skin selection in the SR-plugin.")))
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/plugin.py"):
 			list.append(getConfigListEntry(_("MediaPortal"), config.plugins.KravenHD.MediaPortal, _("Choose whether you want the Kraven skin to be applied to 'MediaPortal' or not. To remove it again, you must deactivate it here and activate another skin in 'MediaPortal'.")))
@@ -1392,7 +1373,7 @@ class KravenHD(ConfigListScreen, Screen):
 			list.append(getConfigListEntry(_("PermanentClock-Font"), config.plugins.KravenHD.PermanentClockFontList, _("Choose the font color of PermanentClock. Press OK to define your own RGB color.")))
 		else:
 			emptyLines+=1
-		for i in range(emptyLines+1):
+		for i in range(emptyLines+2):
 			list.append(getConfigListEntry(_(" "), ))
 
 		# page 7
@@ -1414,29 +1395,27 @@ class KravenHD(ConfigListScreen, Screen):
 			list.append(getConfigListEntry(_("Primetime-Font"), config.plugins.KravenHD.PrimetimeFontList, _("Choose the font color of the primetime information. Press OK to define your own RGB color.")))
 		else:
 			emptyLines+=2
-		for i in range(emptyLines+6):
+		for i in range(emptyLines+10):
 			list.append(getConfigListEntry(_(" "), ))
-
-		# page 7 (category 2)
+		
+		# page 8
 		emptyLines=0
-		list.append(getConfigListEntry(_("NUMBERZAP ________________________________________________________________________________"), config.plugins.KravenHD.CategoryNumberZap, _("This sections offers all settings for NumberZap.")))
-		list.append(getConfigListEntry(_("NumberZap-Style"), config.plugins.KravenHD.NumberZapExt, _("Choose from different styles for NumberZap.")))
-		if not config.plugins.KravenHD.NumberZapExt.value == "none":
-			list.append(getConfigListEntry(_("Border Color"), config.plugins.KravenHD.NZBorderList, _("Choose the border color for NumberZap. Press OK to define your own RGB color.")))
-		else:
-			emptyLines+=1
+		list.append(getConfigListEntry(_("EPGSELECTION ________________________________________________________________________________"), config.plugins.KravenHD.CategoryEPGSelection, _("This sections offers all settings for EPGSelection.")))
+		list.append(getConfigListEntry(_("EPGSelection-Style"), config.plugins.KravenHD.EPGSelection, _("Choose from different styles to display EPGSelection.")))
+		list.append(getConfigListEntry(_("EPG-List Fontsize"), config.plugins.KravenHD.EPGListSize, _("Choose the font size of EPG-List.")))
+		list.append(getConfigListEntry(_("EPG Fontsize"), config.plugins.KravenHD.EPGSelectionEPGSize, _("Choose the font size of event description.")))
 		for i in range(emptyLines+1):
 			list.append(getConfigListEntry(_(" "), ))
 
-		# page 8
+		# page 8 (category 2)
 		emptyLines=0
 		list.append(getConfigListEntry(_("GRAPHMULTIEPG ________________________________________________________________________________"), config.plugins.KravenHD.CategoryGraphMultiEPG, _("This sections offers all settings for GRAPHMULTIEPG.")))
 		list.append(getConfigListEntry(_("GraphMultiEPG-Style"), config.plugins.KravenHD.GraphMultiEPG, _("Choose from different styles for GraphMultiEPG.")))
 		list.append(getConfigListEntry(_("Event Description Fontsize"), config.plugins.KravenHD.GMEDescriptionSize, _("Choose the font size of event description.")))
-		for i in range(emptyLines+6):
+		for i in range(emptyLines+1):
 			list.append(getConfigListEntry(_(" "), ))
 
-		# page 8 (category 2)
+		# page 8 (category 3)
 		emptyLines=0
 		list.append(getConfigListEntry(_("ENHANCED MOVIE CENTER ________________________________________________________________________________"), config.plugins.KravenHD.CategoryEMC, _("This sections offers all settings for EMC ('EnhancedMovieCenter').")))
 		list.append(getConfigListEntry(_("EMC-Style"), config.plugins.KravenHD.EMCStyle, _("Choose from different styles for EnhancedMovieCenter.")))
@@ -1666,14 +1645,6 @@ class KravenHD(ConfigListScreen, Screen):
 			config.plugins.KravenHD.IBProgressBorderLineColor.value = config.plugins.KravenHD.IBProgressBorderLineColorSelf.value
 		else:
 			config.plugins.KravenHD.IBProgressBorderLineColor.value = config.plugins.KravenHD.IBProgressBorderLineColorList.value
-		if config.plugins.KravenHD.MainmenuHorTitleFontList.value == "self":
-			config.plugins.KravenHD.MainmenuHorTitleFont.value = config.plugins.KravenHD.MainmenuHorTitleFontSelf.value
-		else:
-			config.plugins.KravenHD.MainmenuHorTitleFont.value = config.plugins.KravenHD.MainmenuHorTitleFontList.value
-		if config.plugins.KravenHD.MainmenuHorIconColorList.value == "self":
-			config.plugins.KravenHD.MainmenuHorIconColor.value = config.plugins.KravenHD.MainmenuHorIconColorSelf.value
-		else:
-			config.plugins.KravenHD.MainmenuHorIconColor.value = config.plugins.KravenHD.MainmenuHorIconColorList.value
 
 		### global background
 		if config.plugins.KravenHD.BackgroundColor.value == "gradient":
@@ -1747,14 +1718,14 @@ class KravenHD(ConfigListScreen, Screen):
 		if (96 <= position <= 107): # views
 			self["key_yellow"].setText("<< " + _("ECM infos"))
 			self["key_blue"].setText(_("channellist") + " >>")
-		if (108 <= position <= 116): # channellist
+		if (108 <= position <= 125): # channellist
 			self["key_yellow"].setText("<< " + _("views"))
-			self["key_blue"].setText(_("NumberZap") + " >>")
-		if (122 <= position <= 124): # numberzap
+			self["key_blue"].setText(_("EPGSelection") + " >>")
+		if (126 <= position <= 129): # epgselection
 			self["key_yellow"].setText("<< " + _("channellist"))
 			self["key_blue"].setText(_("GraphMultiEPG") + " >>")
-		if (126 <= position <= 133): # graphmultiepg
-			self["key_yellow"].setText("<< " + _("NumberZap"))
+		if (131 <= position <= 133): # graphmultiepg
+			self["key_yellow"].setText("<< " + _("EPGSelection"))
 			self["key_blue"].setText(_("EMC") + " >>")
 		if (135 <= position <= 143): # emc
 			self["key_yellow"].setText("<< " + _("GraphMultiEPG"))
@@ -1935,6 +1906,16 @@ class KravenHD(ConfigListScreen, Screen):
 				self.showText(30,_("small"))
 			elif config.plugins.KravenHD.GMEDescriptionSize.value == "big":
 				self.showText(40,_("big"))
+		elif option == config.plugins.KravenHD.EPGSelectionEPGSize:
+			if config.plugins.KravenHD.EPGSelectionEPGSize.value == "small":
+				self.showText(30,_("small"))
+			elif config.plugins.KravenHD.EPGSelectionEPGSize.value == "big":
+				self.showText(40,_("big"))
+		elif option == config.plugins.KravenHD.EPGListSize:
+			if config.plugins.KravenHD.EPGListSize.value == "small":
+				self.showText(30,_("small"))
+			elif config.plugins.KravenHD.EPGListSize.value == "big":
+				self.showText(40,_("big"))
 		elif option == config.plugins.KravenHD.IBFontSize:
 			if config.plugins.KravenHD.IBFontSize.value == "small":
 				self.showText(30,_("small"))
@@ -2079,10 +2060,6 @@ class KravenHD(ConfigListScreen, Screen):
 			self.showColor(self.hexRGB(config.plugins.KravenHD.TunerRecord.value))
 		elif option == config.plugins.KravenHD.TunerXtremeBusyList:
 			self.showColor(self.hexRGB(config.plugins.KravenHD.TunerXtremeBusy.value))
-		elif option == config.plugins.KravenHD.MainmenuHorTitleFontList:
-			self.showColor(self.hexRGB(config.plugins.KravenHD.MainmenuHorTitleFont.value))
-		elif option == config.plugins.KravenHD.MainmenuHorIconColorList:
-			self.showColor(self.hexRGB(config.plugins.KravenHD.MainmenuHorIconColor.value))
 		elif option == config.plugins.KravenHD.ECMVisible:
 			if option.value == "0":
 				self.showText(36,_("Off"))
@@ -2247,14 +2224,14 @@ class KravenHD(ConfigListScreen, Screen):
 			self["config"].instance.moveSelectionTo(84)
 		if (96 <= position <= 107): # views
 			self["config"].instance.moveSelectionTo(91)
-		if (108 <= position <= 116): # channellist
+		if (108 <= position <= 125): # channellist
 			self["config"].instance.moveSelectionTo(97)
-		if (122 <= position <= 124): # numberzap
+		if (126 <= position <= 129): # epgselection
 			self["config"].instance.moveSelectionTo(109)
-		if (126 <= position <= 133): # graphmultiepg
-			self["config"].instance.moveSelectionTo(123)
-		if (135 <= position <= 143): # emc
+		if (131 <= position <= 133): # graphmultiepg
 			self["config"].instance.moveSelectionTo(127)
+		if (135 <= position <= 143): # emc
+			self["config"].instance.moveSelectionTo(132)
 		if (144 <= position <= 147): # player
 			self["config"].instance.moveSelectionTo(136)
 		if config.plugins.KravenHD.IBStyle.value == "box":
@@ -2289,11 +2266,11 @@ class KravenHD(ConfigListScreen, Screen):
 			self["config"].instance.moveSelectionTo(97)
 		if (96 <= position <= 107): # views
 			self["config"].instance.moveSelectionTo(109)
-		if (108 <= position <= 116): # channellist
-			self["config"].instance.moveSelectionTo(123)
-		if (122 <= position <= 124): # numberzap
+		if (108 <= position <= 125): # channellist
 			self["config"].instance.moveSelectionTo(127)
-		if (126 <= position <= 133): # graphmultiepg
+		if (126 <= position <= 129): # epgselection
+			self["config"].instance.moveSelectionTo(132)
+		if (131 <= position <= 133): # graphmultiepg
 			self["config"].instance.moveSelectionTo(136)
 		if (135 <= position <= 143): # emc
 			self["config"].instance.moveSelectionTo(145)
@@ -2471,12 +2448,6 @@ class KravenHD(ConfigListScreen, Screen):
 		elif option == config.plugins.KravenHD.TunerXtremeBusyList:
 			optionislistcolor=True
 			self.actSelfColorSelection = config.plugins.KravenHD.TunerXtremeBusySelf
-		elif option == config.plugins.KravenHD.MainmenuHorTitleFontList:
-			optionislistcolor=True
-			self.actSelfColorSelection = config.plugins.KravenHD.MainmenuHorTitleFontSelf
-		elif option == config.plugins.KravenHD.MainmenuHorIconColorList:
-			optionislistcolor=True
-			self.actSelfColorSelection = config.plugins.KravenHD.MainmenuHorIconColorSelf
 
 		if optionislistcolor:
 			self.actListColorSelection=option
@@ -2671,7 +2642,9 @@ class KravenHD(ConfigListScreen, Screen):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-x2-x3-box2"/>'])
 				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-z1","infobar-style-z2"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-z1-z2-box2"/>'])
-				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-zz1","infobar-style-zzz1"):
+				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1"):
+					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-x4-zz1-box2"/>'])
+				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-zzz1"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-box2"/>'])
 				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2","infobar-style-zz3"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-zz2-zz3-box2"/>'])
@@ -2684,7 +2657,9 @@ class KravenHD(ConfigListScreen, Screen):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-x2-x3-texture"/>'])
 				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-z1","infobar-style-z2"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-z1-z2-texture"/>'])
-				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-zz1","infobar-style-zzz1"):
+				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1"):
+					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-x4-zz1-texture"/>'])
+				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-zzz1"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-texture"/>'])
 				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2","infobar-style-zz3"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-zz2-zz3-texture"/>'])
@@ -2697,7 +2672,9 @@ class KravenHD(ConfigListScreen, Screen):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-x2-x3-box"/>'])
 				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-z1","infobar-style-z2"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-z1-z2-box"/>'])
-				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-zz1","infobar-style-zzz1"):
+				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1"):
+					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-x4-zz1-box"/>'])
+				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-zzz1"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-box"/>'])
 				elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2","infobar-style-zz3"):
 					self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-zz2-zz3-box"/>'])
@@ -2789,7 +2766,9 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-x2-x3-gradient"/>'])
 			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-z1","infobar-style-z2"):
 				self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-z1-z2-gradient"/>'])
-			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-zz1","infobar-style-zzz1"):
+			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1"):
+				self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-x4-zz1-gradient"/>'])
+			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-zzz1"):
 				self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-gradient"/>'])
 			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2","infobar-style-zz3"):
 				self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-zz2-zz3-gradient"/>'])
@@ -2823,7 +2802,6 @@ class KravenHD(ConfigListScreen, Screen):
 		self.skinSearchAndReplace.append(['name="KravenAndroid" value="#00ffffff', 'name="KravenAndroid" value="#00' + config.plugins.KravenHD.Android.value])
 		self.skinSearchAndReplace.append(['name="KravenAndroid2" value="#00ffffff', 'name="KravenAndroid2" value="#00' + config.plugins.KravenHD.Android2.value])
 		self.skinSearchAndReplace.append(['name="KravenPrime" value="#0070AD11', 'name="KravenPrime" value="#00' + config.plugins.KravenHD.PrimetimeFont.value])
-		self.skinSearchAndReplace.append(['name="KravenMainmenuHorTitleFont" value="#00999999', 'name="KravenMainmenuHorTitleFont" value="#00' + config.plugins.KravenHD.MainmenuHorTitleFont.value])
 
 		### Infobar (Serviceevent) Font-Size
 		if config.plugins.KravenHD.SkinResolution.value == "hd":
@@ -2834,6 +2812,8 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['font="Regular;30" position="545,616" size="393,38"', 'font="Regular;22" position="545,623" size="393,27"']) # ZZZ1 next
 				self.skinSearchAndReplace.append(['font="Regular;30" position="438,614" size="472,38"', 'font="Regular;22" position="438,621" size="472,27"']) # ZZ2, ZZ3 now
 				self.skinSearchAndReplace.append(['font="Regular;30" position="510,666" size="437,38"', 'font="Regular;22" position="510,673" size="437,27"']) # ZZ3 next
+				self.skinSearchAndReplace.append(['font="Regular;30" position="427,553" size="592,38"', 'font="Regular;22" position="427,560" size="592,27"']) # X4 now
+				self.skinSearchAndReplace.append(['font="Regular;30" position="427,643" size="485,38"', 'font="Regular;22" position="427,650" size="485,27"']) # X4 next
 				self.skinSearchAndReplace.append(['font="Regular;30" position="430,614" size="481,38"', 'font="Regular;22" position="430,621" size="481,27"']) # X2, X3, Z1, Z2 now
 				self.skinSearchAndReplace.append(['font="Regular;30" position="430,666" size="481,38"', 'font="Regular;22" position="430,673" size="481,27"']) # X2, X3, Z1, Z2 next
 				self.skinSearchAndReplace.append(['font="Regular;30" position="430,558" size="481,38"', 'font="Regular;22" position="430,565" size="481,27"']) # X1 now
@@ -2847,6 +2827,8 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['font="Regular;30" position="545,616" size="393,38"', 'font="Regular;26" position="545,619" size="393,33"']) # ZZZ1 next
 				self.skinSearchAndReplace.append(['font="Regular;30" position="438,614" size="472,38"', 'font="Regular;26" position="438,617" size="472,33"']) # ZZ2, ZZ3 now
 				self.skinSearchAndReplace.append(['font="Regular;30" position="510,666" size="437,38"', 'font="Regular;26" position="510,669" size="437,33"']) # ZZ3 next
+				self.skinSearchAndReplace.append(['font="Regular;30" position="427,553" size="592,38"', 'font="Regular;26" position="427,556" size="592,33"']) # X4 now
+				self.skinSearchAndReplace.append(['font="Regular;30" position="427,643" size="485,38"', 'font="Regular;26" position="427,646" size="485,33"']) # X4 next
 				self.skinSearchAndReplace.append(['font="Regular;30" position="430,614" size="481,38"', 'font="Regular;26" position="430,617" size="481,33"']) # X2, X3, Z1, Z2 now
 				self.skinSearchAndReplace.append(['font="Regular;30" position="430,666" size="481,38"', 'font="Regular;26" position="430,669" size="481,33"']) # X2, X3, Z1, Z2 next
 				self.skinSearchAndReplace.append(['font="Regular;30" position="430,558" size="481,38"', 'font="Regular;26" position="430,561" size="481,33"']) # X1 now
@@ -2854,26 +2836,30 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['font="Regular;30" position="199,584" size="708,38"', 'font="Regular;26" position="199,587" size="708,33"']) # no picon now
 				self.skinSearchAndReplace.append(['font="Regular;30" position="199,636" size="708,38"', 'font="Regular;26" position="199,639" size="708,33"']) # no picon next
 		else:
-			if config.plugins.KravenHD.IBFontSize.value == "size-33":
+			if config.plugins.KravenHD.IBFontSize.value == "small":
 				self.skinSearchAndReplace.append(['font="Regular;45" position="817,830" size="750,55"', 'font="Regular;33" position="817,839" size="750,42"']) # ZZ1 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="817,965" size="589,55"', 'font="Regular;33" position="817,974" size="589,42"']) # ZZ1 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="817,790" size="750,55"', 'font="Regular;33" position="817,799" size="750,42"']) # ZZZ1 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="817,925" size="589,55"', 'font="Regular;33" position="817,931" size="589,42"']) # ZZZ1 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="657,921" size="708,55"', 'font="Regular;33" position="657,930" size="708,42"']) # ZZ2, ZZ3 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="765,999" size="655,55"', 'font="Regular;33" position="765,1008" size="655,42"']) # ZZ3 next
+				self.skinSearchAndReplace.append(['font="Regular;45" position="640,830" size="888,55"', 'font="Regular;33" position="640,839" size="888,42"']) # X4 now
+				self.skinSearchAndReplace.append(['font="Regular;45" position="640,965" size="727,55"', 'font="Regular;33" position="640,974" size="727,42"']) # X4 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="644,921" size="722,55"', 'font="Regular;33" position="644,930" size="722,42"']) # X2, X3, Z1, Z2 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="644,999" size="722,55"', 'font="Regular;33" position="644,1008" size="722,42"']) # X2, X3, Z1, Z2 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="644,837" size="722,55"', 'font="Regular;33" position="644,846" size="722,42"']) # X1 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="644,972" size="722,55"', 'font="Regular;33" position="644,981" size="722,42"']) # X1 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="298,876" size="1061,55"', 'font="Regular;33" position="298,885" size="1061,42"']) # no picon now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="298,954" size="1061,55"', 'font="Regular;33" position="298,963" size="1061,42"']) # no picon next
-			elif config.plugins.KravenHD.IBFontSize.value == "size-39":
+			elif config.plugins.KravenHD.IBFontSize.value == "middle":
 				self.skinSearchAndReplace.append(['font="Regular;45" position="817,830" size="750,55"', 'font="Regular;39" position="817,833" size="750,49"']) # ZZ1 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="817,965" size="589,55"', 'font="Regular;39" position="817,968" size="589,49"']) # ZZ1 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="817,790" size="750,55"', 'font="Regular;39" position="817,793" size="750,49"']) # ZZZ1 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="817,925" size="589,55"', 'font="Regular;39" position="817,928" size="589,49"']) # ZZZ1 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="657,921" size="708,55"', 'font="Regular;39" position="657,924" size="708,49"']) # ZZ2, ZZ3 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="765,999" size="655,55"', 'font="Regular;39" position="765,1002" size="655,49"']) # ZZ3 next
+				self.skinSearchAndReplace.append(['font="Regular;45" position="640,830" size="888,55"', 'font="Regular;39" position="640,833" size="888,49"']) # X4 now
+				self.skinSearchAndReplace.append(['font="Regular;45" position="640,965" size="727,55"', 'font="Regular;39" position="640,968" size="727,49"']) # X4 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="644,921" size="722,55"', 'font="Regular;39" position="644,924" size="722,49"']) # X2, X3, Z1, Z2 now
 				self.skinSearchAndReplace.append(['font="Regular;45" position="644,999" size="722,55"', 'font="Regular;39" position="644,1002" size="722,49"']) # X2, X3, Z1, Z2 next
 				self.skinSearchAndReplace.append(['font="Regular;45" position="644,837" size="722,55"', 'font="Regular;39" position="644,840" size="722,49"']) # X1 now
@@ -3014,7 +3000,7 @@ class KravenHD(ConfigListScreen, Screen):
 			self.skinSearchAndReplace.append(['<IBProgressBackground', '<ePixmap'])
 			self.skinSearchAndReplace.append(['"IBProgressBackground" />', '"blend" />'])
 			self.makeProgressBackground(878,config.plugins.KravenHD.IBProgressBackground.value,"progress_bg_pl") # player
-			self.makeProgressBackground(769,config.plugins.KravenHD.IBProgressBackground.value,"progress_bg_ts") # x1, x2, x3, z1, z2, timeshift
+			self.makeProgressBackground(769,config.plugins.KravenHD.IBProgressBackground.value,"progress_bg_ts") # x1, x2, x3, x4, z1, z2, timeshift
 			if config.plugins.KravenHD.InfobarStyle.value == "infobar-style-nopicon":
 				self.makeProgressBackground(997,config.plugins.KravenHD.IBProgressBackground.value,"progress_bg_np") # nopicon
 			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zzz1"):
@@ -3038,10 +3024,6 @@ class KravenHD(ConfigListScreen, Screen):
 
 		### MiniTV Border
 		self.skinSearchAndReplace.append(['name="KravenBorder2" value="#003F3F3F', 'name="KravenBorder2" value="#00' + config.plugins.KravenHD.MiniTVBorder.value])
-
-		### NumberZap Border
-		if not config.plugins.KravenHD.NumberZapExt.value == "none":
-			self.skinSearchAndReplace.append(['name="KravenNZBorder" value="#00ffffff', 'name="KravenNZBorder" value="#00' + config.plugins.KravenHD.NZBorder.value])
 
 		### Line
 		self.skinSearchAndReplace.append(['name="KravenLine" value="#00ffffff', 'name="KravenLine" value="#00' + config.plugins.KravenHD.Line.value])
@@ -3130,7 +3112,7 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['<screen name="nonib-mp">', '<screen name="ib-mp">'])
 
 		### Tuner
-		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x2","infobar-style-z1","infobar-style-zz1","infobar-style-zzz1"):
+		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x2","infobar-style-x4","infobar-style-z1","infobar-style-zz1","infobar-style-zzz1"):
 
 			### Tuner Colors
 			self.skinSearchAndReplace.append(['name="KravenTunerBusy" value="#00CCCC00', 'name="KravenTunerBusy" value="#00' + config.plugins.KravenHD.TunerBusy.value])
@@ -3160,7 +3142,7 @@ class KravenHD(ConfigListScreen, Screen):
 			HSize_old = str(i)
 			if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1"):
 				HSize_new = str(i - EventNowLineHeight)
-			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zz2","infobar-style-zz3"):
+			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1","infobar-style-zz2","infobar-style-zz3"):
 				HSize_new = str(i - (EventNowLineHeight * 2))
 			elif config.plugins.KravenHD.InfobarStyle.value == "infobar-style-zzz1":
 				HSize_new = str(i - (EventNowLineHeight * 4))
@@ -3172,9 +3154,6 @@ class KravenHD(ConfigListScreen, Screen):
 		### Clock Analog Color
 		if self.actClockstyle == "clock-analog":
 			self.changeColor("analogclock","analogclock",config.plugins.KravenHD.AnalogColor.value,None)
-
-		### Horizontal Menu Icon
-		self.makeHorMenupng(config.plugins.KravenHD.MainmenuHorIconColor.value,self.skincolorbackgroundcolor)
 
 		### Screennames
 		if config.plugins.KravenHD.DebugNames.value == "screennames-on":
@@ -3228,8 +3207,31 @@ class KravenHD(ConfigListScreen, Screen):
 			self.skinSearchAndReplace.append(['<convert type="KravenHDECMLine">ShortReader', '<convert type="KravenHDECMLine">' + config.plugins.KravenHD.ECMLine1.value])
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x2","infobar-style-x3","infobar-style-z1","infobar-style-z2"):
 			self.skinSearchAndReplace.append(['<convert type="KravenHDECMLine">ShortReader', '<convert type="KravenHDECMLine">' + config.plugins.KravenHD.ECMLine2.value])
-		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zz2","infobar-style-zz3","infobar-style-zzz1"):
+		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1","infobar-style-zz2","infobar-style-zz3","infobar-style-zzz1"):
 			self.skinSearchAndReplace.append(['<convert type="KravenHDECMLine">ShortReader', '<convert type="KravenHDECMLine">' + config.plugins.KravenHD.ECMLine3.value])
+
+		### EPGSelection EPGList
+		if config.plugins.KravenHD.SkinResolution.value == "hd":
+			if config.plugins.KravenHD.EPGListSize.value == "big":
+				self.skinSearchAndReplace.append(['teamBlueEPGListSkinParameter="EPGSelection_EPGSearch"', 'setEventItemFont="Regular;26" setEventTimeFont="Regular;21" setTimeWidth="116" setIconDistance="8" setIconShift="0" setColWidths="70,144" setColGap="10" itemHeight="35" position="42,135" size="736,490"']) # EPGSelection, EPGSearch
+				self.skinSearchAndReplace.append(['teamBlueEPGListSkinParameter="EPGSelectionMulti"', 'setEventItemFont="Regular;26" setEventTimeFont="Regular;21" setTimeWidth="116" setIconDistance="8" setIconShift="0" setColWidths="220,100" setColGap="10" itemHeight="35" position="42,135" size="736,490"']) # EPGSelectionMulti
+			else:
+				self.skinSearchAndReplace.append(['teamBlueEPGListSkinParameter="EPGSelection_EPGSearch"', 'setEventItemFont="Regular;23" setEventTimeFont="Regular;20" setTimeWidth="100" setIconDistance="8" setIconShift="0" setColWidths="60,136" setColGap="10" itemHeight="32" position="42,140" size="736,480"']) # EPGSelection, EPGSearch
+				self.skinSearchAndReplace.append(['teamBlueEPGListSkinParameter="EPGSelectionMulti"', 'setEventItemFont="Regular;23" setEventTimeFont="Regular;20" setTimeWidth="100" setIconDistance="8" setIconShift="0" setColWidths="220,100" setColGap="10" itemHeight="32" position="42,140" size="736,480"']) # EPGSelectionMulti
+		else:
+			if config.plugins.KravenHD.EPGListSize.value == "big":
+				self.skinSearchAndReplace.append(['teamBlueEPGListSkinParameter="EPGSelection_EPGSearch"', 'setEventItemFont="Regular;37" setEventTimeFont="Regular;30" setTimeWidth="170" setIconDistance="12" setIconShift="0" setColWidths="100,207" setColGap="15" itemHeight="52" position="63,202" size="1104,735"']) # EPGSelection, EPGSearch
+				self.skinSearchAndReplace.append(['teamBlueEPGListSkinParameter="EPGSelectionMulti"', 'setEventItemFont="Regular;37" setEventTimeFont="Regular;30" setTimeWidth="170" setIconDistance="12" setIconShift="0" setColWidths="330,150" setColGap="15" itemHeight="52" position="63,202" size="1104,736"']) # EPGSelectionMulti
+			else:
+				self.skinSearchAndReplace.append(['teamBlueEPGListSkinParameter="EPGSelection_EPGSearch"', 'setEventItemFont="Regular;35" setEventTimeFont="Regular;29" setTimeWidth="150" setIconDistance="12" setIconShift="0" setColWidths="90,204" setColGap="15" itemHeight="48" position="63,210" size="1104,720"']) # EPGSelection, EPGSearch
+				self.skinSearchAndReplace.append(['teamBlueEPGListSkinParameter="EPGSelectionMulti"', 'setEventItemFont="Regular;35" setEventTimeFont="Regular;29" setTimeWidth="150" setIconDistance="12" setIconShift="0" setColWidths="330,150" setColGap="15" itemHeight="48" position="63,210" size="1104,720"']) # EPGSelectionMulti
+
+		### EPGSelection EPGSize
+		if config.plugins.KravenHD.EPGSelectionEPGSize.value == "big":
+			if config.plugins.KravenHD.EPGSelection.value == "epgselection-minitv":
+				self.skinSearchAndReplace.append(['<panel name="EPGSelection-EPG-small-minitv"/>', '<panel name="EPGSelection-EPG-big-minitv"/>'])
+			else:
+				self.skinSearchAndReplace.append(['<panel name="EPGSelection-EPG-small"/>', '<panel name="EPGSelection-EPG-big"/>'])
 
 		### Infobar typewriter effect
 		if config.plugins.KravenHD.TypeWriter.value == "runningtext":
@@ -3259,8 +3261,8 @@ class KravenHD(ConfigListScreen, Screen):
 			self.appendSkinFile(self.data + 'templates-' + config.plugins.KravenHD.InfobarStyle.value + '.xml')
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2","infobar-style-x3","infobar-style-z1","infobar-style-z2"):
 			self.appendSkinFile(self.data + 'templates-infobar-style-x2-x3-z1-z2.xml')
-		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zzz1"):
-			self.appendSkinFile(self.data + 'templates-infobar-style-zz1-zzz1.xml')
+		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1","infobar-style-zzz1"):
+			self.appendSkinFile(self.data + 'templates-infobar-style-x4-zz1-zzz1.xml')
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2","infobar-style-zz3"):
 			self.appendSkinFile(self.data + 'templates-infobar-style-zz2-zz3.xml')
 
@@ -3297,8 +3299,8 @@ class KravenHD(ConfigListScreen, Screen):
 			self.skinSearchAndReplace.append(['<!-- Infobar clockstyle -->','<panel name="infobar-style-x2-x3-z1-z2-' + self.actClockstyle + '"/>'])
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2","infobar-style-zz3"):
 			self.skinSearchAndReplace.append(['<!-- Infobar clockstyle -->','<panel name="infobar-style-zz2-zz3-' + self.actClockstyle + '"/>'])
-		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zzz1"):
-			self.skinSearchAndReplace.append(['<!-- Infobar clockstyle -->','<panel name="infobar-style-zz1-zzz1-' + self.actClockstyle + '"/>'])
+		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1","infobar-style-zzz1"):
+			self.skinSearchAndReplace.append(['<!-- Infobar clockstyle -->','<panel name="infobar-style-x4-zz1-zzz1-' + self.actClockstyle + '"/>'])
 
 		### Infobar Channelname
 		if config.plugins.KravenHD.InfobarStyle.value == "infobar-style-nopicon" and not config.plugins.KravenHD.InfobarChannelName.value == "none":
@@ -3307,8 +3309,8 @@ class KravenHD(ConfigListScreen, Screen):
 			self.skinSearchAndReplace.append(['<!-- Infobar channelname -->','<panel name="infobar-style-x1-' + config.plugins.KravenHD.InfobarChannelName.value + '"/>'])
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2","infobar-style-x3","infobar-style-z1","infobar-style-z2") and not config.plugins.KravenHD.InfobarChannelName.value == "none":
 			self.skinSearchAndReplace.append(['<!-- Infobar channelname -->','<panel name="infobar-style-x2-x3-z1-z2-' + config.plugins.KravenHD.InfobarChannelName.value + '"/>'])
-		elif config.plugins.KravenHD.InfobarStyle.value == "infobar-style-zz1" and not config.plugins.KravenHD.InfobarChannelName.value == "none":
-			self.skinSearchAndReplace.append(['<!-- Infobar channelname -->','<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-' + config.plugins.KravenHD.InfobarChannelName.value + '"/>'])
+		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1") and not config.plugins.KravenHD.InfobarChannelName.value == "none":
+			self.skinSearchAndReplace.append(['<!-- Infobar channelname -->','<panel name="infobar-style-x4-zz1-' + config.plugins.KravenHD.InfobarChannelName.value + '"/>'])
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2","infobar-style-zz3") and not config.plugins.KravenHD.InfobarChannelName2.value == "none":
 			self.skinSearchAndReplace.append(['<!-- Infobar channelname -->','<panel name="infobar-style-zz2-zz3-' + config.plugins.KravenHD.InfobarChannelName2.value + '"/>'])
 		elif config.plugins.KravenHD.InfobarStyle.value == "infobar-style-zzz1" and not config.plugins.KravenHD.InfobarChannelName2.value == "none":
@@ -3316,7 +3318,7 @@ class KravenHD(ConfigListScreen, Screen):
 
 		### Infobar/SIB - ecm-info
 		if config.plugins.KravenHD.ECMVisible.value in ("ib","ib+sib"):
-			if config.plugins.KravenHD.InfobarStyle.value == "infobar-style-x1":
+			if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x1","infobar-style-x4"):
 				self.skinSearchAndReplace.append(['<!-- Infobar ecminfo -->','<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-ecminfo"/>'])
 			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2","infobar-style-x3","infobar-style-z1","infobar-style-z2"):
 				self.skinSearchAndReplace.append(['<!-- Infobar ecminfo -->','<panel name="infobar-style-x2-x3-z1-z2-ecminfo"/>'])
@@ -3326,7 +3328,7 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['<!-- Infobar ecminfo -->','<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-ecminfo"/>'])
 
 		if config.plugins.KravenHD.ECMVisible.value in ("sib","ib+sib"):
-			if config.plugins.KravenHD.InfobarStyle.value == "infobar-style-x1":
+			if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x1","infobar-style-x4"):
 				self.skinSearchAndReplace.append(['<!-- SIB ecminfo -->','<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-ecminfo"/>'])
 			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2","infobar-style-x3","infobar-style-z1","infobar-style-z2"):
 				self.skinSearchAndReplace.append(['<!-- SIB ecminfo -->','<panel name="infobar-style-x2-x3-z1-z2-ecminfo"/>'])
@@ -3336,7 +3338,7 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['<!-- SIB ecminfo -->','<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-ecminfo"/>'])
 
 		### Infobar weather-style
-		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x3","infobar-style-z2","infobar-style-zz1","infobar-style-zz2","infobar-style-zz3","infobar-style-zzz1"):
+		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x3","infobar-style-x4","infobar-style-z2","infobar-style-zz1","infobar-style-zz2","infobar-style-zz3","infobar-style-zzz1"):
 			self.actWeatherstyle = config.plugins.KravenHD.WeatherStyle.value
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2","infobar-style-z1"):
 			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/Netatmo/plugin.py"):
@@ -3402,11 +3404,6 @@ class KravenHD(ConfigListScreen, Screen):
 			self.skinSearchAndReplace.append(['<!-- Infobar picon -->', '<panel name="infobar-style-x2-x3-picon"/>'])
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-z1","infobar-style-z2"):
 			self.skinSearchAndReplace.append(['<!-- Infobar picon -->', '<panel name="infobar-style-z1-z2-picon"/>'])
-		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zzz1"):
-			if config.plugins.KravenHD.ShowAgcSnr.value == "on":
-				self.skinSearchAndReplace.append(['<!-- Infobar picon -->', '<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-agc-snr"/>'])
-			else:
-				self.skinSearchAndReplace.append(['<!-- Infobar picon -->', '<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-picon"/>'])
 
 		# tuners / some icons / Infobox
 		if config.plugins.KravenHD.InfobarStyle.value == "infobar-style-nopicon":
@@ -3423,15 +3420,10 @@ class KravenHD(ConfigListScreen, Screen):
 			self.skinSearchAndReplace.append(['<!-- Infobar topbartuners -->', '<panel name="infobar-style-x2-z1-' + self.Tuners + '"/>'])
 			self.skinSearchAndReplace.append(['<!-- Infobar topbarinfobox -->', '<panel name="infobar-style-x2-z1-infobox-' + config.plugins.KravenHD.Infobox.value + '"/>'])
 
-		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zzz1"):
-			self.skinSearchAndReplace.append(['<!-- Infobar icons -->', '<panel name="infobar-style-zz1-zzz1-icons"/>'])
-			self.skinSearchAndReplace.append(['<!-- Infobar tuners -->', '<panel name="infobar-style-zz1-zzz1-' + self.Tuners + '"/>'])
-			self.actInfobox = ''
-			if config.plugins.KravenHD.ShowAgcSnr.value == "on":
-				self.actInfobox = config.plugins.KravenHD.Infobox2.value
-			else:
-				self.actInfobox = config.plugins.KravenHD.Infobox.value
-			self.skinSearchAndReplace.append(['<!-- Infobar infobox -->', '<panel name="infobar-style-zz1-zzz1-infobox-' + self.actInfobox + '"/>'])
+		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4","infobar-style-zz1","infobar-style-zzz1"):
+			self.skinSearchAndReplace.append(['<!-- Infobar icons -->', '<panel name="infobar-style-x4-zz1-zzz1-icons"/>'])
+			self.skinSearchAndReplace.append(['<!-- Infobar tuners -->', '<panel name="infobar-style-x4-zz1-zzz1-' + self.Tuners + '"/>'])
+			self.skinSearchAndReplace.append(['<!-- Infobar infobox -->', '<panel name="infobar-style-x4-zz1-zzz1-infobox-' + config.plugins.KravenHD.Infobox2.value + '"/>'])
 
 		### SecondInfobar
 		self.skinSearchAndReplace.append(['<!-- SIB style -->','<panel name="' + config.plugins.KravenHD.SIB.value + '"/>'])
@@ -3601,9 +3593,6 @@ class KravenHD(ConfigListScreen, Screen):
 		### EMC
 		self.appendSkinFile(self.data + config.plugins.KravenHD.EMCStyle.value + ".xml")
 
-		### NumberZapExt
-		self.appendSkinFile(self.data + config.plugins.KravenHD.NumberZapExt.value + ".xml")
-
 		### EPGSelection
 		self.appendSkinFile(self.data + config.plugins.KravenHD.EPGSelection.value + ".xml")
 
@@ -3617,12 +3606,23 @@ class KravenHD(ConfigListScreen, Screen):
 
 		### GraphMultiEPG
 		self.appendSkinFile(self.data + config.plugins.KravenHD.GraphMultiEPG.value + ".xml")
+		self.makeGraphMultiEPGpng("SelectedEvent.png","3f3f3f",config.plugins.KravenHD.SelectionBackground.value)
 
 		### MovieSelection
 		self.appendSkinFile(self.data + config.plugins.KravenHD.MovieSelection.value + ".xml")
 
 		### bsWindow
 		self.makebsWindowpng()
+
+		### VirtualKeyBoard
+		if config.plugins.KravenHD.PopupStyle.value == "popup-grad-trans":
+			self.changeColor("virtualkeyboard_gr_tr","virtualkeyboard",self.skincolorbackgroundcolor,None)
+		elif config.plugins.KravenHD.PopupStyle.value == "popup-grad":
+			self.changeColor("virtualkeyboard_gr","virtualkeyboard",self.skincolorbackgroundcolor,None)
+		elif config.plugins.KravenHD.PopupStyle.value == "popup-box-trans":
+			self.changeColor("virtualkeyboard_bx_tr","virtualkeyboard",self.skincolorbackgroundcolor,config.plugins.KravenHD.Border.value)
+		elif config.plugins.KravenHD.PopupStyle.value == "popup-box":
+			self.changeColor("virtualkeyboard_bx","virtualkeyboard",self.skincolorbackgroundcolor,config.plugins.KravenHD.Border.value)
 
 		### SerienRecorder
 		if config.plugins.KravenHD.SerienRecorder.value == "serienrecorder":
@@ -4418,6 +4418,7 @@ class KravenHD(ConfigListScreen, Screen):
 		ibarheights=[
 			("infobar-style-nopicon",166),
 			("infobar-style-x1",166),
+			("infobar-style-x4",198),
 			("infobar-style-zz1",198),
 			("infobar-style-zz2",186),
 			("infobar-style-zz3",186),
@@ -4589,12 +4590,10 @@ class KravenHD(ConfigListScreen, Screen):
 		self.changeColor("bs_tl" + addition,"bs_tl",self.skincolorbackgroundcolor,border)
 		self.changeColor("bs_tr" + addition,"bs_tr",self.skincolorbackgroundcolor,border)
 
-	def makeHorMenupng(self,color1,color2):
-		width = int(192 * self.factor)
-		height = int(92 * self.factor)
-		radius = int(10 * self.factor)
-		gradientsize = int(24 * self.factor)
-		trans = 230
+	def makeGraphMultiEPGpng(self, output, color1, color2):
+		width = int(8)
+		height = int(100)
+		gradientsize = int(40)
 
 		color1 = color1[-6:]
 		r1 = int(color1[0:2], 16)
@@ -4605,29 +4604,19 @@ class KravenHD(ConfigListScreen, Screen):
 		g2 = int(color2[2:4], 16)
 		b2 = int(color2[4:6], 16)
 
-		mask = Image.new("L", (width, height), trans)
-		corner = Image.new('L', (radius, radius), 0)
-		draw = ImageDraw.Draw(corner)
-		draw.pieslice((0, 0, radius * 2, radius * 2), 180, 270, trans)
-		mask.paste(corner, (0, 0))
-		mask.paste(corner.transpose(Image.FLIP_LEFT_RIGHT), (width - radius, 0))
-		mask.paste(corner.transpose(Image.ROTATE_180), (width - radius, height - radius))
-		mask.paste(corner.transpose(Image.FLIP_TOP_BOTTOM), (0, height - radius))
-
-		gradient = Image.new("RGBA", (1, height / 2), (r2, g2, b2, trans))
+		gradient = Image.new("RGB", (1, height / 2), (r2, g2, b2))
 		for pos in range(0, gradientsize):
 			p = pos / float(gradientsize)
 			r = r2 * p + r1 * (1 - p)
 			g = g2 * p + g1 * (1 - p)
 			b = b2 * p + b1 * (1 - p)
-			gradient.putpixel((0, pos), (int(r), int(g), int(b), trans))
+			gradient.putpixel((0, pos), (int(r), int(g), int(b)))
 		gradient = gradient.resize((width, height / 2))
 
-		img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
+		img = Image.new('RGB', (width, height), (0, 0, 0, 0))
 		img.paste(gradient, (0, 0))
 		img.paste(gradient.transpose(Image.FLIP_TOP_BOTTOM), (0, height / 2))
-		img.putalpha(mask)
-		img.save("/usr/share/enigma2/KravenHD/buttons/icon1.png")
+		img.save("/usr/share/enigma2/KravenHD/epg/" + output)
 
 	def makeProgressBackground(self,width,color,output):
 		height = int(21 * self.factor)

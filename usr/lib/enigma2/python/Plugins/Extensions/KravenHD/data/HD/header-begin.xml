@@ -68,7 +68,6 @@
     <color name="KravenMeteo" value="#00fff0e0" />
     <color name="KravenIBProgress" value="#00000000" />
     <color name="KravenIBProgressBorderLine" value="#00000000" />
-    <color name="KravenMainmenuHorTitleFont" value="#00999999" />
     <color name="selectedFG" value="#00ffffff" />
     <color name="orange" value="#00dc5221" />
     <color name="rds_text_bg" value="#00003258" />
