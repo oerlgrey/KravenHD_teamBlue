@@ -2485,6 +2485,27 @@
 	<panel name="Exit"/>
   </screen>
 
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="ExtraMessageBox" position="0,0" size="1920,1080" title="">
+	<!--*ExtraMessageBox*-->
+	<widget backgroundColor="Kravenbg3" source="menu" render="Listbox" position="63,120" size="1104,737" foregroundColor="KravenFont1" selectionPixmap="KravenHD/graphics/sel_45.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+		<convert type="TemplatedMultiContent">
+				{"template": [
+					MultiContentEntryPixmapAlphaTest(pos = (pos = (12, 10), size = (48, 48), png = 0),
+					MultiContentEntryText(pos = (72, 13), size = (1020, 41), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
+					],
+					"fonts": [gFont("Regular", 32)],
+					"itemHeight": 67
+				}
+		</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg3" name="message" position="63,877" size="1104,27" font="Regular2;32" foregroundColor="KravenFont2" halign="center" valign="center" transparent="1" />
+    <panel name="Title-big"/>
+  	<!-- Logo -->
+	<panel name="gradient-menu"/>
+	<panel name="Colorbuttons"/>
+	<panel name="OKExit"/>
+  </screen>
+
   <screen backgroundColor="transparent" flags="wfNoBorder" name="HddSetup" position="0,0" size="1920,1080" title="Hard Drive Setup">
 	<!--*HddSetup*-->
     <eLabel backgroundColor="KravenIBbg3" text="Device List" font="Regular2;50" foregroundColor="KravenIBGFont2" position="63,10" size="1500,69" transparent="1" halign="left" valign="center" />
@@ -2552,7 +2573,7 @@
 	<widget backgroundColor="Kravenbg3" name="readDisk" font="Regular;32" foregroundColor="KravenFont1" position="63,390" size="1104,41" halign="left" valign="center" transparent="1" />
 	<widget backgroundColor="Kravenbg3" name="readCache" font="Regular;32" foregroundColor="KravenFont1" position="63,435" size="1104,41" halign="left" valign="center" transparent="1" />
 	<widget backgroundColor="Kravenbg3" name="temp" font="Regular;32" foregroundColor="KravenFont1" position="63,480" size="1104,41" halign="left" valign="center" transparent="1" />
-	<widget backgroundColor="Kravenbg3" name="config" font="Regular;32" foregroundColor="KravenFont1" itemHeight="45" selectionPixmap="KravenHD/graphics/sel_30.png" position="63,525" size="1104,45" scrollbarMode="showOnDemand" transparent="1" />
+	<widget backgroundColor="Kravenbg3" name="config" font="Regular;32" foregroundColor="KravenFont1" itemHeight="45" selectionPixmap="KravenHD/graphics/sel_30.png" position="63,570" size="1104,45" scrollbarMode="showOnDemand" transparent="1" />
     <panel name="Title-big"/>
   	<!-- Logo -->
 	<panel name="gradient-menu"/>

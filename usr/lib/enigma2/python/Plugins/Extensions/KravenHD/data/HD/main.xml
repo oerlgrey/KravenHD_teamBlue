@@ -2485,15 +2485,36 @@
 	<panel name="Exit"/>
   </screen>
 
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="ExtraMessageBox" position="0,0" size="1280,720" title="">
+	<!--*ExtraMessageBox*-->
+	<widget backgroundColor="Kravenbg3" source="menu" render="Listbox" position="42,80" size="736,464" foregroundColor="KravenFont1" selectionPixmap="KravenHD/graphics/sel_60.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+		<convert type="TemplatedMultiContent">
+				{"template": [
+					MultiContentEntryPixmapAlphaTest(pos = (6, 5), size = (48, 48), png = 0),
+					MultiContentEntryText(pos = (66, 15), size = (664, 27), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
+					],
+					"fonts": [gFont("Regular", 22)],
+					"itemHeight": 58
+				}
+		</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg3" name="message" position="42,585" size="736,27" font="Regular2;22" foregroundColor="KravenFont2" halign="center" valign="center" transparent="1" />
+    <panel name="Title-big"/>
+  	<!-- Logo -->
+	<panel name="gradient-menu"/>
+	<panel name="Colorbuttons"/>
+	<panel name="OKExit"/>
+  </screen>
+
   <screen backgroundColor="transparent" flags="wfNoBorder" name="HddSetup" position="0,0" size="1280,720" title="Hard Drive Setup">
 	<!--*HddSetup*-->
     <eLabel backgroundColor="KravenIBbg3" text="Device List" font="Regular2;34" foregroundColor="KravenIBGFont2" position="42,7" size="1000,46" transparent="1" halign="left" valign="center" />
-	<widget backgroundColor="Kravenbg3" source="menu" render="Listbox" position="42,79" size="736,812" itemHeight="58" selectionPixmap="KravenHD/graphics/sel_60.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+	<widget backgroundColor="Kravenbg3" source="menu" render="Listbox" position="42,80" size="736,522" itemHeight="58" selectionPixmap="KravenHD/graphics/sel_60.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
 	  <convert type="TemplatedMultiContent">
 				{"template": [
-					MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (48, 48), png = 0),
-					MultiContentEntryText(pos = (58, 10), size = (508, 27), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
-					MultiContentEntryText(pos = (588, 10), size = (140, 27), font=0, flags = RT_HALIGN_RIGHT|RT_VALIGN_TOP, text = 2),
+					MultiContentEntryPixmapAlphaTest(pos = (6, 5), size = (48, 48), png = 0),
+					MultiContentEntryText(pos = (66, 15), size = (508, 27), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
+					MultiContentEntryText(pos = (590, 15), size = (140, 27), font=0, flags = RT_HALIGN_RIGHT|RT_VALIGN_TOP, text = 2),
 					],
 					"fonts": [gFont("Regular", 22)],
 					"itemHeight": 58
@@ -2511,12 +2532,12 @@
 	<!--*HddPartitions*-->
     <eLabel backgroundColor="KravenIBbg3" text="Device List" font="Regular2;34" foregroundColor="KravenIBGFont2" position="42,7" size="1000,46" transparent="1" halign="left" valign="center" />
 	<widget backgroundColor="Kravenbg3" name="label_disk" font="Regular2;24" foregroundColor="KravenFont2" position="42,80" size="736,30" valign="center" transparent="1" />
-	<widget backgroundColor="Kravenbg3" source="menu" render="Listbox" position="42,120" size="736,522" itemHeight="58" selectionPixmap="KravenHD/graphics/sel_60.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+	<widget backgroundColor="Kravenbg3" source="menu" render="Listbox" position="42,120" size="736,464" itemHeight="58" selectionPixmap="KravenHD/graphics/sel_60.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
 	  <convert type="TemplatedMultiContent">
 				{"template": [
-					MultiContentEntryPixmapAlphaTest(pos = (5, 5), size = (48, 48), png = 0),
-					MultiContentEntryText(pos = (58, 10), size = (508, 27), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
-					MultiContentEntryText(pos = (588, 10), size = (140, 27), font=0, flags = RT_HALIGN_RIGHT|RT_VALIGN_TOP, text = 2),
+					MultiContentEntryPixmapAlphaTest(pos = (6, 5), size = (48, 48), png = 0),
+					MultiContentEntryText(pos = (66, 15), size = (508, 27), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_TOP, text = 1),
+					MultiContentEntryText(pos = (590, 15), size = (140, 27), font=0, flags = RT_HALIGN_RIGHT|RT_VALIGN_TOP, text = 2),
 					],
 					"fonts": [gFont("Regular", 22)],
 					"itemHeight": 58
@@ -2552,7 +2573,7 @@
 	<widget backgroundColor="Kravenbg3" name="readDisk" font="Regular;22" foregroundColor="KravenFont1" position="42,260" size="736,27" halign="left" valign="center" transparent="1" />
 	<widget backgroundColor="Kravenbg3" name="readCache" font="Regular;22" foregroundColor="KravenFont1" position="42,290" size="736,27" halign="left" valign="center" transparent="1" />
 	<widget backgroundColor="Kravenbg3" name="temp" font="Regular;22" foregroundColor="KravenFont1" position="42,320" size="736,27" halign="left" valign="center" transparent="1" />
-	<widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,350" size="736,45" transparent="1" />
+	<widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,380" size="736,30" transparent="1" />
     <panel name="Title-big"/>
   	<!-- Logo -->
 	<panel name="gradient-menu"/>
