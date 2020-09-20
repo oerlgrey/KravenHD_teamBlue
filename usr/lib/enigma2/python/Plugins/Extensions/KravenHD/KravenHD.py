@@ -508,10 +508,6 @@ config.plugins.KravenHD.ChannelSelectionServiceNAList = ConfigSelection(default=
 config.plugins.KravenHD.ChannelSelectionServiceNASelf = ConfigText(default="FFEA04")
 config.plugins.KravenHD.ChannelSelectionServiceNA = ConfigText(default="FFEA04")
 
-config.plugins.KravenHD.NZBorderList = ConfigSelection(default="ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.NZBorderSelf = ConfigText(default="ffffff")
-config.plugins.KravenHD.NZBorder = ConfigText(default="ffffff")
-
 config.plugins.KravenHD.CoolTVGuide = ConfigSelection(default="cooltv-minitv", choices = [
 				("cooltv-minitv", _("MiniTV")),
 				("cooltv-picon", _("Picon"))
@@ -1107,7 +1103,6 @@ class KravenHD(ConfigListScreen, Screen):
 		self.actListColorSelection=None
 		self.actSelfColorSelection=None
 
-		self.BoxName=self.getBoxName()
 		self.Tuners=self.getTuners()
 		self.InternetAvailable=self.getInternetAvailable()
 		self.UserMenuIconsAvailable=self.getUserMenuIconsAvailable()
@@ -1589,10 +1584,6 @@ class KravenHD(ConfigListScreen, Screen):
 			config.plugins.KravenHD.ChannelSelectionServiceNA.value = config.plugins.KravenHD.ChannelSelectionServiceNASelf.value
 		else:
 			config.plugins.KravenHD.ChannelSelectionServiceNA.value = config.plugins.KravenHD.ChannelSelectionServiceNAList.value
-		if config.plugins.KravenHD.NZBorderList.value == "self":
-			config.plugins.KravenHD.NZBorder.value = config.plugins.KravenHD.NZBorderSelf.value
-		else:
-			config.plugins.KravenHD.NZBorder.value = config.plugins.KravenHD.NZBorderList.value
 		if config.plugins.KravenHD.EMCSelectionBackgroundList.value == "self":
 			config.plugins.KravenHD.EMCSelectionBackground.value = config.plugins.KravenHD.EMCSelectionBackgroundSelf.value
 		else:
@@ -1993,8 +1984,6 @@ class KravenHD(ConfigListScreen, Screen):
 			self.showColor(self.hexRGB(config.plugins.KravenHD.MiniTVBorder.value))
 		elif option == config.plugins.KravenHD.AnalogColorList:
 			self.showColor(self.hexRGB(config.plugins.KravenHD.AnalogColor.value))
-		elif option == config.plugins.KravenHD.NZBorderList:
-			self.showColor(self.hexRGB(config.plugins.KravenHD.NZBorder.value))
 		elif option == config.plugins.KravenHD.LineList:
 			self.showColor(self.hexRGB(config.plugins.KravenHD.Line.value))
 		elif option == config.plugins.KravenHD.Font1List:
@@ -2415,9 +2404,6 @@ class KravenHD(ConfigListScreen, Screen):
 		elif option == config.plugins.KravenHD.ChannelSelectionServiceNAList:
 			optionislistcolor=True
 			self.actSelfColorSelection = config.plugins.KravenHD.ChannelSelectionServiceNASelf
-		elif option == config.plugins.KravenHD.NZBorderList:
-			optionislistcolor=True
-			self.actSelfColorSelection = config.plugins.KravenHD.NZBorderSelf
 		elif option == config.plugins.KravenHD.EMCSelectionBackgroundList:
 			optionislistcolor=True
 			self.actSelfColorSelection = config.plugins.KravenHD.EMCSelectionBackgroundSelf
@@ -3267,27 +3253,24 @@ class KravenHD(ConfigListScreen, Screen):
 			self.appendSkinFile(self.data + 'templates-infobar-style-zz2-zz3.xml')
 
 		### ChannelSelection - horizontal RunningText
-		if not self.BoxName == "solo2":
-			if config.plugins.KravenHD.SkinResolution.value == "hd":
-				if config.plugins.KravenHD.RunningTextSpeed.value == "steptime=200":
-					self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=66,wrap=0,always=0,repeat=2,oneshot=1"'])
-				elif config.plugins.KravenHD.RunningTextSpeed.value == "steptime=100":
-					self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=33,wrap=0,always=0,repeat=2,oneshot=1"'])
-				elif config.plugins.KravenHD.RunningTextSpeed.value == "steptime=66":
-					self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=22,wrap=0,always=0,repeat=2,oneshot=1"'])
-				elif config.plugins.KravenHD.RunningTextSpeed.value == "steptime=50":
-					self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=17,wrap=0,always=0,repeat=2,oneshot=1"'])
-			else:
-				if config.plugins.KravenHD.RunningTextSpeed2.value == "steptime=200":
-					self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=66,wrap=0,always=0,repeat=2,oneshot=1"'])
-				elif config.plugins.KravenHD.RunningTextSpeed2.value == "steptime=100":
-					self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=33,wrap=0,always=0,repeat=2,oneshot=1"'])
-				elif config.plugins.KravenHD.RunningTextSpeed2.value == "steptime=50":
-					self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=17,wrap=0,always=0,repeat=2,oneshot=1"'])
-				elif config.plugins.KravenHD.RunningTextSpeed2.value == "steptime=33":
-					self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=11,wrap=0,always=0,repeat=2,oneshot=1"'])
+		if config.plugins.KravenHD.SkinResolution.value == "hd":
+			if config.plugins.KravenHD.RunningTextSpeed.value == "steptime=200":
+				self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=66,wrap=0,always=0,repeat=2,oneshot=1"'])
+			elif config.plugins.KravenHD.RunningTextSpeed.value == "steptime=100":
+				self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=33,wrap=0,always=0,repeat=2,oneshot=1"'])
+			elif config.plugins.KravenHD.RunningTextSpeed.value == "steptime=66":
+				self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=22,wrap=0,always=0,repeat=2,oneshot=1"'])
+			elif config.plugins.KravenHD.RunningTextSpeed.value == "steptime=50":
+				self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=17,wrap=0,always=0,repeat=2,oneshot=1"'])
 		else:
-			self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDEmptyEpg2"'])
+			if config.plugins.KravenHD.RunningTextSpeed2.value == "steptime=200":
+				self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=66,wrap=0,always=0,repeat=2,oneshot=1"'])
+			elif config.plugins.KravenHD.RunningTextSpeed2.value == "steptime=100":
+				self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=33,wrap=0,always=0,repeat=2,oneshot=1"'])
+			elif config.plugins.KravenHD.RunningTextSpeed2.value == "steptime=50":
+				self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=17,wrap=0,always=0,repeat=2,oneshot=1"'])
+			elif config.plugins.KravenHD.RunningTextSpeed2.value == "steptime=33":
+				self.skinSearchAndReplace.append(['render="RunningTextEmptyEpg2"', 'render="KravenHDRunningText" options="movetype=running,startpoint=0,' + config.plugins.KravenHD.RunningText.value + ',steptime=11,wrap=0,always=0,repeat=2,oneshot=1"'])
 
 		### ChannelSelection
 		self.appendSkinFile(self.data + config.plugins.KravenHD.ChannelSelectionStyle.value + ".xml")
@@ -3593,6 +3576,16 @@ class KravenHD(ConfigListScreen, Screen):
 		### EMC
 		self.appendSkinFile(self.data + config.plugins.KravenHD.EMCStyle.value + ".xml")
 
+		### NumberZapExt
+		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon","infobar-style-x1","infobar-style-x2","infobar-style-x3","infobar-style-x4"):
+			self.appendSkinFile(self.data + "numberzapext-xpicon.xml")
+		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-z1","infobar-style-z2"):
+			self.appendSkinFile(self.data + "numberzapext-zpicon.xml")
+		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz1","infobar-style-zz2","infobar-style-zz3"):
+			self.appendSkinFile(self.data + "numberzapext-zzpicon.xml")
+		else:
+			self.appendSkinFile(self.data + "numberzapext-zzzpicon.xml")
+
 		### EPGSelection
 		self.appendSkinFile(self.data + config.plugins.KravenHD.EPGSelection.value + ".xml")
 
@@ -3749,19 +3742,6 @@ class KravenHD(ConfigListScreen, Screen):
 			self.close()
 		else:
 			self.mylist()
-
-	def getBoxName(self):
-		if fileExists("/proc/stb/info/vumodel"):
-			file = open('/proc/stb/info/vumodel', 'r')
-			boxname = file.readline().strip()
-			file.close()
-			return boxname
-		else:
-			try:
-				from boxbranding import getMachineName
-				return getMachineName()
-			except ImportError:
-				return "unknown"
 
 	def getTuners(self):
 		from Components.NimManager import nimmanager
