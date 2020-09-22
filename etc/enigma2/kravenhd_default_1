@@ -4,7 +4,6 @@ TunerBusyList|CCCC00|<type 'str'>
 CategoryGraphMultiEPG|category|<type 'str'>
 BackgroundAlternateColor|000000|<type 'str'>
 InfobarAlternateColor|000000|<type 'str'>
-NZBorderList|ffffff|<type 'str'>
 CategoryAntialiasing|category|<type 'str'>
 Progress|progress|<type 'str'>
 IBProgressBorderLineColorList|ffffff|<type 'str'>
@@ -21,11 +20,11 @@ WeatherStyleNoInternet|none|<type 'str'>
 CategorySystem|category|<type 'str'>
 SelectionFontSelf|000000|<type 'str'>
 WatchingColorSelf|000000|<type 'str'>
-SelfColorG|15|<type 'int'>
+SelfColorG|192|<type 'int'>
 TunerRecord|FF0C00|<type 'str'>
 ProgressSelf|c3461b|<type 'str'>
 InfobarBoxListColor|gradient|<type 'str'>
-SelfColorB|69|<type 'int'>
+SelfColorB|0|<type 'int'>
 IBProgress|progress|<type 'str'>
 ButtonTextList|ffffff|<type 'str'>
 EMCSelectionFontSelf|000000|<type 'str'>
@@ -35,7 +34,7 @@ LineSelf|000000|<type 'str'>
 BackgroundSelfColor|000000|<type 'str'>
 ButtonTextSelf|000000|<type 'str'>
 TunerXtremeBusySelf|1BA1E2|<type 'str'>
-SelfColorR|15|<type 'int'>
+SelfColorR|255|<type 'int'>
 MeteoColor|meteo-light|<type 'str'>
 BackgroundAlternateListColor|000000|<type 'str'>
 EPGListSize|small|<type 'str'>
@@ -74,7 +73,6 @@ Android|000000|<type 'str'>
 ClockStyleNoInternet|clock-classic|<type 'str'>
 WeatherStyle2|none|<type 'str'>
 WeatherStyle3|none|<type 'str'>
-NZBorder|ffffff|<type 'str'>
 TunerXtremeBusyList|1BA1E2|<type 'str'>
 MiniTVBorder|892E13|<type 'str'>
 AndroidSelf|000000|<type 'str'>
@@ -84,7 +82,7 @@ InfobarSelfColorB|0|<type 'int'>
 BackgroundListColor|000000|<type 'str'>
 CategoryEPGSelection|category|<type 'str'>
 ECMFontSelf|000000|<type 'str'>
-Font2List|F0A30A|<type 'str'>
+Font2List|self|<type 'str'>
 InfobarColorTrans|00|<type 'str'>
 Font1List|ffffff|<type 'str'>
 ChannelnameFont|ffffff|<type 'str'>
@@ -97,7 +95,7 @@ SelectionBorderList|self|<type 'str'>
 FTA|none|<type 'str'>
 InfobarSelfColorR|0|<type 'int'>
 MiniTVBorderSelf|000000|<type 'str'>
-IBFont2Self|000000|<type 'str'>
+IBFont2Self|ffc000|<type 'str'>
 BackgroundColor|000000|<type 'str'>
 WatchingColorList|0050EF|<type 'str'>
 UnwatchedColor|ffffff|<type 'str'>
@@ -123,7 +121,7 @@ IBProgressBackground|0050EF|<type 'str'>
 ScreensAntialias|10|<type 'int'>
 FinishedColor|70AD11|<type 'str'>
 Font1|ffffff|<type 'str'>
-Font2|F0A30A|<type 'str'>
+Font2|ffc000|<type 'str'>
 SelectionStyle|pixmap|<type 'str'>
 Infobox|db|<type 'str'>
 TunerLive|00B400|<type 'str'>
@@ -167,7 +165,7 @@ PopupStyle|popup-box-trans|<type 'str'>
 CategoryInfobarLook|category|<type 'str'>
 BackgroundGradientColorSecondary|000000|<type 'str'>
 SelectionBackground|0f0893|<type 'str'>
-IBFont2List|F0A30A|<type 'str'>
+IBFont2List|self|<type 'str'>
 UnwatchedColorSelf|000000|<type 'str'>
 MediaPortal|none|<type 'str'>
 SelectionBackgroundSelf|0f0893|<type 'str'>
@@ -200,9 +198,8 @@ AndroidList|000000|<type 'str'>
 Volume|volume-top|<type 'str'>
 IconStyle2|icons-light2|<type 'str'>
 IBFontSize|middle|<type 'str'>
-NZBorderSelf|000000|<type 'str'>
 WeatherView|icon|<type 'str'>
-Font2Self|000000|<type 'str'>
+Font2Self|ffc000|<type 'str'>
 BackgroundAlternateSelfColor|000000|<type 'str'>
 IBProgressBackgroundList|0050EF|<type 'str'>
 About|about|<type 'str'>
@@ -230,6 +227,6 @@ MarkedFontSelf|000000|<type 'str'>
 IBFont1|ffffff|<type 'str'>
 PermanentClock|permanentclock-infobar-big|<type 'str'>
 PlayerClock|player-classic|<type 'str'>
-IBFont2|F0A30A|<type 'str'>
+IBFont2|ffc000|<type 'str'>
 InfobarBoxSelfColor|000000|<type 'str'>
 PVRState|pvrstate-center-big|<type 'str'>
