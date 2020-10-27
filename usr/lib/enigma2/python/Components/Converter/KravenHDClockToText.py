@@ -3,7 +3,7 @@
 #  Clock To Text Converter
 #
 #  Coded/Modified/Adapted by örlgrey
-#  Based on VTi and/or OpenATV image source code
+#  Based on teamBlue image source code
 #  Based on Clock To Text by Diamondear and plnick
 #
 #  This code is licensed under the Creative Commons 

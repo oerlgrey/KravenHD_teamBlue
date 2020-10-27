@@ -3,7 +3,7 @@
 #  Pixmap Scaler Renderer
 #
 #  Coded/Modified/Adapted by örlgrey
-#  Based on VTi and/or OpenATV image source code
+#  Based on teamBlue image source code
 #  Based on the work of shamann (see below)
 #
 #  This code is licensed under the Creative Commons 

@@ -3,7 +3,7 @@
 #  Color Selection Tool
 #
 #  Coded/Modified/Adapted by örlgrey
-#  Based on VTi and/or OpenATV image source code
+#  Based on teamBlue image source code
 #  Thankfully inspired by MyMetrix by iMaxxx
 #
 #  This code is licensed under the Creative Commons 

@@ -269,18 +269,7 @@
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
     <panel name="Colorbuttons"/>
-  </screen>
-
-  <screen backgroundColor="transparent" flags="wfNoBorder" name="Ipkg" position="0,0" size="1280,720" title="Installing Software...">
-	<!--*Ipkg*-->
-	<eLabel text="Installing Software..." position="42,7" size="1000,46" backgroundColor="KravenIBbg3" font="Regular2;34" foregroundColor="KravenIBGFont2" halign="left" valign="center" transparent="1" />
-    <widget name="activityslider" borderColor="KravenBorder" borderWidth="2" position="42,80" size="736,15" transparent="1" foregroundColor="KravenProgress" pixmap="KravenHD/progress/progress736.png" />
-    <widget backgroundColor="Kravenbg3" font="Regular;22" foregroundColor="KravenFont1" name="package" position="42,110" size="736,27" transparent="1" />
-    <widget backgroundColor="Kravenbg3" font="Regular;22" foregroundColor="KravenFont1" name="status" position="42,150" size="736,54" transparent="1" />
-    <widget name="slider" borderColor="KravenBorder" borderWidth="2" position="42,240" size="736,15" transparent="1" foregroundColor="KravenProgress" pixmap="KravenHD/progress/progress736.png" />
-	<!-- Logo -->
-	<panel name="gradient-menu"/>
-    <panel name="Colorbuttons"/>
+    <panel name="OKExit"/>
   </screen>
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="LEDBrightnessSetup" position="0,0" size="1280,720" title="LED Brightness Setup">
@@ -351,9 +340,45 @@
 	<!--*SkinSelector*-->
     <widget backgroundColor="Kravenbg3" name="SkinList" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" position="42,80" size="348,420" transparent="1" />
     <widget alphatest="blend" name="Preview" position="428,70" size="280,210" />
-    <widget backgroundColor="Kravenbg3" font="Regular2;22" halign="center" position="42,545" render="Label" size="736,56" source="introduction" transparent="1" foregroundColor="KravenFont2" />
+    <widget backgroundColor="Kravenbg3" font="Regular2;22" halign="center" position="42,545" render="Label" size="736,54" source="introduction" transparent="1" foregroundColor="KravenFont2" />
     <panel name="Title-big"/>
     <panel name="Colorbuttons"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="LCDSkinSelectorOLD" position="0,0" size="1280,720" title="LCD Skin Selector">
+	<!--*LCDSkinSelectorOLD*-->
+	<widget backgroundColor="KravenIBbg3" font="Regular2;34" foregroundColor="KravenIBGFont2" position="42,7" render="Label" size="1000,46" source="lab1" transparent="1" halign="left" valign="center" noWrap="1" />
+    <widget backgroundColor="Kravenbg3" name="SkinList" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" position="42,80" size="348,420" transparent="1" />
+    <widget alphatest="blend" name="Preview" position="428,70" size="280,210" />
+    <widget backgroundColor="Kravenbg3" font="Regular2;22" halign="center" position="42,545" render="Label" size="736,54" source="lab3" transparent="1" foregroundColor="KravenFont2" />
+    <panel name="Colorbuttons"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="LCDClockSelector" position="0,0" size="1280,720" title="LCD Clock Selector">
+	<!--*LCDClockSelector*-->
+	<widget backgroundColor="KravenIBbg3" font="Regular2;34" foregroundColor="KravenIBGFont2" position="42,7" render="Label" size="1000,46" source="lab1" transparent="1" halign="left" valign="center" noWrap="1" />
+    <widget backgroundColor="Kravenbg3" name="ClockList" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" position="42,80" size="348,420" transparent="1" />
+    <widget alphatest="blend" name="Preview" position="428,70" size="280,210" />
+    <widget backgroundColor="Kravenbg3" font="Regular2;22" halign="center" position="42,545" render="Label" size="736,54" source="lab3" transparent="1" foregroundColor="KravenFont2" />
+    <panel name="Colorbuttons"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="AudioEffect" position="0,0" size="1280,720" title="Audio Effect Setup">
+	<!--*AudioEffect*-->
+    <widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" position="42,80" size="736,420" transparent="1" />
+    <widget backgroundColor="Kravenbg3" font="Regular2;22" halign="center" position="42,545" render="Label" size="736,54" source="description" transparent="1" foregroundColor="KravenFont2" />
+    <panel name="Title-big"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellow"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
     <panel name="OKExit"/>
@@ -1013,7 +1038,7 @@
 	<!--*CiSelection*-->
 	<eLabel text="Common Interface" position="42,7" size="1000,46" backgroundColor="KravenIBbg3" font="Regular2;34" foregroundColor="KravenIBGFont2" halign="left" valign="center" transparent="1" />
     <widget backgroundColor="Kravenbg3" font="Regular2;24" foregroundColor="KravenFont2" name="text" position="42,80" size="736,30" transparent="1" />
-    <widget backgroundColor="Kravenbg3" name="entries" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" position="42,120" size="736,540" transparent="1" />
+    <widget backgroundColor="Kravenbg3" name="entries" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" position="42,120" size="736,510" transparent="1" />
     <panel name="Colorbuttons"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
@@ -1279,6 +1304,7 @@
 				}
 			</convert>
     </widget>
+    <panel name="Colorbuttons"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
     <panel name="MenuOKExit"/>
@@ -1313,6 +1339,7 @@
 				}
 			</convert>
     </widget>
+    <panel name="Colorbuttons"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
     <panel name="OKExit"/>
@@ -1475,8 +1502,21 @@
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="Setup" position="0,0" size="1280,720" title="Setup">
 	<!--*Setup*-->
-    <widget backgroundColor="Kravenbg3" name="config" font="Regular;21" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,540" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+    <widget backgroundColor="Kravenbg3" name="config" font="Regular;21" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,420" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+    <widget backgroundColor="Kravenbg3" name="description" font="Regular;22" foregroundColor="KravenFont2" position="42,510" size="736,108" halign="center" valign="center" transparent="1" />
     <widget name="HelpWindow" position="134,502" size="552,135" zPosition="98" transparent="1" alphatest="blend" />
+    <panel name="Title-big"/>
+    <panel name="Colorbuttons"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="SourceRedGreen"/>
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="VideoSetup" position="0,0" size="1280,720" title="Setup">
+	<!--*VideoSetup*-->
+    <widget backgroundColor="Kravenbg3" name="config" font="Regular;21" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,450" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+    <widget backgroundColor="Kravenbg3" name="description" font="Regular;22" foregroundColor="KravenFont2" position="42,535" size="736,81" halign="center" valign="center" transparent="1" />
     <panel name="Title-big"/>
     <panel name="Colorbuttons"/>
 	<!-- Logo -->
@@ -2280,6 +2320,7 @@
 	<panel name="gradient-menu"/>
     <panel name="Colorbuttons"/>
     <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="OKExit"/>
   </screen>
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="OPKGMenu" position="0,0" size="1280,720" title="Select OPKG source.....">
@@ -2289,41 +2330,19 @@
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
     <panel name="Colorbuttons"/>
-    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="SourceRedGreen"/>
     <panel name="OKExit"/>
   </screen>
 
-  <screen backgroundColor="transparent" flags="wfNoBorder" name="IpkgInstaller" position="0,0" size="1280,720" title="...">
-	<!--*IpkgInstaller*-->
-    <widget backgroundColor="Kravenbg3" name="list" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,450" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-    <widget backgroundColor="Kravenbg3" font="Regular2;22" foregroundColor="KravenFont2" halign="center" position="42,595" render="Label" size="736,27" source="introduction" transparent="1" />
-    <panel name="Title-big"/>
-	<!-- Logo -->
-	<panel name="gradient-menu"/>
-    <panel name="Colorbuttons"/>
-    <panel name="SourceRedGreenYellowBlue"/>
-  </screen>
-
-  <screen backgroundColor="transparent" flags="wfNoBorder" name="IPKGMenu" position="0,0" size="1280,720" title="Select IPKG source.....">
-	<!--*IPKGMenu*-->
-    <widget backgroundColor="Kravenbg3" name="filelist" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,540" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-    <panel name="Title-big"/>
-	<!-- Logo -->
-	<panel name="gradient-menu"/>
-    <panel name="Colorbuttons"/>
-    <panel name="SourceRedGreenYellowBlue"/>
-    <panel name="OKExit"/>
-  </screen>
-
-  <screen backgroundColor="transparent" flags="wfNoBorder" name="IPKGSource" position="0,0" size="1280,720" title="IPKG source">
-	<!--*IPKGSource*-->
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="OPKGSource" position="0,0" size="1280,720" title="OPKG source">
+	<!--*OPKGSource*-->
     <widget backgroundColor="Kravenbg3" font="Regular2;22" foregroundColor="KravenFont2" name="text" position="42,80" size="736,27" transparent="1" />
     <panel name="Title-big"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
     <panel name="Colorbuttons"/>
     <panel name="SourceRedGreen"/>
-    <panel name="Exit"/>
+    <panel name="OKExit"/>
   </screen>
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="UpdatePluginMenu" position="0,0" size="1280,720" title="Softwaremanager...">
@@ -2630,8 +2649,8 @@
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="AudioSetup" position="0,0" size="1280,720" title="Setup">
 	<!--*AudioSetup*-->
-	<widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,540" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-    <widget name="HelpWindow" position="134,502" size="552,135" zPosition="98" transparent="1" alphatest="blend" />
+	<widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,450" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+    <widget backgroundColor="Kravenbg3" name="description" font="Regular;22" foregroundColor="KravenFont2" position="42,535" size="736,81" halign="center" valign="center" transparent="1" />
     <panel name="Title-big"/>
   	<!-- Logo -->
 	<panel name="gradient-menu"/>
@@ -2642,8 +2661,8 @@
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="setup_subtitlesetup" position="0,0" size="1280,720" title="Setup">
 	<!--*setup_subtitlesetup*-->
-	<widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,540" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-    <widget name="HelpWindow" position="134,502" size="552,135" zPosition="98" transparent="1" alphatest="blend" />
+	<widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,450" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+    <widget backgroundColor="Kravenbg3" name="description" font="Regular;22" foregroundColor="KravenFont2" position="42,535" size="736,81" halign="center" valign="center" transparent="1" />
     <panel name="Title-big"/>
   	<!-- Logo -->
 	<panel name="gradient-menu"/>
@@ -2654,8 +2673,8 @@
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="setup_autolanguagesetup" position="0,0" size="1280,720" title="Setup">
 	<!--*setup_autolanguagesetup*-->
-	<widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,540" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-    <widget name="HelpWindow" position="134,502" size="552,135" zPosition="98" transparent="1" alphatest="blend" />
+	<widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,450" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+    <widget backgroundColor="Kravenbg3" name="description" font="Regular;22" foregroundColor="KravenFont2" position="42,535" size="736,81" halign="center" valign="center" transparent="1" />
     <panel name="Title-big"/>
   	<!-- Logo -->
 	<panel name="gradient-menu"/>

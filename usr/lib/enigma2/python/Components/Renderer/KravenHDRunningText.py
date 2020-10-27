@@ -3,7 +3,7 @@
 #  Running Text Renderer
 #
 #  Coded/Modified/Adapted by örlgrey
-#  Based on VTi and/or OpenATV image source code
+#  Based on teamBlue image source code
 #  Based on Running Text by vlamo and Dr.Best (see below)
 #
 #  This code is licensed under the Creative Commons 

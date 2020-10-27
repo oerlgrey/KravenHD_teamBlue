@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #
-#  KravenHDMSNWeather Converter
+#  KravenHDWeather Converter
 #
-#  Coded by örlgrey
-#  Based on openATV and/or teamBlue image source code
+#  Coded/Modified/Adapted by örlgrey
+#  Based on teamBlue image source code
 #
 #  This code is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported 

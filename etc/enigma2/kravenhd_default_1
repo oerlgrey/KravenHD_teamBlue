@@ -146,7 +146,7 @@ Infobox2|tunerinfo|<type 'str'>
 CategoryInfobarContents|category|<type 'str'>
 ButtonText|ffffff|<type 'str'>
 MarkedFontList|70AD11|<type 'str'>
-ChannelSelectionServiceNASelf|000000|<type 'str'>
+ChannelSelectionServiceNASelf|656565|<type 'str'>
 WeatherStyle|none|<type 'str'>
 LineList|ffffff|<type 'str'>
 GraphMultiEPG|graphmultiepg-minitv|<type 'str'>
@@ -209,12 +209,12 @@ InfobarGradientListColorSecondary|self|<type 'str'>
 Android2Self|000000|<type 'str'>
 FinishedColorList|70AD11|<type 'str'>
 BackgroundSelfColorR|0|<type 'int'>
-ChannelSelectionServiceNAList|FFEA04|<type 'str'>
+ChannelSelectionServiceNAList|self|<type 'str'>
 InfobarChannelName|none|<type 'str'>
 ProgressList|progress|<type 'str'>
 refreshInterval|15|<type 'str'>
 PigMenuActive|False|<type 'str'>
-ChannelSelectionServiceNA|FFEA04|<type 'str'>
+ChannelSelectionServiceNA|656565|<type 'str'>
 BackgroundSelfColorB|0|<type 'int'>
 InfobarAntialias|10|<type 'int'>
 BorderSelf|000000|<type 'str'>

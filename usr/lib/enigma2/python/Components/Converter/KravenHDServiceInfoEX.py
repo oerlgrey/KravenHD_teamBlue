@@ -3,7 +3,7 @@
 #  Service Info EX Converter
 #
 #  Coded/Modified/Adapted by örlgrey
-#  Based on VTi and/or OpenATV image source code
+#  Based on teamBlue image source code
 #  Based on Service Info EX by 2boom (see below)
 #
 #  Original license:

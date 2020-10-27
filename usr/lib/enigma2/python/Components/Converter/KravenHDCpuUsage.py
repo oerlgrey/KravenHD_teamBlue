@@ -3,7 +3,7 @@
 #  CPU Usage Converter
 #
 #  Coded/Modified/Adapted by örlgrey
-#  Based on VTi and/or OpenATV image source code
+#  Based on teamBlue image source code
 #  Based on CPU Usage by vlamo
 #
 #  This code is licensed under the Creative Commons 
