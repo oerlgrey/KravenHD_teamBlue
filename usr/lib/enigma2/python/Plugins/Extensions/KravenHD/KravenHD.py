@@ -1093,6 +1093,7 @@ class KravenHD(ConfigListScreen, Screen):
 		self.actWeatherstyle=""
 		self.actMenustyle=""
 		self.actCity=""
+		self.actCSItemHeight=""
 
 		self.skincolorinfobarcolor=""
 		self.skincolorbackgroundcolor=""
@@ -2116,8 +2117,6 @@ class KravenHD(ConfigListScreen, Screen):
 				path = "/usr/lib/enigma2/python/Plugins/Extensions/KravenHD/images/colors.jpg"
 			elif returnValue == ("channelselection-style-minitv3"):
 				path = "/usr/lib/enigma2/python/Plugins/Extensions/KravenHD/images/channelselection-style-minitv.jpg"
-			elif returnValue == "channelselection-style-nobile-minitv3":
-				path = "/usr/lib/enigma2/python/Plugins/Extensions/KravenHD/images/channelselection-style-nobile-minitv.jpg"
 			elif returnValue == "all-screens":
 				path = "/usr/lib/enigma2/python/Plugins/Extensions/KravenHD/images/emc-smallcover.jpg"
 			elif returnValue == "player-classic":
@@ -3007,6 +3006,7 @@ class KravenHD(ConfigListScreen, Screen):
 			self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_28.png"'," "])
 			self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_32.png"'," "])
 		if config.plugins.KravenHD.SelectionStyle.value == "color":
+			self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_CS.png"', " "])
 			self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_30.png"'," "])
 			self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_36.png"'," "])
 			self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_40.png"'," "])
@@ -3022,6 +3022,34 @@ class KravenHD(ConfigListScreen, Screen):
 			if config.plugins.KravenHD.EMCSelectionColors.value == "global":
 				self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_28.png"'," "])
 				self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_32.png"'," "])
+		else:
+			# ChannelSelection
+			CSlines = ""
+			if config.usage.servicelist_twolines.value == True:
+				CSlines = 2
+			else:
+				CSlines = 1
+			if not config.usage.servicelist_number_of_services.value == "by skin":
+				CSitems = int(config.usage.servicelist_number_of_services.value)
+				CSheight = ""
+				if config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-nobile-minitv":
+					CSheight = 348
+				elif config.plugins.KravenHD.ChannelSelectionStyle.value in ("channelselection-style-nobile", "channelselection-style-nobile2"):
+					CSheight = 580
+				elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv2":
+					CSheight = 420
+				elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv-picon":
+					CSheight = 396
+				else:
+					CSheight = 560
+				self.actCSItemHeight = int(((CSheight / CSitems) * CSlines) +1)
+			else:
+				if config.plugins.KravenHD.ChannelSelectionStyle.value in ("channelselection-style-nobile", "channelselection-style-nobile2", "channelselection-style-nobile-minitv"):
+					self.actCSItemHeight = int(29 * CSlines)
+				elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv-picon":
+					self.actCSItemHeight = int(34 * CSlines)
+				else:	
+					self.actCSItemHeight = int(35 * CSlines)
 
 		### Progress
 		if not config.plugins.KravenHD.Progress.value == "progress":
@@ -4551,6 +4579,7 @@ class KravenHD(ConfigListScreen, Screen):
 		self.makeGradientpng("sel_90",870,90,config.plugins.KravenHD.SelectionBackground.value,config.plugins.KravenHD.SelectionBackground2.value,"00")
 		self.makeGradientpng("sel_110",736,110,config.plugins.KravenHD.SelectionBackground.value,config.plugins.KravenHD.SelectionBackground2.value,"00")
 		self.makeGradientpng("sel_135",736,136,config.plugins.KravenHD.SelectionBackground.value,config.plugins.KravenHD.SelectionBackground2.value,"00")
+		self.makeGradientpng("sel_CS", 765, self.actCSItemHeight, config.plugins.KravenHD.SelectionBackground.value, config.plugins.KravenHD.SelectionBackground2.value, "00")
 		if config.plugins.KravenHD.EMCSelectionColors.value == "global":
 			if config.plugins.KravenHD.EMCStyle.value in ("emc-verybigcover","emc-verybigcover2"):
 				self.makeGradientpng("sel_28",777,28,config.plugins.KravenHD.SelectionBackground.value,config.plugins.KravenHD.SelectionBackground2.value,"00")
