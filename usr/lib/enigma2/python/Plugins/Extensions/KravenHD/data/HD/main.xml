@@ -1787,17 +1787,18 @@
 
   <screen name="HarddiskSelection" position="0,0" size="1280,720" title="Select HDD" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*HarddiskSelection*-->
-	<eLabel text="Select HDD" position="42,7" size="1000,46" backgroundColor="KravenIBbg3" font="Regular2;34" foregroundColor="KravenIBGFont2" halign="left" valign="center" transparent="1" />
+	<panel name="Title-big"/>
 	<widget backgroundColor="Kravenbg3" name="hddlist" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,540" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" />
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
     <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreen"/>
     <panel name="OKExit"/>
   </screen>
 
   <screen name="HarddiskSetup" position="0,0" size="1280,720" title="Harddisk" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*HarddiskSetup*-->
-	<eLabel text="Harddisk Setup" position="42,7" size="1000,46" backgroundColor="KravenIBbg3" font="Regular2;34" foregroundColor="KravenIBGFont2" halign="left" valign="center" transparent="1" />
+	<panel name="Title-big"/>
 	<widget name="model" position="42,80" size="736,30" font="Regular;23" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
 	<widget name="capacity" position="42,130" size="736,30" font="Regular;23" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
 	<widget name="bus" position="42,180" size="736,30" font="Regular;23" foregroundColor="KravenFont1" backgroundColor="Kravenbg3" transparent="1" />
@@ -1805,7 +1806,8 @@
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
     <panel name="Colorbuttons"/>
-    <panel name="OKExit"/>
+    <panel name="SourceRedGreen"/>
+    <panel name="Exit"/>
   </screen>
 
   <screen name="HarddiskWait" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
