@@ -338,6 +338,18 @@
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="SkinSelector" position="0,0" size="1280,720" title="Skin Selector">
 	<!--*SkinSelector*-->
+	<!-- new widgets -->
+	<widget backgroundColor="Kravenbg3" source="skins" render="Listbox" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" position="42,80" size="348,420" transparent="1">
+	  <convert type="TemplatedMultiContent">
+	      {"template": [ MultiContentEntryText(pos = (8, 1), size = (332, 27), flags = RT_HALIGN_LEFT, text = 0) ],
+	      "fonts": [gFont("Regular", 22)],
+	      "itemHeight": 30
+	      }
+	  </convert>
+	</widget>
+    <widget alphatest="blend" name="preview" position="428,70" size="280,210" />
+    <widget backgroundColor="Kravenbg3" font="Regular2;22" halign="center" position="42,545" render="Label" size="736,54" source="description" transparent="1" foregroundColor="KravenFont2" />
+	<!-- old widgets -->
     <widget backgroundColor="Kravenbg3" name="SkinList" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" position="42,80" size="348,420" transparent="1" />
     <widget alphatest="blend" name="Preview" position="428,70" size="280,210" />
     <widget backgroundColor="Kravenbg3" font="Regular2;22" halign="center" position="42,545" render="Label" size="736,54" source="introduction" transparent="1" foregroundColor="KravenFont2" />
@@ -2528,7 +2540,6 @@
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="HddSetup" position="0,0" size="1280,720" title="Hard Drive Setup">
 	<!--*HddSetup*-->
-    <eLabel backgroundColor="KravenIBbg3" text="Device List" font="Regular2;34" foregroundColor="KravenIBGFont2" position="42,7" size="1000,46" transparent="1" halign="left" valign="center" />
 	<widget backgroundColor="Kravenbg3" source="menu" render="Listbox" position="42,80" size="736,522" itemHeight="58" selectionPixmap="KravenHD/graphics/sel_60.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
 	  <convert type="TemplatedMultiContent">
 				{"template": [
@@ -2541,6 +2552,7 @@
 				}
 	  </convert>
 	</widget>
+    <panel name="Title-big"/>
   	<!-- Logo -->
 	<panel name="gradient-menu"/>
 	<panel name="Colorbuttons"/>
@@ -2903,9 +2915,9 @@
 	<!--*NetworkAfp*-->
     <widget name="lab1" position="42,80" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
     <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" zPosition="2" />
-    <widget name="lab2" position="42,140" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
-    <widget name="labstop" position="306,140" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
-    <widget name="labrun" position="306,140" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="lab2" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
     <panel name="Title-big"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
@@ -2913,7 +2925,7 @@
     <panel name="SourceRedGreenYellowBlue"/>
     <panel name="Exit"/>
   </screen>
-  
+
   <screen name="NetworkPassword" title="NetworkPassword" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*NetworkPassword*-->
     <widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,270" scrollbarMode="showOnDemand" transparent="1" />
@@ -2927,13 +2939,30 @@
     <panel name="OKExit"/>
   </screen>
 
+  <screen name="NetworkFTP" title="FTP Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkFTP*-->
+    <widget name="lab1" position="42,80" size="736,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" zPosition="2" />
+    <widget name="lab2" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="Exit"/>
+  </screen>
+
   <screen name="NetworkNfs" title="NFS Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*NetworkNfs*-->
     <widget name="lab1" position="42,80" size="165,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
     <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" zPosition="2" />
-    <widget name="lab2" position="42,140" size="165,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
-    <widget name="labstop" position="306,140" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
-    <widget name="labrun" position="306,140" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="lab2" position="42,130" size="165,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+	<widget name="lab4" position="42,300" size="736,30" font="Regular2;22" backgroundColor="Kravenbg3" foregroundColor="KravenFont2" valign="center" transparent="1"/>
+	<widget name="lab3" position="42,350" size="736,108" font="Regular;22" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" valign="top" transparent="1"/>
     <panel name="Title-big"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
@@ -2946,9 +2975,9 @@
 	<!--*NetworkSamba*-->
     <widget name="lab1" position="42,80" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
     <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" zPosition="2" />
-    <widget name="lab2" position="42,140" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
-    <widget name="labstop" position="306,140" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
-    <widget name="labrun" position="306,140" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="lab2" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
     <panel name="Title-big"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
@@ -2957,18 +2986,13 @@
     <panel name="Exit"/>
   </screen>
 
-  <screen name="NetworkSambaLog" title="Samba Log" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
-	<!--*NetworkSambaLog*-->
-    <widget backgroundColor="Kravenbg3" name="infotext" position="42,80" size="736,540" zPosition="3" font="Regular;22" scrollbarMode="showOnDemand" foregroundColor="KravenFont1" transparent="1" />
-    <panel name="Title-big"/>
-	<!-- Logo -->
-	<panel name="gradient-menu"/>
-    <panel name="Colorbuttons"/>
-  </screen>
-
-  <screen name="ScanIP" title="Scan IP" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
-	<!--*ScanIP*-->
-    <widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,540" scrollbarMode="showOnDemand" zPosition="3" backgroundColorSelected="KravenSelection" foregroundColorSelected="KravenFont1" transparent="1" />
+  <screen name="NetworkSATPI" title="Satpi Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkSATPI*-->
+    <widget name="lab1" position="42,80" size="165,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" zPosition="2" />
+    <widget name="lab2" position="42,130" size="165,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
     <panel name="Title-big"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
@@ -2980,7 +3004,7 @@
   <screen backgroundColor="transparent" flags="wfNoBorder" name="NetworkMacSetup" position="0,0" size="1280,720" title=" ">
 	<!--*NetworkMacSetup*-->
     <widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,120" transparent="1" />
-    <widget backgroundColor="Kravenbg3" font="Regular2;22" foregroundColor="KravenFont2" halign="center" valign="center" position="42,485" render="Label" size="736,100" source="introduction" transparent="1" />
+    <widget backgroundColor="Kravenbg3" font="Regular2;22" foregroundColor="KravenFont2" halign="center" valign="center" position="42,485" render="Label" size="736,108" source="introduction" transparent="1" />
     <panel name="Title-big"/>
 	<!-- Logo -->
 	<panel name="gradient-menu"/>
@@ -2988,7 +3012,212 @@
     <panel name="SourceRedGreenYellowBlue"/>
     <panel name="Exit"/>
   </screen>
-  
+
+  <screen name="NetworkInadyn" title="Inadyn Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkInadyn*-->
+    <widget name="autostart" position="42,80" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labdisabled" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="status" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="time" position="42,180" size="254,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labtime" position="306,180" size="114,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="username" position="42,230" size="234,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labuser" position="306,230" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="password" position="42,280" size="234,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labpass" position="306,280" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="alias" position="42,330" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labalias" position="306,330" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="system" position="42,380" size="114,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="sinactive" position="306,385" zPosition="1" pixmap="KravenHD/icons/lock_off.png" size="20,20" alphatest="on" />
+    <widget name="sactive" position="306,385" zPosition="2" pixmap="KravenHD/icons/lock_on.png" size="20,20" alphatest="on" />
+    <widget name="labsys" position="346,380" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen name="NetworkInadynSetup" title="Inadyn Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkInadynSetup*-->
+    <widget backgroundColor="Kravenbg3" name="config" position="42,80" size="736,510" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" font="Regular;22" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="HelpWindow" position="42,502" size="736,135" zPosition="98" transparent="1" alphatest="blend" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="Exit"/>
+  </screen>
+
+  <screen name="NetworkInadynLog" title="Inadyn Log" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkInadynLog*-->
+    <widget name="infotext" position="42,80" size="736,540" font="Regular;22" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="Exit"/>
+  </screen>
+
+  <screen name="NetworkMiniDLNA" title="MiniDLNA Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkMiniDLNA*-->
+    <widget name="autostart" position="42,80" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labdisabled" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="status" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="username" position="42,180" size="254,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labuser" position="306,180" size="114,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="iface" position="42,230" size="234,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labiface" position="306,230" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="port" position="42,280" size="234,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labport" position="306,280" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="serialno" position="42,330" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labserialno" position="306,330" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="sharedir" position="42,380" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labsharedir" position="306,380" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="inotify" position="42,430" size="314,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="inotifyactive" position="306,435" zPosition="1" pixmap="KravenHD/icons/lock_on.png" size="20,20" alphatest="on" />
+    <widget name="inotifyinactive" position="306,435" zPosition="2" pixmap="KravenHD/icons/lock_off.png" size="20,20" alphatest="on" />
+    <widget name="tivo" position="42,480" size="314,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="tivoactive" position="306,485" zPosition="1" pixmap="KravenHD/icons/lock_on.png" size="20,20" alphatest="on" />
+    <widget name="tivoinactive" position="306,485" zPosition="2" pixmap="KravenHD/icons/lock_off.png" size="20,20" alphatest="on" />
+    <widget name="dlna" position="42,530" size="314,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="dlnaactive" position="306,535" zPosition="1" pixmap="KravenHD/icons/lock_on.png" size="20,20" alphatest="on" />
+    <widget name="dlnainactive" position="306,535" zPosition="2" pixmap="KravenHD/icons/lock_off.png" size="20,20" alphatest="on" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen name="NetworkOpenvpn" title="OpenVpn Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkOpenvpn*-->
+    <widget name="lab1" position="42,80" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" zPosition="2" />
+    <widget name="lab2" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+	<widget name="labconfig" position="42,300" size="736,30" font="Regular2;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont2" transparent="1" />
+	<widget name="labconfigfilename" position="42,350" size="736,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen name="NetworkSABnzbd" title="SABnzbd Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkSABnzbd*-->
+    <widget name="lab1" position="42,80" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" zPosition="2" />
+    <widget name="lab2" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="Exit"/>
+  </screen>
+
+  <screen name="NetworkTelnet" title="Telnet Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkTelnet*-->
+    <widget name="lab1" position="42,80" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" zPosition="2" />
+    <widget name="lab2" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellow"/>
+    <panel name="Exit"/>
+  </screen>
+
+  <screen name="NetworkuShareSetup" title="uShare Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkuShareSetup*-->
+    <widget backgroundColor="Kravenbg3" name="config" position="42,80" size="736,510" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" font="Regular;22" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="HelpWindow" position="42,502" size="736,135" zPosition="98" transparent="1" alphatest="blend" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="Exit"/>
+  </screen>
+
+  <screen name="uShareSelection" title="uShare Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*uShareSelection*-->
+    <widget backgroundColor="Kravenbg3" name="checkList" position="42,80" size="736,510" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" font="Regular;22" scrollbarMode="showOnDemand" transparent="1" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="Exit"/>
+  </screen>
+
+  <screen name="NetworkuShare" title="uShare Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*NetworkuShare*-->
+    <widget name="autostart" position="42,80" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labdisabled" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labactive" position="306,80" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="status" position="42,130" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labstop" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="red" foregroundColor="white" zPosition="1" />
+    <widget name="labrun" position="306,130" size="186,30" font="Regular;22" valign="center" halign="center" backgroundColor="green" foregroundColor="white" zPosition="2" />
+    <widget name="username" position="42,180" size="254,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labuser" position="306,180" size="114,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="iface" position="42,230" size="234,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labiface" position="306,230" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="port" position="42,280" size="234,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labport" position="306,280" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="telnetport" position="42,330" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labtelnetport" position="306,330" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="sharedir" position="42,380" size="164,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="labsharedir" position="306,380" size="364,30" font="Regular;22" valign="center" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="web" position="42,430" size="314,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="webactive" position="306,435" zPosition="1" pixmap="KravenHD/icons/lock_on.png" size="20,20" alphatest="on" />
+    <widget name="webinactive" position="306,435" zPosition="2" pixmap="KravenHD/icons/lock_off.png" size="20,20" alphatest="on" />
+    <widget name="telnet" position="42,480" size="314,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="telnetactive" position="306,485" zPosition="1" pixmap="KravenHD/icons/lock_on.png" size="20,20" alphatest="on" />
+    <widget name="telnetinactive" position="306,485" zPosition="2" pixmap="KravenHD/icons/lock_off.png" size="20,20" alphatest="on" />
+    <widget name="xbox" position="42,530" size="314,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="xboxactive" position="306,535" zPosition="1" pixmap="KravenHD/icons/lock_on.png" size="20,20" alphatest="on" />
+    <widget name="xboxinactive" position="306,535" zPosition="2" pixmap="KravenHD/icons/lock_off.png" size="20,20" alphatest="on" />
+    <widget name="dlna" position="42,580" size="300,30" font="Regular;22" valign="center" halign="left" backgroundColor="Kravenbg3" foregroundColor="KravenFont1" transparent="1" />
+    <widget name="dlnaactive" position="306,585" zPosition="1" pixmap="KravenHD/icons/lock_on.png" size="20,20" alphatest="on" />
+    <widget name="dlnainactive" position="306,585" zPosition="2" pixmap="KravenHD/icons/lock_off.png" size="20,20" alphatest="on" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="OKExit"/>
+  </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="IPv6Setup" position="0,0" size="1280,720" title="IPv6 setup">
+	<!--*IPv6Setup*-->
+    <widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,120" transparent="1" />
+    <widget backgroundColor="Kravenbg3" font="Regular2;22" foregroundColor="KravenFont2" halign="center" valign="center" position="42,485" render="Label" size="736,108" source="introduction" transparent="1" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreen"/>
+    <panel name="Exit"/>
+  </screen>
+
   <screen name="MultiBootSelector" title="MultiBoot Image Selector" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*MultiBootSelector*-->
     <widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,300" scrollbarMode="showOnDemand" transparent="1" />
@@ -3001,7 +3230,7 @@
     <panel name="SourceRedGreen"/>
     <panel name="OKExit"/>
   </screen>
-  
+
   <screen name="MultiBootWizard" title="MultiBoot Image Manager" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*MultiBootWizard*-->
     <widget backgroundColor="Kravenbg3" name="config" font="Regular;22" foregroundColor="KravenFont1" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" position="42,80" size="736,300" scrollbarMode="showOnDemand" transparent="1" />
