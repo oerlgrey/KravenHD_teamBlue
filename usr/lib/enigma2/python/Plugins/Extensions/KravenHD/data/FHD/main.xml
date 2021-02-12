@@ -2434,6 +2434,27 @@
     <panel name="OKExit"/>
   </screen>
 
+  <screen name="RestorePlugins" position="0,0" size="1920,1080" title="Select Plugins" backgroundColor="transparent" flags="wfNoBorder">
+	<!--*RestorePlugins*-->
+    <panel name="Title-big"/>
+    <widget backgroundColor="Kravenbg3" source="menu" render="Listbox" position="63,120" size="1104,810" selectionPixmap="KravenHD/graphics/sel_30.png" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1">
+      <convert type="TemplatedMultiContent">
+				{"template": [
+					MultiContentEntryText(pos = (50, 2), size = (1032, 41), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0),
+					MultiContentEntryPixmapAlphaTest(pos = (7, 10), size = (24, 24), png = 1),
+					],
+					"fonts": [gFont("Regular", 32), gFont("Regular", 26)],
+					"itemHeight": 45
+				}
+	  </convert>
+    </widget>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+	<panel name="SourceRedGreen"/>
+    <panel name="OKExit"/>
+  </screen>
+
   <screen name="JobView" position="0,0" size="1920,1080" title="JobView" backgroundColor="transparent" flags="wfNoBorder">
 	<!--*JobView*-->
     <widget backgroundColor="Kravenbg3" source="job_name" render="Label" foregroundColor="KravenFont2" font="Regular2;32" position="63,120" size="1104,41" transparent="1" />
