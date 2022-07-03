@@ -33,6 +33,8 @@
 # Changed the struct.pack() calls to pack the checksum and ID as
 # unsigned. My thanks to Jerome Poincheval for the fix.
 
+from __future__ import print_function
+
 import os
 from socket import *
 import struct
@@ -50,7 +52,14 @@ def checksum(str):
   countTo=(len(str)/2)*2
   count=0
   while count<countTo:
-    thisVal=ord(str[count+1])*256+ord(str[count])
+    try:
+      import six
+      if six.PY2:
+        thisVal=ord(str[count+1])*256+ord(str[count])
+      else:
+        thisVal=str[count+1]*256+str[count]
+    except ImportError:
+      thisVal=ord(str[count+1])*256+ord(str[count])
     sum=sum+thisVal
     sum=sum & 0xffffffff # Necessary?
     count=count+2
@@ -69,44 +78,46 @@ def checksum(str):
   
   return answer
 
-def receiveOnePing(mySocket,ID,timeout):
+def receiveOnePing(mySocket, ID, timeout):
   timeLeft=timeout
-  while 1:
+  while True:
     startedSelect=time.time()
-    whatReady=select.select([mySocket],[],[],timeLeft)
+    whatReady=select.select([mySocket], [], [], timeLeft)
     howLongInSelect=(time.time()-startedSelect)
     if whatReady[0]==[]: # Timeout
-#      print "Ping whatReady"
+#      print ("Ping whatReady")
       return None
     timeReceived=time.time()
-    recPacket,addr=mySocket.recvfrom(1024)
+    recPacket, addr=mySocket.recvfrom(1024)
     icmpHeader=recPacket[20:28]
-    type,code,checksum,packetID,sequence=struct.unpack("bbHHh",icmpHeader)
+    type, code, checksum, packetID, sequence=struct.unpack("bbHHh", icmpHeader)
     if packetID==ID:
       bytesInDouble=struct.calcsize("d")
-      timeSent=struct.unpack("d",recPacket[28:28+bytesInDouble])[0]
+      timeSent=struct.unpack("d", recPacket[28:28+bytesInDouble])[0]
       return timeReceived-timeSent
     timeLeft=timeLeft-howLongInSelect
     if timeLeft<=0:
-#      print "Ping timeLeft"
+#      print ("Ping timeLeft")
       return None
 
-def sendOnePing(mySocket,destAddr,ID):
+def sendOnePing(mySocket, destAddr, ID):
   # Header is type (8), code (8), checksum (16), id (16), sequence (16)
   myChecksum=0
   # Make a dummy heder with a 0 checksum.
-  header=struct.pack("bbHHh",ICMP_ECHO_REQUEST,0,myChecksum,ID,1)
+  header=struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
   bytesInDouble=struct.calcsize("d")
   data=(192-bytesInDouble) * "Q"
-  data=struct.pack("d",time.time())+data
+  if (type(data) is str):
+    data = data.encode()
+  data=struct.pack("d", time.time())+data
   # Calculate the checksum on the data and the dummy header.
   myChecksum=checksum(header+data)
   # Now that we have the right checksum, we put that in. It's just easier
   # to make up a new header than to stuff it into the dummy.
-  header=struct.pack("bbHHh",ICMP_ECHO_REQUEST,0,htons(myChecksum),ID,1)
+  header=struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, htons(myChecksum), ID, 1)
   packet=header+data
   try:
-    mySocket.sendto(packet,(destAddr,1)) # Don't know about the 1
+    mySocket.sendto(packet, (destAddr, 1)) # Don't know about the 1
   except:
     pass
   return None
@@ -118,21 +129,21 @@ def doOne(destAddr,timeout=10):
   except:
     return None
   icmp=getprotobyname("icmp")
-  mySocket=socket(AF_INET,SOCK_RAW,icmp)
+  mySocket=socket(AF_INET, SOCK_RAW, icmp)
   myID=os.getpid()+int(destAddr.split(".")[3]) & 0xFFFF
-  sendOnePing(mySocket,destAddr,myID)
-  delay=receiveOnePing(mySocket,myID,timeout)
+  sendOnePing(mySocket, destAddr, myID)
+  delay=receiveOnePing(mySocket, myID, timeout)
   mySocket.close()
   return delay
 
 def main():
   if len(sys.argv)<2:
-    print "Usage: %s hostname" % os.path.basename(sys.argv[0])
+    print ("Usage: %s hostname" % os.path.basename(sys.argv[0]))
     sys.exit(1)
 
   dest=gethostbyname(sys.argv[1])
   delay=doOne(dest)
-  print delay
+  print (delay)
   return None
 
 if __name__=='__main__':

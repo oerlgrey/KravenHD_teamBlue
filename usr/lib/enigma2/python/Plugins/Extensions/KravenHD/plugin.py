@@ -15,13 +15,25 @@
 #  If you think this license infringes any rights,
 #  please contact me at ochzoetna@gmail.com
 
+from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from enigma import getDesktop
 from Components.Language import language
 from os import environ
 import gettext
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
-import KravenHD
+from . import KravenHD
+
+python3 = False
+
+try:
+	import six
+	if six.PY2:
+		python3 = False
+	else:
+		python3 = True
+except ImportError:
+	python3 = False
 
 lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
@@ -36,9 +48,15 @@ def _(txt):
 	return t
 
 def main(session, **kwargs):
-	reload(KravenHD)
+	global python3
 	try:
-		session.open(KravenHD.KravenHD)
+		if python3:
+			from six.moves import reload_module
+			reload_module(KravenHD)
+			session.open(KravenHD.KravenHD)
+		else:
+			reload(KravenHD)
+			session.open(KravenHD.KravenHD)
 	except:
 		import traceback
 		traceback.print_exc()
