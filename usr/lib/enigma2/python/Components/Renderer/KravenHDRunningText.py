@@ -2,7 +2,7 @@
 
 #  Running Text Renderer
 #
-#  Coded/Modified/Adapted by örlgrey
+#  Coded/Modified/Adapted by oerlgrey
 #  Based on teamBlue image source code
 #  Based on Running Text by vlamo and Dr.Best (see below)
 #

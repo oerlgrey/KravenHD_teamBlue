@@ -2,7 +2,7 @@
 
 #  Sys Temp Renderer
 #
-#  Coded/Modified/Adapted by örlgrey
+#  Coded/Modified/Adapted by oerlgrey
 #  Based on teamBlue image source code
 #
 #  This code is licensed under the Creative Commons 

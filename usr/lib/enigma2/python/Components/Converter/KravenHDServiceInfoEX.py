@@ -2,7 +2,7 @@
 
 #  Service Info EX Converter
 #
-#  Coded/Modified/Adapted by örlgrey
+#  Coded/Modified/Adapted by oerlgrey
 #  Based on teamBlue image source code
 #  Based on Service Info EX by 2boom (see below)
 #

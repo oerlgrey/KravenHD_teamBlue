@@ -2,7 +2,7 @@
 
 #  Ref String Converter
 #
-#  Coded/Modified/Adapted by örlgrey
+#  Coded/Modified/Adapted by oerlgrey
 #  Based on teamBlue image source code
 #  Based on Metrix Ref String by Vali (see below)
 #

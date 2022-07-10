@@ -2,7 +2,7 @@
 
 #  Clock To Text Converter
 #
-#  Coded/Modified/Adapted by örlgrey
+#  Coded/Modified/Adapted by oerlgrey
 #  Based on teamBlue image source code
 #  Based on Clock To Text by Diamondear and plnick
 #

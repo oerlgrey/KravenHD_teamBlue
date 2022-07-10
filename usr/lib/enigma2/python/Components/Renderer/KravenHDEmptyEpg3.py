@@ -2,7 +2,7 @@
 
 #  Empty EPG 3 Renderer
 #
-#  Coded/Modified/Adapted by örlgrey
+#  Coded/Modified/Adapted by oerlgrey
 #  Based on teamBlue image source code
 #  Based on the work of shamann (see below)
 #

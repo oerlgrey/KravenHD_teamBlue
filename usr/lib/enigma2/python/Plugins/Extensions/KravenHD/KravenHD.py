@@ -2,7 +2,7 @@
 
 #  Kraven Plugin
 #
-#  Coded/Modified/Adapted by örlgrey
+#  Coded/Modified/Adapted by oerlgrey
 #  Based on teamBlue image source code
 #  Thankfully inspired by MyMetrix by iMaxxx
 #
@@ -230,17 +230,15 @@ ProgressList = [
 	]
 
 config.plugins.KravenHD = ConfigSubsection()
-currenttime = time.localtime()
-primetime = (currenttime[0], currenttime[1], currenttime[2], 20, 15, 0, 0, 0, 0)
-config.plugins.KravenHD.Primetime = ConfigClock(default = time.mktime(primetime))
-config.plugins.KravenHD.InfobarAntialias = ConfigSlider(default = 10, increment=1, limits=(0, 20))
-config.plugins.KravenHD.ECMLineAntialias = ConfigSlider(default = 10, increment=1, limits=(0, 20))
-config.plugins.KravenHD.ScreensAntialias = ConfigSlider(default = 10, increment=1, limits=(0, 20))
-config.plugins.KravenHD.SelfColorR = ConfigSlider(default = 0, increment=5, limits=(0, 255))
-config.plugins.KravenHD.SelfColorG = ConfigSlider(default = 0, increment=5, limits=(0, 255))
-config.plugins.KravenHD.SelfColorB = ConfigSlider(default = 75, increment=5, limits=(0, 255))
+config.plugins.KravenHD.Primetime2 = ConfigClock(default=time.mktime((0, 0, 0, 20, 15, 0, 0, 0, 0)))
+config.plugins.KravenHD.InfobarAntialias = ConfigSlider(default=10, increment=1, limits=(0, 20))
+config.plugins.KravenHD.ECMLineAntialias = ConfigSlider(default=10, increment=1, limits=(0, 20))
+config.plugins.KravenHD.ScreensAntialias = ConfigSlider(default=10, increment=1, limits=(0, 20))
+config.plugins.KravenHD.SelfColorR = ConfigSlider(default=0, increment=5, limits=(0, 255))
+config.plugins.KravenHD.SelfColorG = ConfigSlider(default=0, increment=5, limits=(0, 255))
+config.plugins.KravenHD.SelfColorB = ConfigSlider(default=75, increment=5, limits=(0, 255))
 
-config.plugins.KravenHD.customProfile = ConfigSelection(default = "1", choices = [
+config.plugins.KravenHD.customProfile = ConfigSelection(default="1", choices = [
 				("1", _("1")),
 				("2", _("2")),
 				("3", _("3")),
@@ -261,9 +259,9 @@ for i in range(1, 21):
 		elif i == 4:
 			name = '4 ' + _("colored")
 		profList.append((n, _(name)))
-config.plugins.KravenHD.defaultProfile = ConfigSelection(default = "default", choices = profList)
+config.plugins.KravenHD.defaultProfile = ConfigSelection(default="default", choices = profList)
 				
-config.plugins.KravenHD.refreshInterval = ConfigSelection(default = "60", choices = [
+config.plugins.KravenHD.refreshInterval = ConfigSelection(default="60", choices = [
 				("15", _("15")),
 				("30", _("30")),
 				("60", _("60")),
@@ -272,7 +270,7 @@ config.plugins.KravenHD.refreshInterval = ConfigSelection(default = "60", choice
 				("480", _("480"))
 				])
 
-config.plugins.KravenHD.Volume = ConfigSelection(default = "volume-border", choices = [
+config.plugins.KravenHD.Volume = ConfigSelection(default="volume-border", choices = [
 				("volume-original", _("original")),
 				("volume-border", _("with Border")),
 				("volume-left", _("left")),
@@ -281,151 +279,151 @@ config.plugins.KravenHD.Volume = ConfigSelection(default = "volume-border", choi
 				("volume-center", _("center"))
 				])
 
-config.plugins.KravenHD.BackgroundColorTrans = ConfigSelection(default = "32", choices = TransList)
+config.plugins.KravenHD.BackgroundColorTrans = ConfigSelection(default="32", choices = TransList)
 
-config.plugins.KravenHD.InfobarColorTrans = ConfigSelection(default = "00", choices = TransList)
+config.plugins.KravenHD.InfobarColorTrans = ConfigSelection(default="00", choices = TransList)
 
-config.plugins.KravenHD.BackgroundListColor = ConfigSelection(default = "self", choices = BackgroundSelfGradientTextureList)
-config.plugins.KravenHD.BackgroundSelfColor = ConfigText(default = "000000")
-config.plugins.KravenHD.BackgroundColor = ConfigText(default = "000000")
+config.plugins.KravenHD.BackgroundListColor = ConfigSelection(default="self", choices = BackgroundSelfGradientTextureList)
+config.plugins.KravenHD.BackgroundSelfColor = ConfigText(default="000000")
+config.plugins.KravenHD.BackgroundColor = ConfigText(default="000000")
 
-config.plugins.KravenHD.BackgroundAlternateListColor = ConfigSelection(default = "000000", choices = BackgroundSelfList)
-config.plugins.KravenHD.BackgroundAlternateSelfColor = ConfigText(default = "000000")
-config.plugins.KravenHD.BackgroundAlternateColor = ConfigText(default = "000000")
+config.plugins.KravenHD.BackgroundAlternateListColor = ConfigSelection(default="000000", choices = BackgroundSelfList)
+config.plugins.KravenHD.BackgroundAlternateSelfColor = ConfigText(default="000000")
+config.plugins.KravenHD.BackgroundAlternateColor = ConfigText(default="000000")
 
-config.plugins.KravenHD.InfobarGradientListColor = ConfigSelection(default = "self", choices = BackgroundSelfTextureList)
-config.plugins.KravenHD.InfobarGradientSelfColor = ConfigText(default = "000000")
-config.plugins.KravenHD.InfobarGradientColor = ConfigText(default = "000000")
+config.plugins.KravenHD.InfobarGradientListColor = ConfigSelection(default="self", choices = BackgroundSelfTextureList)
+config.plugins.KravenHD.InfobarGradientSelfColor = ConfigText(default="000000")
+config.plugins.KravenHD.InfobarGradientColor = ConfigText(default="000000")
 
-config.plugins.KravenHD.InfobarBoxListColor = ConfigSelection(default = "self", choices = BackgroundSelfGradientTextureList)
-config.plugins.KravenHD.InfobarBoxSelfColor = ConfigText(default = "000000")
-config.plugins.KravenHD.InfobarBoxColor = ConfigText(default = "000000")
+config.plugins.KravenHD.InfobarBoxListColor = ConfigSelection(default="self", choices = BackgroundSelfGradientTextureList)
+config.plugins.KravenHD.InfobarBoxSelfColor = ConfigText(default="000000")
+config.plugins.KravenHD.InfobarBoxColor = ConfigText(default="000000")
 
-config.plugins.KravenHD.InfobarAlternateListColor = ConfigSelection(default = "000000", choices = BackgroundSelfList)
-config.plugins.KravenHD.InfobarAlternateSelfColor = ConfigText(default = "000000")
-config.plugins.KravenHD.InfobarAlternateColor = ConfigText(default = "000000")
+config.plugins.KravenHD.InfobarAlternateListColor = ConfigSelection(default="000000", choices = BackgroundSelfList)
+config.plugins.KravenHD.InfobarAlternateSelfColor = ConfigText(default="000000")
+config.plugins.KravenHD.InfobarAlternateColor = ConfigText(default="000000")
 
-config.plugins.KravenHD.BackgroundGradientListColorPrimary = ConfigSelection(default = "000000", choices = BackgroundSelfList)
-config.plugins.KravenHD.BackgroundGradientSelfColorPrimary = ConfigText(default = "000000")
-config.plugins.KravenHD.BackgroundGradientColorPrimary = ConfigText(default = "000000")
+config.plugins.KravenHD.BackgroundGradientListColorPrimary = ConfigSelection(default="000000", choices = BackgroundSelfList)
+config.plugins.KravenHD.BackgroundGradientSelfColorPrimary = ConfigText(default="000000")
+config.plugins.KravenHD.BackgroundGradientColorPrimary = ConfigText(default="000000")
 
-config.plugins.KravenHD.BackgroundGradientListColorSecondary = ConfigSelection(default = "000000", choices = BackgroundSelfList)
-config.plugins.KravenHD.BackgroundGradientSelfColorSecondary = ConfigText(default = "000000")
-config.plugins.KravenHD.BackgroundGradientColorSecondary = ConfigText(default = "000000")
+config.plugins.KravenHD.BackgroundGradientListColorSecondary = ConfigSelection(default="000000", choices = BackgroundSelfList)
+config.plugins.KravenHD.BackgroundGradientSelfColorSecondary = ConfigText(default="000000")
+config.plugins.KravenHD.BackgroundGradientColorSecondary = ConfigText(default="000000")
 
-config.plugins.KravenHD.InfobarGradientListColorPrimary = ConfigSelection(default = "000000", choices = BackgroundSelfList)
-config.plugins.KravenHD.InfobarGradientSelfColorPrimary = ConfigText(default = "000000")
-config.plugins.KravenHD.InfobarGradientColorPrimary = ConfigText(default = "000000")
+config.plugins.KravenHD.InfobarGradientListColorPrimary = ConfigSelection(default="000000", choices = BackgroundSelfList)
+config.plugins.KravenHD.InfobarGradientSelfColorPrimary = ConfigText(default="000000")
+config.plugins.KravenHD.InfobarGradientColorPrimary = ConfigText(default="000000")
 
-config.plugins.KravenHD.InfobarGradientListColorSecondary = ConfigSelection(default = "000000", choices = BackgroundSelfList)
-config.plugins.KravenHD.InfobarGradientSelfColorSecondary = ConfigText(default = "000000")
-config.plugins.KravenHD.InfobarGradientColorSecondary = ConfigText(default = "000000")
+config.plugins.KravenHD.InfobarGradientListColorSecondary = ConfigSelection(default="000000", choices = BackgroundSelfList)
+config.plugins.KravenHD.InfobarGradientSelfColorSecondary = ConfigText(default="000000")
+config.plugins.KravenHD.InfobarGradientColorSecondary = ConfigText(default="000000")
 
-config.plugins.KravenHD.Font1List = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.Font1Self = ConfigText(default = "ffffff")
-config.plugins.KravenHD.Font1 = ConfigText(default = "ffffff")
+config.plugins.KravenHD.Font1List = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.Font1Self = ConfigText(default="ffffff")
+config.plugins.KravenHD.Font1 = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.Font2List = ConfigSelection(default = "F0A30A", choices = ColorSelfList)
-config.plugins.KravenHD.Font2Self = ConfigText(default = "F0A30A")
-config.plugins.KravenHD.Font2 = ConfigText(default = "F0A30A")
+config.plugins.KravenHD.Font2List = ConfigSelection(default="F0A30A", choices = ColorSelfList)
+config.plugins.KravenHD.Font2Self = ConfigText(default="F0A30A")
+config.plugins.KravenHD.Font2 = ConfigText(default="F0A30A")
 
-config.plugins.KravenHD.IBFont1List = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.IBFont1Self = ConfigText(default = "ffffff")
-config.plugins.KravenHD.IBFont1 = ConfigText(default = "ffffff")
+config.plugins.KravenHD.IBFont1List = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.IBFont1Self = ConfigText(default="ffffff")
+config.plugins.KravenHD.IBFont1 = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.IBFont2List = ConfigSelection(default = "F0A30A", choices = ColorSelfList)
-config.plugins.KravenHD.IBFont2Self = ConfigText(default = "F0A30A")
-config.plugins.KravenHD.IBFont2 = ConfigText(default = "F0A30A")
+config.plugins.KravenHD.IBFont2List = ConfigSelection(default="F0A30A", choices = ColorSelfList)
+config.plugins.KravenHD.IBFont2Self = ConfigText(default="F0A30A")
+config.plugins.KravenHD.IBFont2 = ConfigText(default="F0A30A")
 
-config.plugins.KravenHD.PermanentClockFontList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.PermanentClockFontSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.PermanentClockFont = ConfigText(default = "ffffff")
+config.plugins.KravenHD.PermanentClockFontList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.PermanentClockFontSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.PermanentClockFont = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.SelectionFontList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.SelectionFontSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.SelectionFont = ConfigText(default = "ffffff")
+config.plugins.KravenHD.SelectionFontList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.SelectionFontSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.SelectionFont = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.MarkedFontList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.MarkedFontSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.MarkedFont = ConfigText(default = "ffffff")
+config.plugins.KravenHD.MarkedFontList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.MarkedFontSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.MarkedFont = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.ECMFontList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.ECMFontSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.ECMFont = ConfigText(default = "ffffff")
+config.plugins.KravenHD.ECMFontList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.ECMFontSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.ECMFont = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.ChannelnameFontList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.ChannelnameFontSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.ChannelnameFont = ConfigText(default = "ffffff")
+config.plugins.KravenHD.ChannelnameFontList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.ChannelnameFontSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.ChannelnameFont = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.PrimetimeFontList = ConfigSelection(default = "70AD11", choices = ColorSelfList)
-config.plugins.KravenHD.PrimetimeFontSelf = ConfigText(default = "70AD11")
-config.plugins.KravenHD.PrimetimeFont = ConfigText(default = "70AD11")
+config.plugins.KravenHD.PrimetimeFontList = ConfigSelection(default="70AD11", choices = ColorSelfList)
+config.plugins.KravenHD.PrimetimeFontSelf = ConfigText(default="70AD11")
+config.plugins.KravenHD.PrimetimeFont = ConfigText(default="70AD11")
 
-config.plugins.KravenHD.ButtonTextList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.ButtonTextSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.ButtonText = ConfigText(default = "ffffff")
+config.plugins.KravenHD.ButtonTextList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.ButtonTextSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.ButtonText = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.AndroidList = ConfigSelection(default = "000000", choices = ColorSelfList)
-config.plugins.KravenHD.AndroidSelf = ConfigText(default = "000000")
-config.plugins.KravenHD.Android = ConfigText(default = "000000")
+config.plugins.KravenHD.AndroidList = ConfigSelection(default="000000", choices = ColorSelfList)
+config.plugins.KravenHD.AndroidSelf = ConfigText(default="000000")
+config.plugins.KravenHD.Android = ConfigText(default="000000")
 
-config.plugins.KravenHD.BorderList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.BorderSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.Border = ConfigText(default = "ffffff")
+config.plugins.KravenHD.BorderList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.BorderSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.Border = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.ProgressList = ConfigSelection(default = "C3461B", choices = ProgressList)
-config.plugins.KravenHD.ProgressSelf = ConfigText(default = "C3461B")
-config.plugins.KravenHD.Progress = ConfigText(default = "C3461B")
+config.plugins.KravenHD.ProgressList = ConfigSelection(default="C3461B", choices = ProgressList)
+config.plugins.KravenHD.ProgressSelf = ConfigText(default="C3461B")
+config.plugins.KravenHD.Progress = ConfigText(default="C3461B")
 
-config.plugins.KravenHD.LineList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.LineSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.Line = ConfigText(default = "ffffff")
+config.plugins.KravenHD.LineList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.LineSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.Line = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.IBLineList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.IBLineSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.IBLine = ConfigText(default = "ffffff")
+config.plugins.KravenHD.IBLineList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.IBLineSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.IBLine = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.IBStyle = ConfigSelection(default = "grad", choices = [
+config.plugins.KravenHD.IBStyle = ConfigSelection(default="grad", choices = [
 				("grad", _("gradient")),
 				("box", _("box"))
 				])
 
-config.plugins.KravenHD.InfoStyle = ConfigSelection(default = "gradient", choices = [
+config.plugins.KravenHD.InfoStyle = ConfigSelection(default="gradient", choices = [
 				("gradient", _("gradient")),
 				("primary", _("          Primary Color")),
 				("secondary", _("          Secondary Color"))
 				])
 
-config.plugins.KravenHD.InfobarTexture = ConfigSelection(default = "texture1", choices = TextureList)
+config.plugins.KravenHD.InfobarTexture = ConfigSelection(default="texture1", choices = TextureList)
 				
-config.plugins.KravenHD.BackgroundTexture = ConfigSelection(default = "texture1", choices = TextureList)
+config.plugins.KravenHD.BackgroundTexture = ConfigSelection(default="texture1", choices = TextureList)
 
-config.plugins.KravenHD.SelectionStyle = ConfigSelection(default = "color", choices = [
+config.plugins.KravenHD.SelectionStyle = ConfigSelection(default="color", choices = [
 				("color", _("solid color")),
 				("pixmap", _("two-colored"))
 				])
 
-config.plugins.KravenHD.SelectionBackgroundList = ConfigSelection(default = "0050EF", choices = ColorSelfList)
-config.plugins.KravenHD.SelectionBackgroundSelf = ConfigText(default = "0050EF")
-config.plugins.KravenHD.SelectionBackground = ConfigText(default = "0050EF")
+config.plugins.KravenHD.SelectionBackgroundList = ConfigSelection(default="0050EF", choices = ColorSelfList)
+config.plugins.KravenHD.SelectionBackgroundSelf = ConfigText(default="0050EF")
+config.plugins.KravenHD.SelectionBackground = ConfigText(default="0050EF")
 
-config.plugins.KravenHD.SelectionBackground2List = ConfigSelection(default = "001F59", choices = BackgroundSelfList)
-config.plugins.KravenHD.SelectionBackground2Self = ConfigText(default = "001F59")
-config.plugins.KravenHD.SelectionBackground2 = ConfigText(default = "001F59")
+config.plugins.KravenHD.SelectionBackground2List = ConfigSelection(default="001F59", choices = BackgroundSelfList)
+config.plugins.KravenHD.SelectionBackground2Self = ConfigText(default="001F59")
+config.plugins.KravenHD.SelectionBackground2 = ConfigText(default="001F59")
 
-config.plugins.KravenHD.SelectionBorderList = ConfigSelection(default = "ffffff", choices = BorderSelfList)
-config.plugins.KravenHD.SelectionBorderSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.SelectionBorder = ConfigText(default = "ffffff")
+config.plugins.KravenHD.SelectionBorderList = ConfigSelection(default="ffffff", choices = BorderSelfList)
+config.plugins.KravenHD.SelectionBorderSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.SelectionBorder = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.MiniTVBorderList = ConfigSelection(default = "3F3F3F", choices = ColorSelfList)
-config.plugins.KravenHD.MiniTVBorderSelf = ConfigText(default = "3F3F3F")
-config.plugins.KravenHD.MiniTVBorder = ConfigText(default = "3F3F3F")
+config.plugins.KravenHD.MiniTVBorderList = ConfigSelection(default="3F3F3F", choices = ColorSelfList)
+config.plugins.KravenHD.MiniTVBorderSelf = ConfigText(default="3F3F3F")
+config.plugins.KravenHD.MiniTVBorder = ConfigText(default="3F3F3F")
 
-config.plugins.KravenHD.AnalogColorList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.AnalogColorSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.AnalogColor = ConfigText(default = "ffffff")
+config.plugins.KravenHD.AnalogColorList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.AnalogColorSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.AnalogColor = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.InfobarStyle = ConfigSelection(default = "infobar-style-x3", choices = [
+config.plugins.KravenHD.InfobarStyle = ConfigSelection(default="infobar-style-x3", choices = [
 				("infobar-style-nopicon", _("no Picon")),
 				("infobar-style-x1", _("X1")),
 				("infobar-style-x2", _("X2")),
@@ -439,7 +437,7 @@ config.plugins.KravenHD.InfobarStyle = ConfigSelection(default = "infobar-style-
 				("infobar-style-zzz1", _("ZZZ1"))
 				])
 
-config.plugins.KravenHD.InfobarChannelName = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.InfobarChannelName = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("infobar-channelname-small", _("Name small")),
 				("infobar-channelname-number-small", _("Name & Number small")),
@@ -447,25 +445,25 @@ config.plugins.KravenHD.InfobarChannelName = ConfigSelection(default = "none", c
 				("infobar-channelname-number", _("Name & Number big"))
 				])
 
-config.plugins.KravenHD.InfobarChannelName2 = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.InfobarChannelName2 = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("infobar-channelname-small", _("Name")),
 				("infobar-channelname-number-small", _("Name & Number"))
 				])
 
-config.plugins.KravenHD.IBFontSize = ConfigSelection(default = "big", choices = [
+config.plugins.KravenHD.IBFontSize = ConfigSelection(default="big", choices = [
 				("small", _("small")),
 				("middle", _("middle")),
 				("big", _("big"))
 				])
 
-config.plugins.KravenHD.TypeWriter = ConfigSelection(default = "runningtext", choices = [
+config.plugins.KravenHD.TypeWriter = ConfigSelection(default="runningtext", choices = [
 				("typewriter", _("typewriter")),
 				("runningtext", _("runningtext")),
 				("none", _("off"))
 				])
 
-config.plugins.KravenHD.ChannelSelectionStyle = ConfigSelection(default = "channelselection-style-minitv", choices = [
+config.plugins.KravenHD.ChannelSelectionStyle = ConfigSelection(default="channelselection-style-minitv", choices = [
 				("channelselection-style-nopicon", _("no Picon")),
 				("channelselection-style-nopicon2", _("no Picon2")),
 				("channelselection-style-xpicon", _("X-Picons")),
@@ -480,38 +478,38 @@ config.plugins.KravenHD.ChannelSelectionStyle = ConfigSelection(default = "chann
 				("channelselection-style-minitv-picon", _("MiniTV Picon"))
 				])
 
-config.plugins.KravenHD.ChannelSelectionTrans = ConfigSelection(default = "32", choices = TransList)
+config.plugins.KravenHD.ChannelSelectionTrans = ConfigSelection(default="32", choices = TransList)
 
-config.plugins.KravenHD.ChannelSelectionEPGSize1 = ConfigSelection(default = "small", choices = [
+config.plugins.KravenHD.ChannelSelectionEPGSize1 = ConfigSelection(default="small", choices = [
 				("small", _("small")),
 				("big", _("big"))
 				])
 
-config.plugins.KravenHD.ChannelSelectionEPGSize2 = ConfigSelection(default = "small", choices = [
+config.plugins.KravenHD.ChannelSelectionEPGSize2 = ConfigSelection(default="small", choices = [
 				("small", _("small")),
 				("big", _("big"))
 				])
 
-config.plugins.KravenHD.ChannelSelectionServiceNAList = ConfigSelection(default = "FFEA04", choices = ColorSelfList)
-config.plugins.KravenHD.ChannelSelectionServiceNASelf = ConfigText(default = "FFEA04")
-config.plugins.KravenHD.ChannelSelectionServiceNA = ConfigText(default = "FFEA04")
+config.plugins.KravenHD.ChannelSelectionServiceNAList = ConfigSelection(default="FFEA04", choices = ColorSelfList)
+config.plugins.KravenHD.ChannelSelectionServiceNASelf = ConfigText(default="FFEA04")
+config.plugins.KravenHD.ChannelSelectionServiceNA = ConfigText(default="FFEA04")
 
-config.plugins.KravenHD.CoolTVGuide = ConfigSelection(default = "cooltv-minitv", choices = [
+config.plugins.KravenHD.CoolTVGuide = ConfigSelection(default="cooltv-minitv", choices = [
 				("cooltv-minitv", _("MiniTV")),
 				("cooltv-picon", _("Picon"))
 				])
 
-config.plugins.KravenHD.GraphMultiEPG = ConfigSelection(default = "graphmultiepg-minitv", choices = [
+config.plugins.KravenHD.GraphMultiEPG = ConfigSelection(default="graphmultiepg-minitv", choices = [
 				("graphmultiepg-minitv", _("MiniTV")),
 				("graphmultiepg", _("no MiniTV"))
 				])
 
-config.plugins.KravenHD.GMEDescriptionSize = ConfigSelection(default = "small", choices = [
+config.plugins.KravenHD.GMEDescriptionSize = ConfigSelection(default="small", choices = [
 				("small", _("small")),
 				("big", _("big"))
 				])
 
-config.plugins.KravenHD.MovieSelection = ConfigSelection(default = "movieselection-no-cover", choices = [
+config.plugins.KravenHD.MovieSelection = ConfigSelection(default="movieselection-no-cover", choices = [
 				("movieselection-no-cover", _("no Cover")),
 				("movieselection-no-cover2", _("no Cover2")),
 				("movieselection-small-cover", _("small Cover")),
@@ -520,22 +518,22 @@ config.plugins.KravenHD.MovieSelection = ConfigSelection(default = "movieselecti
 				("movieselection-minitv-cover", _("MiniTV + Cover"))
 				])
 
-config.plugins.KravenHD.EPGSelection = ConfigSelection(default = "epgselection-standard", choices = [
+config.plugins.KravenHD.EPGSelection = ConfigSelection(default="epgselection-standard", choices = [
 				("epgselection-standard", _("standard")),
 				("epgselection-minitv", _("MiniTV"))
 				])
 
-config.plugins.KravenHD.EPGListSize = ConfigSelection(default = "small", choices = [
+config.plugins.KravenHD.EPGListSize = ConfigSelection(default="small", choices = [
 				("small", _("small")),
 				("big", _("big"))
 				])
 
-config.plugins.KravenHD.EPGSelectionEPGSize = ConfigSelection(default = "small", choices = [
+config.plugins.KravenHD.EPGSelectionEPGSize = ConfigSelection(default="small", choices = [
 				("small", _("small")),
 				("big", _("big"))
 				])
 
-config.plugins.KravenHD.EMCStyle = ConfigSelection(default = "emc-minitv", choices = [
+config.plugins.KravenHD.EMCStyle = ConfigSelection(default="emc-minitv", choices = [
 				("emc-nocover", _("no Cover")),
 				("emc-nocover2", _("no Cover2")),
 				("emc-smallcover", _("small Cover")),
@@ -549,7 +547,7 @@ config.plugins.KravenHD.EMCStyle = ConfigSelection(default = "emc-minitv", choic
 				("emc-full", _("full"))
 				])
 
-config.plugins.KravenHD.RunningText = ConfigSelection(default = "startdelay=4000", choices = [
+config.plugins.KravenHD.RunningText = ConfigSelection(default="startdelay=4000", choices = [
 				("none", _("off")),
 				("startdelay=2000", _("2 sec")),
 				("startdelay=4000", _("4 sec")),
@@ -560,36 +558,36 @@ config.plugins.KravenHD.RunningText = ConfigSelection(default = "startdelay=4000
 				("startdelay=20000", _("20 sec"))
 				])
 
-config.plugins.KravenHD.RunningTextSpeed = ConfigSelection(default = "steptime=100", choices = [
+config.plugins.KravenHD.RunningTextSpeed = ConfigSelection(default="steptime=100", choices = [
 				("steptime=200", _("5 px/sec")),
 				("steptime=100", _("10 px/sec")),
 				("steptime=66", _("15 px/sec")),
 				("steptime=50", _("20 px/sec"))
 				])
 
-config.plugins.KravenHD.RunningTextSpeed2 = ConfigSelection(default = "steptime=100", choices = [
+config.plugins.KravenHD.RunningTextSpeed2 = ConfigSelection(default="steptime=100", choices = [
 				("steptime=200", _("5 px/sec")),
 				("steptime=100", _("10 px/sec")),
 				("steptime=50", _("20 px/sec")),
 				("steptime=33", _("30 px/sec"))
 				])
 
-config.plugins.KravenHD.ScrollBar = ConfigSelection(default = "on", choices = [
+config.plugins.KravenHD.ScrollBar = ConfigSelection(default="on", choices = [
 				("on", _("on")),
 				("none", _("off"))
 				])
 
-config.plugins.KravenHD.IconStyle = ConfigSelection(default = "icons-light", choices = [
+config.plugins.KravenHD.IconStyle = ConfigSelection(default="icons-light", choices = [
 				("icons-light", _("light")),
 				("icons-dark", _("dark"))
 				])
 
-config.plugins.KravenHD.IconStyle2 = ConfigSelection(default = "icons-light2", choices = [
+config.plugins.KravenHD.IconStyle2 = ConfigSelection(default="icons-light2", choices = [
 				("icons-light2", _("light")),
 				("icons-dark2", _("dark"))
 				])
 
-config.plugins.KravenHD.ClockStyle = ConfigSelection(default = "clock-classic", choices = [
+config.plugins.KravenHD.ClockStyle = ConfigSelection(default="clock-classic", choices = [
 				("clock-classic", _("standard")),
 				("clock-classic-big", _("standard big")),
 				("clock-analog", _("analog")),
@@ -599,7 +597,7 @@ config.plugins.KravenHD.ClockStyle = ConfigSelection(default = "clock-classic", 
 				("clock-weather", _("weather icon"))
 				])
 
-config.plugins.KravenHD.ClockStyleNoInternet = ConfigSelection(default = "clock-classic", choices = [
+config.plugins.KravenHD.ClockStyleNoInternet = ConfigSelection(default="clock-classic", choices = [
 				("clock-classic", _("standard")),
 				("clock-classic-big", _("standard big")),
 				("clock-analog", _("analog")),
@@ -607,41 +605,41 @@ config.plugins.KravenHD.ClockStyleNoInternet = ConfigSelection(default = "clock-
 				("clock-flip", _("flip"))
 				])
 
-config.plugins.KravenHD.WeatherStyle = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.WeatherStyle = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("weather-big", _("big")),
 				("weather-small", _("small"))
 				])
 
-config.plugins.KravenHD.WeatherStyle2 = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.WeatherStyle2 = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("weather-left", _("on"))
 				])
 
-config.plugins.KravenHD.WeatherStyle3 = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.WeatherStyle3 = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("weather-left", _("on")),
 				("netatmobar", _("NetatmoBar"))
 				])
 
-config.plugins.KravenHD.WeatherStyleNoInternet = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.WeatherStyleNoInternet = ConfigSelection(default="none", choices = [
 				("none", _("off"))
 				])
 
-config.plugins.KravenHD.ECMVisible = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.ECMVisible = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("ib", _("Infobar")),
 				("sib", _("SecondInfobar")),
 				("ib+sib", _("Infobar & SecondInfobar"))
 				])
 
-config.plugins.KravenHD.ECMLine1 = ConfigSelection(default = "ShortReader", choices = [
+config.plugins.KravenHD.ECMLine1 = ConfigSelection(default="ShortReader", choices = [
 				("VeryShortCaid", _("short with CAID")),
 				("VeryShortReader", _("short with source")),
 				("ShortReader", _("compact"))
 				])
 
-config.plugins.KravenHD.ECMLine2 = ConfigSelection(default = "ShortReader", choices = [
+config.plugins.KravenHD.ECMLine2 = ConfigSelection(default="ShortReader", choices = [
 				("VeryShortCaid", _("short with CAID")),
 				("VeryShortReader", _("short with source")),
 				("ShortReader", _("compact")),
@@ -650,7 +648,7 @@ config.plugins.KravenHD.ECMLine2 = ConfigSelection(default = "ShortReader", choi
 				("VeryLong", _("complete"))
 				])
 
-config.plugins.KravenHD.ECMLine3 = ConfigSelection(default = "ShortReader", choices = [
+config.plugins.KravenHD.ECMLine3 = ConfigSelection(default="ShortReader", choices = [
 				("VeryShortCaid", _("short with CAID")),
 				("VeryShortReader", _("short with source")),
 				("ShortReader", _("compact")),
@@ -658,19 +656,19 @@ config.plugins.KravenHD.ECMLine3 = ConfigSelection(default = "ShortReader", choi
 				("Long", _("extensive")),
 				])
 
-config.plugins.KravenHD.FTA = ConfigSelection(default = "FTAVisible", choices = [
+config.plugins.KravenHD.FTA = ConfigSelection(default="FTAVisible", choices = [
 				("FTAVisible", _("on")),
 				("none", _("off"))
 				])
 
-config.plugins.KravenHD.SystemInfo = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.SystemInfo = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("systeminfo-small", _("small")),
 				("systeminfo-big", _("big")),
 				("systeminfo-bigsat", _("big + Sat"))
 				])
 
-config.plugins.KravenHD.SIB = ConfigSelection(default = "sib4", choices = [
+config.plugins.KravenHD.SIB = ConfigSelection(default="sib4", choices = [
 				("sib1", _("MiniTV/weather")),
 				("sib2", _("left/right")),
 				("sib3", _("single")),
@@ -680,40 +678,40 @@ config.plugins.KravenHD.SIB = ConfigSelection(default = "sib4", choices = [
 				("sib7", _("Weather2"))
 				])
 
-config.plugins.KravenHD.TunerBusyList = ConfigSelection(default = "CCCC00", choices = [
+config.plugins.KravenHD.TunerBusyList = ConfigSelection(default="CCCC00", choices = [
 				("CCCC00", _("yellow")),
 				("self", _("self"))
 				])
-config.plugins.KravenHD.TunerBusySelf = ConfigText(default = "CCCC00")
-config.plugins.KravenHD.TunerBusy = ConfigText(default = "CCCC00")
+config.plugins.KravenHD.TunerBusySelf = ConfigText(default="CCCC00")
+config.plugins.KravenHD.TunerBusy = ConfigText(default="CCCC00")
 
-config.plugins.KravenHD.TunerLiveList = ConfigSelection(default = "00B400", choices = [
+config.plugins.KravenHD.TunerLiveList = ConfigSelection(default="00B400", choices = [
 				("00B400", _("green")),
 				("self", _("self"))
 				])
-config.plugins.KravenHD.TunerLiveSelf = ConfigText(default = "00B400")
-config.plugins.KravenHD.TunerLive = ConfigText(default = "00B400")
+config.plugins.KravenHD.TunerLiveSelf = ConfigText(default="00B400")
+config.plugins.KravenHD.TunerLive = ConfigText(default="00B400")
 
-config.plugins.KravenHD.TunerRecordList = ConfigSelection(default = "FF0C00", choices = [
+config.plugins.KravenHD.TunerRecordList = ConfigSelection(default="FF0C00", choices = [
 				("FF0C00", _("red")),
 				("self", _("self"))
 				])
-config.plugins.KravenHD.TunerRecordSelf = ConfigText(default = "FF0C00")
-config.plugins.KravenHD.TunerRecord = ConfigText(default = "FF0C00")
+config.plugins.KravenHD.TunerRecordSelf = ConfigText(default="FF0C00")
+config.plugins.KravenHD.TunerRecord = ConfigText(default="FF0C00")
 
-config.plugins.KravenHD.TunerXtremeBusyList = ConfigSelection(default = "1BA1E2", choices = [
+config.plugins.KravenHD.TunerXtremeBusyList = ConfigSelection(default="1BA1E2", choices = [
 				("1BA1E2", _("cyan")),
 				("self", _("self"))
 				])
-config.plugins.KravenHD.TunerXtremeBusySelf = ConfigText(default = "1BA1E2")
-config.plugins.KravenHD.TunerXtremeBusy = ConfigText(default = "1BA1E2")
+config.plugins.KravenHD.TunerXtremeBusySelf = ConfigText(default="1BA1E2")
+config.plugins.KravenHD.TunerXtremeBusy = ConfigText(default="1BA1E2")
 
-config.plugins.KravenHD.ShowUnusedTuner = ConfigSelection(default = "on", choices = [
+config.plugins.KravenHD.ShowUnusedTuner = ConfigSelection(default="on", choices = [
 				("on", _("on")),
 				("none", _("off"))
 				])
 				
-config.plugins.KravenHD.Infobox = ConfigSelection(default = "sat", choices = [
+config.plugins.KravenHD.Infobox = ConfigSelection(default="sat", choices = [
 				("sat", _("Tuner/Satellite + SNR")),
 				("db", _("Tuner/Satellite + dB")),
 				("tunerinfo", _("Tunerinfo")),
@@ -721,40 +719,40 @@ config.plugins.KravenHD.Infobox = ConfigSelection(default = "sat", choices = [
 				("temp", _("Temperature + Fan"))
 				])
 				
-config.plugins.KravenHD.Infobox2 = ConfigSelection(default = "tunerinfo", choices = [
+config.plugins.KravenHD.Infobox2 = ConfigSelection(default="tunerinfo", choices = [
 				("tunerinfo", _("Tunerinfo")),
 				("cpu", _("CPU + Load")),
 				("temp", _("Temperature + Fan"))
 				])
 
-config.plugins.KravenHD.IBColor = ConfigSelection(default = "all-screens", choices = [
+config.plugins.KravenHD.IBColor = ConfigSelection(default="all-screens", choices = [
 				("all-screens", _("in all Screens")),
 				("only-infobar", _("only Infobar, SecondInfobar & Players"))
 				])
 
-config.plugins.KravenHD.About = ConfigSelection(default = "about", choices = [
+config.plugins.KravenHD.About = ConfigSelection(default="about", choices = [
 				("about", _("KravenHD"))
 				])
 
-config.plugins.KravenHD.Logo = ConfigSelection(default = "minitv", choices = [
+config.plugins.KravenHD.Logo = ConfigSelection(default="minitv", choices = [
 				("logo", _("Logo")),
 				("minitv", _("MiniTV")),
 				("metrix-icons", _("Icons")),
 				("minitv-metrix-icons", _("MiniTV + Icons"))
 				])
 
-config.plugins.KravenHD.LogoNoInternet = ConfigSelection(default = "minitv", choices = [
+config.plugins.KravenHD.LogoNoInternet = ConfigSelection(default="minitv", choices = [
 				("logo", _("Logo")),
 				("minitv", _("MiniTV"))
 				])
 
-config.plugins.KravenHD.MainmenuFontsize = ConfigSelection(default = "mainmenu-big", choices = [
+config.plugins.KravenHD.MainmenuFontsize = ConfigSelection(default="mainmenu-big", choices = [
 				("mainmenu-small", _("small")),
 				("mainmenu-middle", _("middle")),
 				("mainmenu-big", _("big"))
 				])
 
-config.plugins.KravenHD.MenuIcons = ConfigSelection(default = "stony272", choices = [
+config.plugins.KravenHD.MenuIcons = ConfigSelection(default="stony272", choices = [
 				("stony272", _("stony272")),
 				("stony272-metal", _("stony272-metal")),
 				("stony272-gold-round", _("stony272-gold-round")),
@@ -762,60 +760,60 @@ config.plugins.KravenHD.MenuIcons = ConfigSelection(default = "stony272", choice
 				("rennmaus-kleinerteufel", _("rennmaus-kleiner.teufel"))
 				])
 
-config.plugins.KravenHD.DebugNames = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.DebugNames = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("screennames-on", _("on"))
 				])
 
-config.plugins.KravenHD.WeatherView = ConfigSelection(default = "meteo", choices = [
+config.plugins.KravenHD.WeatherView = ConfigSelection(default="meteo", choices = [
 				("icon", _("Icon")),
 				("meteo", _("Meteo"))
 				])
 
-config.plugins.KravenHD.MeteoColor = ConfigSelection(default = "meteo-light", choices = [
+config.plugins.KravenHD.MeteoColor = ConfigSelection(default="meteo-light", choices = [
 				("meteo-light", _("light")),
 				("meteo-dark", _("dark"))
 				])
 
-config.plugins.KravenHD.Primetimeavailable = ConfigSelection(default = "primetime-on", choices = [
+config.plugins.KravenHD.Primetimeavailable = ConfigSelection(default="primetime-on", choices = [
 				("none", _("off")),
 				("primetime-on", _("on"))
 				])
 
-config.plugins.KravenHD.EMCSelectionColors = ConfigSelection(default = "global", choices = [
+config.plugins.KravenHD.EMCSelectionColors = ConfigSelection(default="global", choices = [
 				("global", _("global colors")),
 				("custom", _("define new colors"))
 				])
 
-config.plugins.KravenHD.EMCSelectionBackgroundList = ConfigSelection(default = "213305", choices = ColorSelfList)
-config.plugins.KravenHD.EMCSelectionBackgroundSelf = ConfigText(default = "213305")
-config.plugins.KravenHD.EMCSelectionBackground = ConfigText(default = "213305")
+config.plugins.KravenHD.EMCSelectionBackgroundList = ConfigSelection(default="213305", choices = ColorSelfList)
+config.plugins.KravenHD.EMCSelectionBackgroundSelf = ConfigText(default="213305")
+config.plugins.KravenHD.EMCSelectionBackground = ConfigText(default="213305")
 
-config.plugins.KravenHD.EMCSelectionFontList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.EMCSelectionFontSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.EMCSelectionFont = ConfigText(default = "ffffff")
+config.plugins.KravenHD.EMCSelectionFontList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.EMCSelectionFontSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.EMCSelectionFont = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.SerienRecorder = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.SerienRecorder = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("serienrecorder", _("on"))
 				])
 
-config.plugins.KravenHD.MediaPortal = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.MediaPortal = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("mediaportal", _("on"))
 				])
 
-config.plugins.KravenHD.PVRState = ConfigSelection(default = "pvrstate-center-big", choices = [
+config.plugins.KravenHD.PVRState = ConfigSelection(default="pvrstate-center-big", choices = [
 				("pvrstate-center-big", _("center big")),
 				("pvrstate-center-small", _("center small")),
 				("pvrstate-left-small", _("left small")),
 				("pvrstate-off", _("off"))
 				])
 
-config.plugins.KravenHD.PigStyle = ConfigText(default = "")
-config.plugins.KravenHD.PigMenuActive = ConfigYesNo(default = False)
+config.plugins.KravenHD.PigStyle = ConfigText(default="")
+config.plugins.KravenHD.PigMenuActive = ConfigYesNo(default=False)
 
-config.plugins.KravenHD.msn_language = ConfigSelection(default = "de-DE", choices = [
+config.plugins.KravenHD.msn_language = ConfigSelection(default="de-DE", choices = [
 				("de-DE", _("Deutsch")),
 				("en-US", _("English")),
 				("ru-RU", _("Russian")),
@@ -836,106 +834,106 @@ config.plugins.KravenHD.msn_language = ConfigSelection(default = "de-DE", choice
 				("sk-SK", _("Slovak"))
 				])
 
-config.plugins.KravenHD.msn_searchby = ConfigSelection(default = "auto-ip", choices = [
+config.plugins.KravenHD.msn_searchby = ConfigSelection(default="auto-ip", choices = [
 				("auto-ip", _("IP")),
 				("location", _("Enter location manually"))
 				])
 
 SearchResultList = []
-config.plugins.KravenHD.msn_list = ConfigSelection(default = "", choices = SearchResultList)
+config.plugins.KravenHD.msn_list = ConfigSelection(default="", choices = SearchResultList)
 
-config.plugins.KravenHD.msn_cityfound = ConfigText(default = "")
-config.plugins.KravenHD.msn_cityname = ConfigText(default = "")
-config.plugins.KravenHD.msn_code = ConfigText(default = "")
+config.plugins.KravenHD.msn_cityfound = ConfigText(default="")
+config.plugins.KravenHD.msn_cityname = ConfigText(default="")
+config.plugins.KravenHD.msn_code = ConfigText(default="")
 
-config.plugins.KravenHD.PlayerClock = ConfigSelection(default = "player-classic", choices = [
+config.plugins.KravenHD.PlayerClock = ConfigSelection(default="player-classic", choices = [
 				("player-classic", _("standard")),
 				("player-android", _("android")),
 				("player-flip", _("flip")),
 				("player-weather", _("weather icon"))
 				])
 
-config.plugins.KravenHD.Android2List = ConfigSelection(default = "000000", choices = ColorSelfList)
-config.plugins.KravenHD.Android2Self = ConfigText(default = "000000")
-config.plugins.KravenHD.Android2 = ConfigText(default = "000000")
+config.plugins.KravenHD.Android2List = ConfigSelection(default="000000", choices = ColorSelfList)
+config.plugins.KravenHD.Android2Self = ConfigText(default="000000")
+config.plugins.KravenHD.Android2 = ConfigText(default="000000")
 
-config.plugins.KravenHD.CategoryProfiles = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryProfiles = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategorySystem = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategorySystem = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryGlobalColors = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryGlobalColors = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryInfobarLook = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryInfobarLook = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryInfobarContents = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryInfobarContents = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryWeather = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryWeather = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryClock = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryClock = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryECMInfos = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryECMInfos = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryViews = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryViews = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryChannellist = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryChannellist = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryEPGSelection = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryEPGSelection = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryGraphMultiEPG = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryGraphMultiEPG = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryEMC = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryEMC = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryPlayers = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryPlayers = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryAntialiasing = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryAntialiasing = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.CategoryVarious = ConfigSelection(default = "category", choices = [
+config.plugins.KravenHD.CategoryVarious = ConfigSelection(default="category", choices = [
 				("category", _(" "))
 				])
 
-config.plugins.KravenHD.UnwatchedColorList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.UnwatchedColorSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.UnwatchedColor = ConfigText(default = "ffffff")
+config.plugins.KravenHD.UnwatchedColorList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.UnwatchedColorSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.UnwatchedColor = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.WatchingColorList = ConfigSelection(default = "0050EF", choices = ColorSelfList)
-config.plugins.KravenHD.WatchingColorSelf = ConfigText(default = "0050EF")
-config.plugins.KravenHD.WatchingColor = ConfigText(default = "0050EF")
+config.plugins.KravenHD.WatchingColorList = ConfigSelection(default="0050EF", choices = ColorSelfList)
+config.plugins.KravenHD.WatchingColorSelf = ConfigText(default="0050EF")
+config.plugins.KravenHD.WatchingColor = ConfigText(default="0050EF")
 
-config.plugins.KravenHD.FinishedColorList = ConfigSelection(default = "70AD11", choices = ColorSelfList)
-config.plugins.KravenHD.FinishedColorSelf = ConfigText(default = "70AD11")
-config.plugins.KravenHD.FinishedColor = ConfigText(default = "70AD11")
+config.plugins.KravenHD.FinishedColorList = ConfigSelection(default="70AD11", choices = ColorSelfList)
+config.plugins.KravenHD.FinishedColorSelf = ConfigText(default="70AD11")
+config.plugins.KravenHD.FinishedColor = ConfigText(default="70AD11")
 
-config.plugins.KravenHD.PermanentClock = ConfigSelection(default = "permanentclock-infobar-big", choices = [
+config.plugins.KravenHD.PermanentClock = ConfigSelection(default="permanentclock-infobar-big", choices = [
 				("permanentclock-infobar-big", _("infobar colors big")),
 				("permanentclock-infobar-small", _("infobar colors small")),
 				("permanentclock-global-big", _("global colors big")),
@@ -944,7 +942,7 @@ config.plugins.KravenHD.PermanentClock = ConfigSelection(default = "permanentclo
 				("permanentclock-transparent-small", _("transparent small"))
 				])
 
-config.plugins.KravenHD.KravenIconVPosition = ConfigSelection(default = "vposition-2", choices = [
+config.plugins.KravenHD.KravenIconVPosition = ConfigSelection(default="vposition-2", choices = [
 				("vposition-3", _("-3")),
 				("vposition-2", _("-2")),
 				("vposition-1", _("-1")),
@@ -954,42 +952,42 @@ config.plugins.KravenHD.KravenIconVPosition = ConfigSelection(default = "vpositi
 				("vposition+3", _("+3"))
 				])
 
-config.plugins.KravenHD.SkinResolution = ConfigSelection(default = "hd", choices = [
+config.plugins.KravenHD.SkinResolution = ConfigSelection(default="hd", choices = [
 				("hd", _("HD")),
 				("fhd", _("FHD"))
 				])
 
-config.plugins.KravenHD.PopupStyle = ConfigSelection(default = "popup-grad-trans", choices = [
+config.plugins.KravenHD.PopupStyle = ConfigSelection(default="popup-grad-trans", choices = [
 				("popup-grad-trans", _("gradient transparent")),
 				("popup-grad", _("gradient")),
 				("popup-box-trans", _("box transparent")),
 				("popup-box", _("box"))
 				])
 
-config.plugins.KravenHD.IBProgressList = ConfigSelection(default = "ffffff", choices = ProgressList)
-config.plugins.KravenHD.IBProgressSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.IBProgress = ConfigText(default = "ffffff")
+config.plugins.KravenHD.IBProgressList = ConfigSelection(default="ffffff", choices = ProgressList)
+config.plugins.KravenHD.IBProgressSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.IBProgress = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.IBProgressBackgroundList = ConfigSelection(default = "1BA1E2", choices = BorderSelfList)
-config.plugins.KravenHD.IBProgressBackgroundSelf = ConfigText(default = "1BA1E2")
-config.plugins.KravenHD.IBProgressBackground = ConfigText(default = "1BA1E2")
+config.plugins.KravenHD.IBProgressBackgroundList = ConfigSelection(default="1BA1E2", choices = BorderSelfList)
+config.plugins.KravenHD.IBProgressBackgroundSelf = ConfigText(default="1BA1E2")
+config.plugins.KravenHD.IBProgressBackground = ConfigText(default="1BA1E2")
 
-config.plugins.KravenHD.IBProgressBorderLine = ConfigSelection(default = "none", choices = [
+config.plugins.KravenHD.IBProgressBorderLine = ConfigSelection(default="none", choices = [
 				("none", _("off")),
 				("ib-progress-border", _("border")),
 				("ib-progress-line", _("line"))
 				])
 
-config.plugins.KravenHD.IBProgressBorderLineColorList = ConfigSelection(default = "ffffff", choices = ColorSelfList)
-config.plugins.KravenHD.IBProgressBorderLineColorSelf = ConfigText(default = "ffffff")
-config.plugins.KravenHD.IBProgressBorderLineColor = ConfigText(default = "ffffff")
+config.plugins.KravenHD.IBProgressBorderLineColorList = ConfigSelection(default="ffffff", choices = ColorSelfList)
+config.plugins.KravenHD.IBProgressBorderLineColorSelf = ConfigText(default="ffffff")
+config.plugins.KravenHD.IBProgressBorderLineColor = ConfigText(default="ffffff")
 
-config.plugins.KravenHD.InfobarSelfColorR = ConfigSlider(default = 0, increment=5, limits=(0, 255))
-config.plugins.KravenHD.InfobarSelfColorG = ConfigSlider(default = 0, increment=5, limits=(0, 255))
-config.plugins.KravenHD.InfobarSelfColorB = ConfigSlider(default = 0, increment=5, limits=(0, 255))
-config.plugins.KravenHD.BackgroundSelfColorR = ConfigSlider(default = 0, increment=5, limits=(0, 255))
-config.plugins.KravenHD.BackgroundSelfColorG = ConfigSlider(default = 0, increment=5, limits=(0, 255))
-config.plugins.KravenHD.BackgroundSelfColorB = ConfigSlider(default = 75, increment=5, limits=(0, 255))
+config.plugins.KravenHD.InfobarSelfColorR = ConfigSlider(default=0, increment=5, limits=(0, 255))
+config.plugins.KravenHD.InfobarSelfColorG = ConfigSlider(default=0, increment=5, limits=(0, 255))
+config.plugins.KravenHD.InfobarSelfColorB = ConfigSlider(default=0, increment=5, limits=(0, 255))
+config.plugins.KravenHD.BackgroundSelfColorR = ConfigSlider(default=0, increment=5, limits=(0, 255))
+config.plugins.KravenHD.BackgroundSelfColorG = ConfigSlider(default=0, increment=5, limits=(0, 255))
+config.plugins.KravenHD.BackgroundSelfColorB = ConfigSlider(default=75, increment=5, limits=(0, 255))
 
 class KravenHD(ConfigListScreen, Screen):
 
@@ -1394,7 +1392,7 @@ class KravenHD(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("'Not available'-Font"), config.plugins.KravenHD.ChannelSelectionServiceNAList, _("Choose the font color of channels that are unavailable at the moment. Press OK to define your own RGB color.")))
 		list.append(getConfigListEntry(_("Primetime"), config.plugins.KravenHD.Primetimeavailable, _("Choose whether primetime program information is displayed or not.")))
 		if config.plugins.KravenHD.Primetimeavailable.value == "primetime-on":
-			list.append(getConfigListEntry(_("Primetime-Time"), config.plugins.KravenHD.Primetime, _("Specify the time for your primetime.")))
+			list.append(getConfigListEntry(_("Primetime-Time"), config.plugins.KravenHD.Primetime2, _("Specify the time for your primetime.")))
 			list.append(getConfigListEntry(_("Primetime-Font"), config.plugins.KravenHD.PrimetimeFontList, _("Choose the font color of the primetime information. Press OK to define your own RGB color.")))
 		else:
 			emptyLines+=2
