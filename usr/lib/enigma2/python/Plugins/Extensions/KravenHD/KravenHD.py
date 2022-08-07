@@ -230,10 +230,7 @@ ProgressList = [
 	]
 
 config.plugins.KravenHD = ConfigSubsection()
-currenttime = time.localtime()
-primetime = (currenttime[0], currenttime[1], currenttime[2], 20, 15, 0, 0, 0, 0)
-currentint = int(time.mktime(primetime))
-config.plugins.KravenHD.PrimetimeTime = ConfigText(default=str(currentint))
+config.plugins.KravenHD.Primetime = ConfigClock(default=time.mktime((0, 0, 0, 20, 15, 0, 0, 0, 0)))
 config.plugins.KravenHD.InfobarAntialias = ConfigSlider(default=10, increment=1, limits=(0, 20))
 config.plugins.KravenHD.ECMLineAntialias = ConfigSlider(default=10, increment=1, limits=(0, 20))
 config.plugins.KravenHD.ScreensAntialias = ConfigSlider(default=10, increment=1, limits=(0, 20))
@@ -1117,11 +1114,6 @@ class KravenHD(ConfigListScreen, Screen):
 		self.InternetAvailable=self.getInternetAvailable()
 		self.UserMenuIconsAvailable=self.getUserMenuIconsAvailable()
 
-		# workaround primetime #1
-		cur_primetime = time.localtime(int(config.plugins.KravenHD.PrimetimeTime.value))
-		cur_int = int(time.mktime(cur_primetime))
-		self.Primetime = ConfigClock(default=cur_int)
-
 	def mylist(self):
 		self.timer.start(100, True)
 
@@ -1400,7 +1392,7 @@ class KravenHD(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("'Not available'-Font"), config.plugins.KravenHD.ChannelSelectionServiceNAList, _("Choose the font color of channels that are unavailable at the moment. Press OK to define your own RGB color.")))
 		list.append(getConfigListEntry(_("Primetime"), config.plugins.KravenHD.Primetimeavailable, _("Choose whether primetime program information is displayed or not.")))
 		if config.plugins.KravenHD.Primetimeavailable.value == "primetime-on":
-			list.append(getConfigListEntry(_("Primetime-Time"), self.Primetime, _("Specify the time for your primetime.")))
+			list.append(getConfigListEntry(_("Primetime-Time"), config.plugins.KravenHD.Primetime, _("Specify the time for your primetime.")))
 			list.append(getConfigListEntry(_("Primetime-Font"), config.plugins.KravenHD.PrimetimeFontList, _("Choose the font color of the primetime information. Press OK to define your own RGB color.")))
 		else:
 			emptyLines+=2
@@ -3814,13 +3806,6 @@ class KravenHD(ConfigListScreen, Screen):
 		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_1080/KravenHD/MP_skin.xml") and config.plugins.KravenHD.MediaPortal.value == "mediaportal" and config.plugins.KravenHD.SkinResolution.value == "fhd":
 			console5.execute("cp /usr/share/enigma2/KravenHD/graphics/bs_* /usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_1080/KravenHD/images/")
 
-		# workaround primetime #2
-		new_primetime = time.localtime(int(config.plugins.KravenHD.PrimetimeTime.value))
-		new_ptime = (new_primetime[0], new_primetime[1], new_primetime[2], int(self.Primetime.value[0]), int(self.Primetime.value[1]), 0, 0, 0, 0)
-		new_int = int(time.mktime(new_ptime))
-		config.plugins.KravenHD.PrimetimeTime.value = str(new_int)
-		config.plugins.KravenHD.PrimetimeTime.save()
-
 		# Thats it
 		self.restart()
 
@@ -3959,6 +3944,7 @@ class KravenHD(ConfigListScreen, Screen):
 		c.flush()
 
 	def loadProfile(self, loadDefault=False):
+		global python3
 		if loadDefault:
 			profile=config.plugins.KravenHD.defaultProfile.value
 			fname=self.profiles+"kravenhd_default_"+profile
@@ -3971,25 +3957,46 @@ class KravenHD(ConfigListScreen, Screen):
 			pFile=open(fname, "r")
 			for line in pFile:
 				try:
-					line=line.split("|")
-					name=line[0]
-					value=line[1]
-					valuetype=line[2].strip('\n')
-					if not (name in ("customProfile", "DebugNames", "msn_language", "msn_searchby", "msn_list", "msn_cityname", "msn_code") or (loadDefault and name == "defaultProfile")):
-						# fix for changed value "gradient"/"grad"
-						if name=="IBStyle" and value=="gradient":
-							value="grad"
-						# fix for changed name "InfobarColor"/"InfobarGradientColor"
-						if name=="InfobarColor":
-							config.plugins.KravenHD.InfobarGradientColor.value=value
-						if valuetype == "<class 'int'>":
-							getattr(config.plugins.KravenHD, name).value=int(value)
-						elif valuetype == "<class 'hex'>":
-							getattr(config.plugins.KravenHD, name).value=hex(value)
-						elif valuetype == "<class 'list'>":
-							getattr(config.plugins.KravenHD, name).value=eval(value)
-						else:
-							getattr(config.plugins.KravenHD, name).value=str(value)
+					if python3:
+						line=line.split("|")
+						name=line[0]
+						value=line[1]
+						valuetype=line[2].strip('\n')
+						if not (name in ("customProfile", "DebugNames", "msn_language", "msn_searchby", "msn_list", "msn_cityname", "msn_code") or (loadDefault and name == "defaultProfile")):
+							# fix for changed value "gradient"/"grad"
+							if name=="IBStyle" and value=="gradient":
+								value="grad"
+							# fix for changed name "InfobarColor"/"InfobarGradientColor"
+							if name == "InfobarColor":
+								config.plugins.KravenHD.InfobarGradientColor.value=value
+							if valuetype == "<class 'int'>":
+								getattr(config.plugins.KravenHD, name).value=int(value)
+							elif valuetype == "<class 'hex'>":
+								getattr(config.plugins.KravenHD, name).value=hex(value)
+							elif valuetype == "<class 'list'>":
+								getattr(config.plugins.KravenHD, name).value=eval(value)
+							else:
+								getattr(config.plugins.KravenHD, name).value=str(value)
+					else:
+						line=line.split("|")
+						name=line[0]
+						value=line[1]
+						type=line[2].strip('\n')
+						if not (name in ("customProfile", "DebugNames", "msn_language", "msn_searchby", "msn_list", "msn_cityname", "msn_code") or (loadDefault and name == "defaultProfile")):
+							# fix for changed value "gradient"/"grad"
+							if name == "IBStyle" and value == "gradient":
+								value="grad"
+							# fix for changed name "InfobarColor"/"InfobarGradientColor"
+							if name == "InfobarColor":
+								config.plugins.KravenHD.InfobarGradientColor.value=value
+							if type == "<type 'int'>":
+								getattr(config.plugins.KravenHD, name).value=int(value)
+							elif type == "<type 'hex'>":
+								getattr(config.plugins.KravenHD, name).value=hex(value)
+							elif type == "<type 'list'>":
+								getattr(config.plugins.KravenHD, name).value=eval(value)
+							else:
+								getattr(config.plugins.KravenHD, name).value=str(value)
 				except:
 					pass
 			pFile.close()

@@ -95,8 +95,7 @@ class KravenHDEventsInfo(Converter, object):
 			if curEvent:
 				now = localtime(time())
 				try:
-					prime_time = localtime(int(config.plugins.KravenHD.PrimetimeTime.value))
-					dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, prime_time[3], prime_time[4])
+					dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, int(config.plugins.KravenHD.Primetime.value[0]), int(config.plugins.KravenHD.Primetime.value[1]))
 				except:
 					dt = datetime(now.tm_year, now.tm_mon, now.tm_mday, 20, 15)
 				primeTime = int(mktime(dt.timetuple()))
