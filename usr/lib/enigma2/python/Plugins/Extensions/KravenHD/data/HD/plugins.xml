@@ -2576,9 +2576,12 @@
 
   <screen name="HDFRadioScreenSaver" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*HDFRadioScreenSaver*-->
-	<widget backgroundColor="#00000000" name="cover" position="146,80" size="300,300" zPosition="1" />
-	<widget backgroundColor="#00000000" source="recording" render="Label" font="Regular;24" foregroundColor="#00ff0000" position="40,24" size="1200,30" halign="center" valign="center" transparent="1" />
+	<widget backgroundColor="#00000000" source="recording" render="Label" font="Regular;30" foregroundColor="#00ff0000" position="40,20" size="1200,50" halign="center" valign="center" transparent="1" />
 	<widget backgroundColor="#00000000" source="songtitle" render="Label" font="Regular;30" foregroundColor="#00ffffff" position="40,650" size="1200,50" noWrap="1" halign="center" valign="center" transparent="1" />
+	<widget backgroundColor="#00000000" name="cover" position="146,80" size="300,300" zPosition="1" />
+	<widget backgroundColor="#3f3f3f" name="background" position="670,80" size="594,560" zPosition="2" transparent="0" />
+	<widget backgroundColor="#3f3f3f" name="favorites" font="Regular;22" foregroundColor="#00ffffff" position="680,90" size="574,540" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" zPosition="3" transparent="1"/>
+	<widget backgroundColor="#3f3f3f" name="stations" font="Regular;22" foregroundColor="#00ffffff" position="680,90" size="574,540" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" zPosition="3" transparent="1"/>
 	<eLabel backgroundColor="#00000000" position="0,0" size="1280,720" transparent="0" zPosition="-1" />
   </screen>
 
