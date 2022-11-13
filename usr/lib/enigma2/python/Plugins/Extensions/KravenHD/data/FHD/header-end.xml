@@ -155,6 +155,10 @@
 	<parameter name="ZapHistoryBrowserListFont2" value="Regular;30"/>
 	<parameter name="ZapHistoryBrowserServiceName" value="15,3,1074,41"/>
 	<parameter name="ZapHistoryBrowserEventName" value="15,45,1074,38"/>
+	<!-- HDFRadio -->
+	<parameter name="HDFRadioDirFont" value="Regular;32" />
+	<parameter name="HDFRadioDirPixmap" value="5,8,30,30" />
+	<parameter name="HDFRadioDirectory" value="50,0,741,45" />
   </parameters>
   <fonts>
 	<alias name="FileList" font="Regular" size="32" height="45" />
