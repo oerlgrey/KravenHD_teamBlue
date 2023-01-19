@@ -3,7 +3,7 @@
 #  Single EPG List Nobile Renderer
 #
 #  Coded/Modified/Adapted by oerlgrey
-#  Based on teamBlue image source code
+#  Based on openHDF image source code
 #
 #  This code is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported 
@@ -17,7 +17,7 @@
 
 from Components.VariableText import VariableText
 from enigma import eLabel, eEPGCache
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from time import localtime
 
 class KravenHDSingleEpgListNobile(Renderer, VariableText):

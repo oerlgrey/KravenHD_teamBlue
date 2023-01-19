@@ -3,7 +3,7 @@
 #  Ref String Converter
 #
 #  Coded/Modified/Adapted by oerlgrey
-#  Based on teamBlue image source code
+#  Based on openHDF image source code
 #  Based on Metrix Ref String by Vali (see below)
 #
 #  This code is licensed under the Creative Commons 

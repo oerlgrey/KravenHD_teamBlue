@@ -3,7 +3,7 @@
 #  Empty EPG 2 Renderer
 #
 #  Coded/Modified/Adapted by oerlgrey
-#  Based on teamBlue image source code
+#  Based on openHDF image source code
 #  Based on the work of shamann (see below)
 #
 #  This code is licensed under the Creative Commons 
@@ -35,7 +35,7 @@
 #    
 #######################################################################
 
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from enigma import eLabel, eSize
 from Components.VariableText import VariableText
 from skin import parseFont
@@ -54,17 +54,17 @@ class KravenHDEmptyEpg2(VariableText, Renderer):
 		for (attrib, value) in self.skinAttributes:
 			if attrib == "size":
 				self.sizeX = int(value.strip().split(",")[0])
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 			elif attrib == "emptyText":
 				self.EmptyText = value
 			elif attrib == "font":
-				self.used_font = parseFont(value, ((1,1),(1,1)))
-				attribs.append((attrib,value))
+				self.used_font = parseFont(value, ((1, 1), (1, 1)))
+				attribs.append((attrib, value))
 			else:
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 		self.skinAttributes = attribs
 		self.testSizeLabel.setFont(self.used_font)
-		self.testSizeLabel.resize(eSize(self.sizeX+500,20))
+		self.testSizeLabel.resize(eSize(self.sizeX+500, 20))
 		self.testSizeLabel.setVAlign(eLabel.alignTop)
 		self.testSizeLabel.setHAlign(eLabel.alignLeft)
 		self.testSizeLabel.setNoWrap(1)

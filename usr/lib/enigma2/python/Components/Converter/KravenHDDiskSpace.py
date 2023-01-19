@@ -3,7 +3,7 @@
 #  Disk Space Converter
 #
 #  Coded/Modified/Adapted by oerlgrey
-#  Based on teamBlue image source code
+#  Based on openHDF image source code
 #
 #  This code is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported 
@@ -15,10 +15,10 @@
 #  If you think this license infringes any rights,
 #  please contact me at ochzoetna@gmail.com
 
-from Converter import Converter
+from Components.Converter.Converter import Converter
 from os import statvfs, environ
 from Components.Element import cached, ElementError
-from Poll import Poll
+from Components.Converter.Poll import Poll
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Components.Language import language
 import gettext
@@ -62,7 +62,7 @@ class KravenHDDiskSpace(Poll, Converter, object):
         if service:
             if self.type == self.free:
                 try:
-                    stat = statvfs(service.getPath().replace('Latest Recordings',''))
+                    stat = statvfs(service.getPath().replace('Latest Recordings', ''))
                     hdd = stat.f_bfree * stat.f_bsize
                     if hdd > 1099511627776:
                         free = float(hdd/1099511627776.0)
@@ -78,7 +78,7 @@ class KravenHDDiskSpace(Poll, Converter, object):
 
             elif self.type == self.size:
                 try:
-                    stat = statvfs(service.getPath().replace('Latest Recordings',''))
+                    stat = statvfs(service.getPath().replace('Latest Recordings', ''))
                     hddsize = stat.f_blocks * stat.f_bsize
                     if hddsize > 1099511627776:
                         locks = float(hddsize/1099511627776.0)
@@ -94,7 +94,7 @@ class KravenHDDiskSpace(Poll, Converter, object):
 
             elif self.type == self.both:
                 try:
-                    stat = statvfs(service.getPath().replace('Latest Recordings',''))
+                    stat = statvfs(service.getPath().replace('Latest Recordings', ''))
                     total = stat.f_blocks * stat.f_bsize
                     free = (stat.f_bavail or stat.f_bfree) * stat.f_bsize
                     if total == 0:
@@ -105,10 +105,10 @@ class KravenHDDiskSpace(Poll, Converter, object):
                     return 'N/A'
 
             elif self.type == self.path:
-				if "." in str(service.getPath()) or "@" in str(service.getPath()) or "Latest Recordings" in str(service.getPath()):
-					return service.getPath().rsplit('/', 1)[0]
-				else:
-					return service.getPath().replace('/Latest Recordings','')
+                                if "." in str(service.getPath()) or "@" in str(service.getPath()) or "Latest Recordings" in str(service.getPath()):
+                                        return service.getPath().rsplit('/', 1)[0]
+                                else:
+                                        return service.getPath().replace('/Latest Recordings', '')
 
         return ""
 

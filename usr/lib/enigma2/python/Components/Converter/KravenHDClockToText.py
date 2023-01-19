@@ -3,7 +3,7 @@
 #  Clock To Text Converter
 #
 #  Coded/Modified/Adapted by oerlgrey
-#  Based on teamBlue image source code
+#  Based on openHDF image source code
 #  Based on Clock To Text by Diamondear and plnick
 #
 #  This code is licensed under the Creative Commons 
@@ -16,7 +16,7 @@
 #  If you think this license infringes any rights,
 #  please contact me at ochzoetna@gmail.com
 
-from Converter import Converter
+from Components.Converter.Converter import Converter
 from time import localtime, strftime
 from Components.Element import cached
 
@@ -84,8 +84,8 @@ class KravenHDClockToText(Converter, object):
 			weekday_long = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 			month_long = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 			str_fmt_values = {
-						"%B" : month_long,
-						"%A" : weekday_long,
+						"%B": month_long,
+						"%A": weekday_long,
 					}
 			
 			for key in str_fmt_values:
@@ -103,10 +103,10 @@ class KravenHDClockToText(Converter, object):
 			month_long = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 			month_short = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 			str_fmt_values = {
-						"%B" : month_long,
-						"%b" : month_short,
-						"%A" : weekday_long,
-						"%a" : weekday_short,
+						"%B": month_long,
+						"%b": month_short,
+						"%A": weekday_long,
+						"%a": weekday_short,
 					}
 			
 			return_str = strftime(self.fmt_string, t)

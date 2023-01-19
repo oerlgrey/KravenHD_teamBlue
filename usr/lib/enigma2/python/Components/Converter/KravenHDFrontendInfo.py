@@ -3,7 +3,7 @@
 #  Front End Info Converter
 #
 #  Coded/Modified/Adapted by oerlgrey
-#  Based on teamBlue image source code
+#  Based on openHDF image source code
 #
 #  This code is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported 
@@ -17,7 +17,7 @@
 
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from Poll import Poll
+from Components.Converter.Poll import Poll
 
 class KravenHDFrontendInfo(Poll, Converter, object):
 	BER = 0
