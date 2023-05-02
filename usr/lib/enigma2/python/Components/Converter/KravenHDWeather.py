@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #
-#  KravenHDMSNWeather Converter
+#  KravenHDWeather Converter
 #
 #  Coded by oerlgrey
-#  Based on openHDF image source code
+#  Based on teamBlue image source code
 #
 #  This code is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported 
@@ -15,15 +15,18 @@
 #  If you think this license infringes any rights,
 #  please contact me at ochzoetna@gmail.com
 
+from __future__ import absolute_import
+from __future__ import print_function
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.config import config
 from enigma import eTimer
-import requests, time, os, gettext
+import requests, os, gettext, json
+from time import strftime, strptime, gmtime
+from datetime import datetime
+from math import floor
 from Components.Converter.Poll import Poll
 from Plugins.Extensions.KravenHD import ping
-from lxml import etree
-from xml.etree.cElementTree import fromstring
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Components.Language import language
 
@@ -39,50 +42,95 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
+python3 = False
+try:
+	import six
+	if six.PY2:
+		python3 = False
+	else:
+		python3 = True
+except ImportError:
+	python3 = False
+
+if python3:
+	from html import unescape as _unescape
+else:
+	from HTMLParser import HTMLParser
+	_unescape = HTMLParser().unescape
+
 WEATHER_DATA = None
 WEATHER_LOAD = True
+WeekDays = [_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun")]
+
+def Code_utf8(value):
+	value = "" if value is None else _unescape(value)
+	if python3:
+		value.replace('\x86', '').replace('\x87', '')
+		return value
+	else:
+		value = value.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") or ""
+		return decode(value, 'UTF-8')
+
+def getDirection(angle):
+	def normalize_angle(angle):
+		cycles = angle / 360.
+		normalized_cycles = cycles - floor(cycles)
+		return normalized_cycles * 360.
+	direction_names = [_("N"), _("N-NE"), _("NE"), _("E-NE"), _("E"), _("E-SE"), _("SE"), _("S-SE"), _("S"), _("S-SW"), _("SW"), _("W-SW"), _("W"), _("W-NW"), _("NW"), _("N-NW")]
+	directions_num = len(direction_names)
+	directions_step = 360. / directions_num
+	index = int(round(normalize_angle(angle) / directions_step))
+	index %= directions_num
+	return direction_names[index]
 
 class KravenHDWeather(Poll, Converter, object):
 	def __init__(self, type):
+		_type = type
 		Poll.__init__(self)
 		Converter.__init__(self, type)
 		self.poll_interval = 60000
 		self.poll_enabled = True
-		self.type = type
+		_type = _type.split(',')
+		self.day_value = _type[0]
+		self.type = _type[1]
 		self.timer = eTimer()
 		self.timer.callback.append(self.reset)
 		self.timer.callback.append(self.get_Data)
 		self.data = None
+		self.zerolist = [0] * 24
+		self.nalist = ["na"] * 24
 		self.get_Data()
 
 	@cached
 	def getText(self):
 		global WEATHER_DATA
+
 		self.data = WEATHER_DATA
-		if self.type == "temp_cur":
-			return self.getTemperature_current()
-		elif self.type == "feels_like":
-			return self.getTemperature_feelslike()
-		elif self.type == "humidity":
+		day = self.day_value.split('_')[1]
+		if self.type == "Temp":
+			return self.getDayTemp()
+		elif self.type == "Feels":
+			return self.getFeelTemp()
+		elif self.type == "Humidity":
 			return self.getHumidity()
-		elif self.type == "wind":
+		elif self.type == "Wind":
 			return self.getWind()
-		elif self.type == "city":
-			return str(config.plugins.KravenHD.msn_cityfound.value)
-		elif self.type in ("meteo_cur","meteo1","meteo2","meteo3"):
-			return self.getMeteoFont()
-		elif self.type in ("icon_cur","icon1","icon2","icon3"):
-			return self.getMeteoIcon()
-		elif self.type in ("text_cur","text1","text2","text3"):
-			return self.getMeteoText()
-		elif self.type in ("high0","high1","high2","high3"):
-			return self.getTemperature_high()
-		elif self.type in ("low0","low1","low2","low3"):
-			return self.getTemperature_low()
-		elif self.type in ("minmax0","minmax1","minmax2","minmax3"):
-			return self.getMinMax()
-		elif self.type in ("shortday0","shortday1","shortday2","shortday3"):
-			return self.getShortday()
+		elif self.type == "City":
+			return str(config.plugins.KravenHD.cityfound.value)
+		elif self.type == 'MinTemp':
+			return self.getMinTemp(int(day))
+		elif self.type == 'MaxTemp':
+			return self.getMaxTemp(int(day))
+		elif self.type == 'MinMaxTemp':
+			return self.getMinMax(int(day))
+		elif self.type == "MeteoFont":
+			return self.getMeteoFont(int(day))
+		elif self.type == "Text":
+			return self.getMeteoText(int(day))
+		elif self.type == "Icon":
+			return self.getMeteoIcon(int(day))
+		elif self.type == 'WetterDate':
+			return self.getShortday(int(day))
 		else:
 			return ""
 
@@ -90,253 +138,290 @@ class KravenHDWeather(Poll, Converter, object):
 
 	def reset(self):
 		global WEATHER_LOAD
+
 		WEATHER_LOAD = True
 		self.timer.stop()
 
 	def get_Data(self):
 		global WEATHER_DATA
 		global WEATHER_LOAD
-		if WEATHER_LOAD == True:
+
+		if WEATHER_LOAD:
 			try:
-				r = ping.doOne("8.8.8.8",1.5)
+				r = ping.doOne("8.8.8.8", 1.5)
 				if r != None and r <= 1.5:
-					print ("KravenHD: download from URL")
-					res = requests.get('http://weather.service.msn.com/data.aspx?src=windows&weadegreetype=C&culture=' + str(config.plugins.KravenHD.msn_language.value) + '&wealocations=' + str(config.plugins.KravenHD.msn_code.value), timeout=1.5)
-					self.data = fromstring(res.text)
+					print("[KravenHD]: download from URL")
+					timezones = {"-06": "America/Anchorage", "-05": "America/Los_Angeles", "-04": "America/Denver", "-03": "America/Chicago", "-02": "America/New_York", "-01": "America/Sao_Paulo", "+00": "Europe/London", "+01": "Europe/Berlin", "+02": "Europe/Moscow", "+03": "Africa/Cairo", "+04": "Asia/Bangkok", "+05": "Asia/Singapore", "+06": "Asia/Tokyo", "+07": "Australia/Sydney", "+08": "Pacific/Auckland"}
+					currzone = timezones.get(strftime("%z", gmtime())[:3], "Europe/Berlin")
+					url = 'https://api.open-meteo.com/v1/forecast?longitude=%s&latitude=%s&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m,winddirection_10m,precipitation_probability&daily=sunrise,sunset,weathercode,precipitation_probability_max,temperature_2m_max,temperature_2m_min&timezone=%s&windspeed_unit=kmh&temperature_unit=celsius' % (str(config.plugins.KravenHD.longitude.value), str(config.plugins.KravenHD.latitude.value), currzone)
+					res = requests.get(url, timeout=3)
+					self.data = res.json()
 					WEATHER_DATA = self.data
 					WEATHER_LOAD = False
 			except:
 				pass
-			timeout = max(15,int(config.plugins.KravenHD.refreshInterval.value)) * 1000.0 * 60.0
+			timeout = max(15, int(config.plugins.KravenHD.refreshInterval.value)) * 1000.0 * 60.0
 			self.timer.start(int(timeout), True)
 		else:
 			self.data = WEATHER_DATA
 
-	def getTemperature_current(self):
+	def getDayTemp(self):
 		try:
-			for childs in self.data:
-				for items in childs:
-					if items.tag == 'current':
-						value = items.attrib.get("temperature")
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				isotime = datetime.now().strftime("%FT%H:00")
+				current = self.data.get("hourly", {})
+				for idx, time in enumerate(current.get("time", [])):
+					if isotime in time:
+						value = "%.0f" % current.get("temperature_2m", self.zerolist)[idx]
 						return str(value) + "°C"
 		except:
-			return ''
+			return ""
 
-	def getTemperature_feelslike(self):
+	def getFeelTemp(self):
 		try:
-			for childs in self.data:
-				for items in childs:
-					if items.tag == 'current':
-						cur_temp = items.attrib.get("temperature")
-						feels_temp = items.attrib.get("feelslike")
-						return str(cur_temp) + '°C' + _(", feels ") + str(feels_temp) + '°C'
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				isotime = datetime.now().strftime("%FT%H:00")
+				current = self.data.get("hourly", {})
+				for idx, time in enumerate(current.get("time", [])):
+					if isotime in time:
+						cur_temp = "%.0f" % current.get("temperature_2m", self.zerolist)[idx]
+						feel_temp = "%.0f" % current.get("apparent_temperature", self.zerolist)[idx]
+						return str(cur_temp) + '°C' + _(", feels ") + str(feel_temp) + '°C'
 		except:
-			return ''
+			return ""
 
 	def getHumidity(self):
 		try:
-			for childs in self.data:
-				for items in childs:
-					if items.tag == 'current':
-						value = items.attrib.get("humidity")
-						return str(value) + _('% humidity')
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				isotime = datetime.now().strftime("%FT%H:00")
+				current = self.data.get("hourly", {})
+				for idx, time in enumerate(current.get("time", [])):
+					if isotime in time:
+						value = "%.0f%%" % current.get("relativehumidity_2m", self.zerolist)[idx]
+						return value + " " + _('humidity')
 		except:
-			return ''
+			return ""
 
 	def getWind(self):
 		try:
-			for childs in self.data:
-				for items in childs:
-					if items.tag == 'current':
-						value = items.attrib.get("winddisplay")
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				isotime = datetime.now().strftime("%FT%H:00")
+				current = self.data.get("hourly", {})
+				for idx, time in enumerate(current.get("time", [])):
+					if isotime in time:
+						value = "%.0f km/h %s" % (current.get("windspeed_10m", self.zerolist)[idx], getDirection(current.get("winddirection_10m", self.nalist)[idx]))
 						return str(value)
 		except:
-			return ''
+			return ""
 
-	def getTemperature_high(self):
+	def getMinTemp(self, day):
 		try:
-			if self.type == "high0":
-				for items in self.data.findall(".//forecast[2]"):
-					value = items.get("high")
-					return str(value) + "°C"
-			if self.type == "high1":
-				for items in self.data.findall(".//forecast[3]"):
-					value = items.get("high")
-					return str(value) + "°C"
-			if self.type == "high2":
-				for items in self.data.findall(".//forecast[4]"):
-					value = items.get("high")
-					return str(value) + "°C"
-			if self.type == "high3":
-				for items in self.data.findall(".//forecast[5]"):
-					value = items.get("high")
-					return str(value) + "°C"
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				forecast = self.data["daily"]
+				if day in range(6):
+					value = "%.0f" % forecast.get("temperature_2m_min", self.zerolist)[day]
+					return str(value) + '°C'
 		except:
-			return ''
+			return ""
 
-	def getTemperature_low(self):
+	def getMaxTemp(self, day):
 		try:
-			if self.type == "low0":
-				for items in self.data.findall(".//forecast[2]"):
-					value = items.get("low")
-					return str(value) + "°C"
-			if self.type == "low1":
-				for items in self.data.findall(".//forecast[3]"):
-					value = items.get("low")
-					return str(value) + "°C"
-			if self.type == "low2":
-				for items in self.data.findall(".//forecast[4]"):
-					value = items.get("low")
-					return str(value) + "°C"
-			if self.type == "low3":
-				for items in self.data.findall(".//forecast[5]"):
-					value = items.get("low")
-					return str(value) + "°C"
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				forecast = self.data["daily"]
+				if day in range(6):
+					value = "%.0f" % forecast.get("temperature_2m_max", self.zerolist)[day]
+					return str(value) + '°C'
 		except:
-			return ''
+			return ""
 
-	def getMinMax(self):
+	def getMinMax(self, day):
 		try:
-			if self.type == "minmax0":
-				for items in self.data.findall(".//forecast[2]"):
-					min = items.get("low")
-					max = items.get("high")
-					return str(min) + "° / " + str(max) + "°"
-			if self.type == "minmax1":
-				for items in self.data.findall(".//forecast[3]"):
-					min = items.get("low")
-					max = items.get("high")
-					return str(min) + "° / " + str(max) + "°"
-			if self.type == "minmax2":
-				for items in self.data.findall(".//forecast[4]"):
-					min = items.get("low")
-					max = items.get("high")
-					return str(min) + "° / " + str(max) + "°"
-			if self.type == "minmax3":
-				for items in self.data.findall(".//forecast[5]"):
-					min = items.get("low")
-					max = items.get("high")
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				forecast = self.data["daily"]
+				if day in range(6):
+					min = "%.0f" % forecast.get("temperature_2m_min", self.zerolist)[day]
+					max = "%.0f" % forecast.get("temperature_2m_max", self.zerolist)[day]
 					return str(min) + "° / " + str(max) + "°"
 		except:
-			return ''
+			return ""
 
-	def getShortday(self):
+	def getShortday(self, day):
 		try:
-			if self.type == "shortday0":
-				for items in self.data.findall(".//forecast[2]"):
-					value = items.get("shortday")
-					return str(value)
-			if self.type == "shortday1":
-				for items in self.data.findall(".//forecast[3]"):
-					value = items.get("shortday")
-					return str(value)
-			if self.type == "shortday2":
-				for items in self.data.findall(".//forecast[4]"):
-					value = items.get("shortday")
-					return str(value)
-			if self.type == "shortday3":
-				for items in self.data.findall(".//forecast[5]"):
-					value = items.get("shortday")
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				global WeekDays
+				forecast = self.data["daily"]
+				if day in range(6):
+					value = Code_utf8(WeekDays[strptime(forecast.get("time", self.zerolist)[day], "%Y-%m-%d").tm_wday])
 					return str(value)
 		except:
-			return ''
+			return ""
 
-	def getMeteoIcon(self):
+	def getMeteoIcon(self, day):
 		try:
-			if self.type == "icon_cur":
-				for childs in self.data:
-					for items in childs:
-						if items.tag == "current":
-							value = items.attrib.get("skycode")
-							return str(value)
-			if self.type == "icon1":
-				for items in self.data.findall(".//forecast[3]"):
-					value = items.get("skycodeday")
-					return str(value)
-			if self.type == "icon2":
-				for items in self.data.findall(".//forecast[4]"):
-					value = items.get("skycodeday")
-					return str(value)
-			if self.type == "icon3":
-				for items in self.data.findall(".//forecast[5]"):
-					value = items.get("skycodeday")
-					return str(value)
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				if day == 0:
+					isotime = datetime.now().strftime("%FT%H:00")
+					current = self.data.get("hourly", {})
+					for idx, time in enumerate(current.get("time", [])):
+						if isotime in time:
+							value = int(current.get("weathercode", self.nalist)[idx])
+							icon = self.setIcon(value)
+							return str(icon)
+				else:
+					forecast = self.data["daily"]
+					if day in range(6):
+						value = int(forecast.get("weathercode", self.zerolist)[day])
+						icon = self.setIcon(value)
+						return str(icon)
 		except:
-			return "3200"
+			return ""
 
-	def getMeteoText(self):
+	def getMeteoText(self, day):
 		try:
-			if self.type == "text_cur":
-				for childs in self.data:
-					for items in childs:
-						if items.tag == "current":
-							value = items.attrib.get("skytext")
-							return str(value)
-			if self.type == "text1":
-				for items in self.data.findall(".//forecast[3]"):
-					value = items.get("skytextday")
-					return str(value)
-			if self.type == "text2":
-				for items in self.data.findall(".//forecast[4]"):
-					value = items.get("skytextday")
-					return str(value)
-			if self.type == "text3":
-				for items in self.data.findall(".//forecast[5]"):
-					value = items.get("skytextday")
-					return str(value)
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				if day == 0:
+					isotime = datetime.now().strftime("%FT%H:00")
+					current = self.data.get("hourly", {})
+					for idx, time in enumerate(current.get("time", [])):
+						if isotime in time:
+							value = int(current.get("weathercode", self.nalist)[idx])
+							text = self.setDescription(value)
+							return str(text)
+				else:
+					forecast = self.data["daily"]
+					if day in range(6):
+						value = int(forecast.get("weathercode", self.zerolist)[day])
+						text = self.setDescription(value)
+						return str(text)
 		except:
-			return ''
+			return ""
 
-	def getMeteoFont(self):
+	def getMeteoFont(self, day):
 		try:
-			if self.type == "meteo_cur":
-				for childs in self.data:
-					for items in childs:
-						if items.tag == "current":
-							value = items.attrib.get("skycode")
-			if self.type == "meteo1":
-				for items in self.data.findall(".//forecast[3]"):
-					value = items.get("skycodeday")
-			if self.type == "meteo2":
-				for items in self.data.findall(".//forecast[4]"):
-					value = items.get("skycodeday")
-			if self.type == "meteo3":
-				for items in self.data.findall(".//forecast[5]"):
-					value = items.get("skycodeday")
+			if self.data.get("hourly", None) is not None and self.data.get("daily", None) is not None:
+				if day == 0:
+					isotime = datetime.now().strftime("%FT%H:00")
+					current = self.data.get("hourly", {})
+					for idx, time in enumerate(current.get("time", [])):
+						if isotime in time:
+							value = int(current.get("weathercode", self.nalist)[idx])
+							font = self.setMeteoFont(value)
+							return str(font)
+				else:
+					forecast = self.data["daily"]
+					if day in range(6):
+						value = int(forecast.get("weathercode", self.zerolist)[day])
+						font = self.setMeteoFont(value)
+						return str(font)
 		except:
-			return ''
+			return ""
 
-		if value in ("0","1","2","23","24"):
-			return "S"
-		elif value in ("3","4"):
-			return "Z"
-		elif value in ("5","6","7","18"):
-			return "U"
-		elif value in ("8","10","25"):
-			return "G"
-		elif value == "9":
-			return "Q"
-		elif value in ("11","12","40"):
-			return "R"
-		elif value in ("13","14","15","16","41","42","43","46"):
-			return "W"
-		elif value in ("17","35"):
-			return "X"
-		elif value == "19":
-			return "F"
-		elif value in ("20","21","22"):
-			return "L"
-		elif value in ("26","44"):
-			return "N"
-		elif value in ("27","29"):
-			return "I"
-		elif value in ("28","30"):
-			return "H"
-		elif value in ("31","33"):
-			return "C"
-		elif value in ("32","34","36"):
-			return "B"
-		elif value in ("37","38","39","45","47"):
-			return "0"
+	def setMeteoFont(self, value):
+		if value == 0:
+			return "B" # sun
+		elif value in (1, 2):
+			return "H" # sun + cloud
+		elif value == 3:
+			return "Y" # clouds
+		elif value in (45, 48):
+			return "M" # fog
+		elif value in (95, 96, 99):
+			return "P" # thunderstorm
+		elif value in (51, 61, 80):
+			return "Q" # slight rain
+		elif value in (53, 55, 63, 65, 81, 82):
+			return "R" # rain
+		elif value in (71, 85):
+			return "U" # slight snow
+		elif value in (73, 75, 86):
+			return "W" # snow
+		elif value in (56, 57, 66, 67, 77):
+			return "X" # sleet
 		else:
-			return ")"
+			return "(" # compass
+
+	def setDescription(self, value):
+		if value == 0:
+			return _("clear sky")
+		elif value == 1:
+			return _("mainly clear")
+		elif value == 2:
+			return _("partly cloudy")
+		elif value == 3:
+			return _("overcast")
+		elif value == 45:
+			return _("foggy")
+		elif value == 48:
+			return _("rime fog")
+		elif value == 51:
+			return _("light drizzle")
+		elif value == 53:
+			return _("moderate drizzle")
+		elif value == 55:
+			return _("dense drizzle")
+		elif value == 56:
+			return _("light freezing drizzle")
+		elif value == 57:
+			return _("dense freezing drizzle")
+		elif value == 61:
+			return _("slight rain")
+		elif value == 63:
+			return _("moderate rain")
+		elif value == 65:
+			return _("heavy rain")
+		elif value == 66:
+			return _("light freezing rain")
+		elif value == 67:
+			return _("heavy freezing rain")
+		elif value == 71:
+			return _("slight snow fall")
+		elif value == 73:
+			return _("moderate snow fall")
+		elif value == 75:
+			return _("heavy snow fall")
+		elif value == 77:
+			return _("snow grains")
+		elif value == 80:
+			return _("slight rain showers")
+		elif value == 81:
+			return _("moderate rain showers")
+		elif value == 82:
+			return _("violent rain showers")
+		elif value == 85:
+			return _("slight snow showers")
+		elif value == 86:
+			return _("heavy snow showers")
+		elif value == 95:
+			return _("slight thunderstorm")
+		elif value == 96:
+			return _("thunderstorm with slight hail")
+		elif value == 99:
+			return _("thunderstorm with heavy hail")
+		else:
+			return ""
+
+	def setIcon(self, value):
+		if value == 0:
+			return "32"
+		elif value == 1:
+			return "34"
+		elif value == 2:
+			return "44"
+		elif value == 3:
+			return "26"
+		elif value in (45, 48):
+			return "20"
+		elif value in (95, 96, 99):
+			return "3"
+		elif value in (51, 61, 80):
+			return "11"
+		elif value in (53, 55, 63, 65, 81, 82):
+			return "12"
+		elif value in (71, 85):
+			return "13"
+		elif value in (73, 75, 86):
+			return "7"
+		elif value in (56, 57, 66, 67, 77):
+			return "5"
+		else:
+			return "3200"

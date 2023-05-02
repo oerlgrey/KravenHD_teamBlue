@@ -3,7 +3,7 @@
 #  Empty EPG 2 Renderer
 #
 #  Coded/Modified/Adapted by oerlgrey
-#  Based on openHDF image source code
+#  Based on teamBlue image source code
 #  Based on the work of shamann (see below)
 #
 #  This code is licensed under the Creative Commons 

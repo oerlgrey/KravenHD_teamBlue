@@ -3,7 +3,7 @@
 #  Events Info Converter
 #
 #  Coded/Modified/Adapted by oerlgrey
-#  Based on openHDF image source code
+#  Based on teamBlue image source code
 #  Based on Next Events by m0rphU & LN
 #
 #  This code is licensed under the Creative Commons 

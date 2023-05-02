@@ -15,3 +15,22 @@
 	<eLabel backgroundColor="KravenBorder" position="411,366" size="1,97" />
 	<eLabel backgroundColor="KravenBorder" position="411,52" size="1,96" />
   </screen>
+
+  <screen backgroundColor="transparent" flags="wfNoBorder" name="NumberZapPicon" position="396,279" size="1071,514" title="QuickZap">
+	<widget alphatest="blend" render="Picon" position="426,67" size="600,360" source="Service" zPosition="1">
+	  <convert type="ServiceName">Reference</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg" font="Regular;120" foregroundColor="KravenFont1" halign="center" name="number" position="97,166" size="300,180" transparent="0" />
+	<widget backgroundColor="Kravenbg" font="Regular;30" foregroundColor="KravenFont1" halign="center" name="servicename" noWrap="1" position="438,423" size="580,39" transparent="0" />
+	<eLabel backgroundColor="Kravenbg" position="406,48" size="640,421" zPosition="-1" />
+	<eLabel backgroundColor="KravenBorder" position="1041,52" size="1,412" />
+	<eLabel backgroundColor="KravenBorder" position="411,52" size="630,1" />
+	<eLabel backgroundColor="Kravenbg" position="69,142" size="337,229" zPosition="-1" />
+	<eLabel backgroundColor="KravenBorder" position="73,147" size="1,220" />
+	<eLabel backgroundColor="KravenBorder" position="73,147" size="349,1" />
+	<eLabel backgroundColor="KravenBorder" position="423,147" size="1,220" />
+	<eLabel backgroundColor="KravenBorder" position="73,366" size="349,1" />
+	<eLabel backgroundColor="KravenBorder" position="411,463" size="630,1" />
+	<eLabel backgroundColor="KravenBorder" position="411,366" size="1,97" />
+	<eLabel backgroundColor="KravenBorder" position="411,52" size="1,96" />
+  </screen>

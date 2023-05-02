@@ -1399,7 +1399,7 @@
 
   <screen backgroundColor="transparent" flags="wfNoBorder" name="Satfinder" position="0,0" size="1920,1080" title="Satfinder">
 	<!--*Satfinder*-->
-    <widget backgroundColor="Kravenbg3" font="Regular2;31" foregroundColor="KravenFont2" halign="center" position="180,120" render="Label" size="900,33" source="Frontend" transparent="1" zPosition="2">
+    <widget backgroundColor="Kravenbg3" font="Regular2;31" foregroundColor="KravenFont2" halign="center" position="315,120" render="Label" size="630,33" source="Frontend" transparent="1" zPosition="2">
       <convert type="FrontendInfo">SNRdB</convert>
     </widget>
     <eLabel backgroundColor="Kravenbg3" font="Regular2;31" foregroundColor="KravenFont2" halign="right" name="snr" position="180,165" size="120,37" text="SNR:" transparent="1" />
@@ -1416,7 +1416,7 @@
     <widget backgroundColor="Kravenbg3" font="Regular2;31" foregroundColor="KravenFont2" position="960,217" render="Label" size="120,37" source="Frontend" transparent="1">
       <convert type="FrontendInfo">BER</convert>
     </widget>
-    <eLabel backgroundColor="Kravenbg3" font="Regular2;31" foregroundColor="KravenFont2" halign="right" name="lock" position="180,277" size="120,37" text="Lock:" transparent="1" />
+    <eLabel backgroundColor="Kravenbg3" font="Regular2;31" foregroundColor="KravenFont2" halign="right" name="lock" position="180,277" size="120,37" text=" Lock:" transparent="1" />
     <widget alphatest="blend" pixmap="KravenHD/icons/lock_on.png" position="315,280" render="Pixmap" size="30,30" source="Frontend" zPosition="1">
       <convert type="FrontendInfo">LOCK</convert>
       <convert type="ConditionalShowHide" />
