@@ -16,8 +16,8 @@
 #  If you think this license infringes any rights,
 #  please contact me at ochzoetna@gmail.com
 
-from Converter import Converter
-from Poll import Poll
+from Components.Converter.Converter import Converter
+from Components.Converter.Poll import Poll
 from Components.Element import cached
 
 class KravenHDCpuUsage(Converter, object):

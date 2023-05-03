@@ -16,7 +16,7 @@
 #  If you think this license infringes any rights,
 #  please contact me at ochzoetna@gmail.com
 
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
 
 class KravenHDPixmapScaler(Renderer):
@@ -31,7 +31,7 @@ class KravenHDPixmapScaler(Renderer):
 			if attrib == 'noscale':
 				self.scale = value
 			else:
-				attribs.append((attrib,value))
+				attribs.append((attrib, value))
 		self.skinAttributes = attribs
 		return Renderer.applySkin(self, desktop, parent)
 
@@ -44,7 +44,7 @@ class KravenHDPixmapScaler(Renderer):
 		if what[0] != self.CHANGED_CLEAR:
 			if self.instance:
 				pngname=self.source.text
-				if self.scale is '0':
+				if self.scale == '0':
 					self.instance.setScale(1)
 				self.instance.setPixmapFromFile(pngname)
 				self.instance.show()

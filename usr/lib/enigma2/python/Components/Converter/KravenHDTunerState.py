@@ -17,8 +17,8 @@
 
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from Poll import Poll
-from Components.NimManager import nimmanager
+from Components.Converter.Poll import Poll
+from Components.Sources.TunerInfo import TunerInfo
 from enigma import iServiceInformation
 import NavigationInstance
 
@@ -186,7 +186,7 @@ class KravenHDTunerState(Poll, Converter, object):
 		
 		self.boxes = boxes
 		self.activetuners = len(boxes)
-		self.availabletuners = len(nimmanager.nim_slots) + int(self.streamastuner)
+		self.availabletuners = self.source.getTunerAmount() + int(self.streamastuner)
 		
 		self.box = self.boxnum
 		if self.boxcount > 0:
@@ -195,5 +195,5 @@ class KravenHDTunerState(Poll, Converter, object):
 			else:
 				self.box -= (self.boxcount - self.activetuners)
 			
-	def intFirst(self,elem):
+	def intFirst(self, elem):
 		return int(elem.split("_")[0])

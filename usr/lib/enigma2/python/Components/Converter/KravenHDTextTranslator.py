@@ -64,17 +64,15 @@ class KravenHDTextTranslator(Converter, object):
 	load = 26
 	sat = 27
 	snr = 28
-	temp = 29
-	wind = 30
-	clime = 31
-	city = 32
-	name = 33
-	birthday = 34
-	age = 35
-	brsettings = 36
-	brpath = 37
-	verticalepg = 38
-	currentweather = 39
+	name = 29
+	birthday = 30
+	age = 31
+	brsettings = 32
+	brpath = 33
+	verticalepg = 34
+	currentweather = 35
+	screensaver = 36
+	favorites = 37
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -137,14 +135,6 @@ class KravenHDTextTranslator(Converter, object):
 			self.type = self.sat
 		elif type == "snr":
 			self.type = self.snr
-		elif type == "temp":
-			self.type = self.temp
-		elif type == "wind":
-			self.type = self.wind
-		elif type == "clime":
-			self.type = self.clime
-		elif type == "city":
-			self.type = self.city
 		elif type == "name":
 			self.type = self.name
 		elif type == "birthday":
@@ -159,6 +149,10 @@ class KravenHDTextTranslator(Converter, object):
 			self.type = self.verticalepg
 		elif type == "currentweather":
 			self.type = self.currentweather
+		elif type == "screensaver":
+			self.type = self.screensaver
+		elif type == "favorites":
+			self.type = self.favorites
 
 	@cached
 	def getText(self):
@@ -220,14 +214,6 @@ class KravenHDTextTranslator(Converter, object):
 			return _('Sat:')
 		elif self.type == self.snr:
 			return _('SNR:')
-		elif self.type == self.temp:
-			return _('temp:')
-		elif self.type == self.wind:
-			return _('wind:')
-		elif self.type == self.clime:
-			return _('clime:')
-		elif self.type == self.city:
-			return _('city:')
 		elif self.type == self.name:
 			return _('Name')
 		elif self.type == self.birthday:
@@ -242,5 +228,9 @@ class KravenHDTextTranslator(Converter, object):
 			return _('VerticalEPG')
 		elif self.type == self.currentweather:
 			return _('Current Weather')
+		elif self.type == self.screensaver:
+			return _('Screensaver')
+		elif self.type == self.favorites:
+			return _('Favorites')
 
 	text = property(getText)

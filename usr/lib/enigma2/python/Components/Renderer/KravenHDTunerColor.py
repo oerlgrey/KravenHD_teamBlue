@@ -16,7 +16,7 @@
 #  please contact me at ochzoetna@gmail.com
 
 from Components.VariableText import VariableText
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from enigma import eLabel
 from skin import parseColor
 
@@ -40,13 +40,13 @@ class KravenHDTunerColor(VariableText, Renderer):
 
 	def changed(self, what):
 		tunertext = self.source.text
-		if tunertext.split("_")[1] is "B":
+		if tunertext.split("_")[1] == "B":
 			color = "KravenTunerBusy"
-		elif tunertext.split("_")[1] is "L":
+		elif tunertext.split("_")[1] == "L":
 			color = "KravenTunerLive"
-		elif tunertext.split("_")[1] is "R":
+		elif tunertext.split("_")[1] == "R":
 			color = "KravenTunerRecord"
-		elif tunertext.split("_")[1] is "X":
+		elif tunertext.split("_")[1] == "X":
 			color = "KravenTunerXtremeBusy"
 		else:
 			color = "KravenIcon"
