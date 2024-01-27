@@ -37,6 +37,30 @@
 	  <eLabel position="0,709" size="1920,3" backgroundColor="KravenIBLine" zPosition="-8" />
 	</screen>
 	
+	<screen name="infobar-style-x4-zz1-poster">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="45,282" size="300,450" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
+	<screen name="infobar-style-x4-zz1-poster-bigname">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="45,171" size="300,450" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
+	<screen name="infobar-style-x4-zz1-poster-smallname">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="45,234" size="300,450" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
+	<screen name="infobar-style-zzz1-poster">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="45,207" size="300,450" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
 	<screen name="infobar-style-x4">
 	  <widget alphatest="blend" position="30,814" size="330,198" render="Picon" source="session.CurrentService" transparent="1" zPosition="4">
 		<convert type="ServiceName">Reference</convert>

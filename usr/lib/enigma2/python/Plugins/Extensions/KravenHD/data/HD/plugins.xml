@@ -36,6 +36,19 @@
     <eLabel backgroundColor="Kravenbg2" position="266,250" size="748,220" transparent="0" zPosition="-1" />
   </screen>
 
+  <screen name="KravenHDBrowser" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*KravenHDBrowser*-->
+    <widget backgroundColor="Kravenbg2" source="info" render="Label" font="Regular2;24" foregroundColor="KravenFont2" position="42,80" size="736,30" transparent="1" zPosition="1" />
+    <widget backgroundColor="Kravenbg2" name="list" font="Regular;21" secondfont="Regular;19" position="42,120" size="736,450" itemHeight="30" selectionPixmap="KravenHD/graphics/sel_30.png" foregroundColor="KravenFont1" transparent="1" enableWrapAround="1" scrollbarMode="showOnDemand" scrollbarWidth="10" zPosition="2" />
+    <widget backgroundColor="Kravenbg2" source="instruction" render="Label" font="Regular2;22" foregroundColor="KravenFont2" position="42,580" size="736,54" halign="center" valign="center" transparent="1" zPosition="1" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="SourceRedGreen"/>
+    <panel name="Colorbuttons"/>
+    <panel name="OKExit"/>
+  </screen>
+
   <screen name="BitrateViewer" backgroundColor="transparent" position="0,0" size="1280,720" title="Bitrate viewer" flags="wfBorder">
 	<!--*BitrateViewer*-->
 	<widget source="video" render="Label" position="85,120" zPosition="1" size="80,20" font="Regular;20" foregroundColor="KravenFont2" backgroundColor="Kravenbg3" transparent="1" />
@@ -2771,4 +2784,89 @@
     <widget font="Regular;20" halign="left" valign="center" source="key_green" position="297,670" size="220,26" render="Label" backgroundColor="KravenIBbg2" foregroundColor="KravenButton" transparent="1" zPosition="1" />
     <panel name="Colorbuttons"/>
     <panel name="OKExit"/>
+  </screen>
+
+  <screen name="HDFRadioYTPlayer" position="0,0" size="1280,720" flags="wfNoBorder" title="InfoBar" backgroundColor="transparent">
+	<widget backgroundColor="Kravenbg6" name="cover" position="55,615" size="100,100" />
+	<widget backgroundColor="Kravenbg6" font="Regular;30" foregroundColor="KravenFont2" noWrap="1" position="257,620" render="Label" size="653,38" source="session.CurrentService" transparent="1">
+		<convert type="ServiceName">Name</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg6" source="session.CurrentService" render="Label" font="Regular;20" foregroundColor="KravenFont1" position="918,629" size="100,26" halign="right" transparent="1">
+		<convert type="ServicePosition">Position</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg6" source="session.CurrentService" render="Label" font="Regular;20" foregroundColor="KravenFont1" position="938,676" size="80,26" halign="right" transparent="1">
+		<convert type="ServicePosition">Length</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg6" text="16:9" source="session.CurrentService" render="FixedLabel" font="Regular;20" foregroundColor="KravenFont1" position="210,676" size="50,26" transparent="1">
+		<convert type="ServiceInfo">IsWidescreen</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget backgroundColor="Kravenbg6" text="4:3" source="session.CurrentService" render="FixedLabel" font="Regular;20" foregroundColor="KravenFont1" position="210,676" size="50,26" transparent="1">
+		<convert type="ServiceInfo">IsWidescreen</convert>
+		<convert type="ConditionalShowHide">Invert</convert>
+	</widget>
+    <widget backgroundColor="Kravenbg6" text="SD" source="session.CurrentService" render="FixedLabel" font="Regular;20" foregroundColor="KravenFont1" position="260,676" size="50,26" halign="center" transparent="1">
+		<convert type="ServiceInfo">VideoHeight</convert>
+		<convert type="ValueRange">0,719</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+    <widget backgroundColor="Kravenbg6" text="HD" source="session.CurrentService" render="FixedLabel" font="Regular;20" foregroundColor="KravenFont1" position="260,676" size="50,26" halign="center" transparent="1">
+		<convert type="ServiceInfo">VideoHeight</convert>
+		<convert type="ValueRange">720,1080</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+    <widget backgroundColor="Kravenbg6" text="UHD" source="session.CurrentService" render="FixedLabel" font="Regular;20" foregroundColor="KravenFont1" position="260,676" size="50,26" halign="center" transparent="1">
+		<convert type="ServiceInfo">VideoHeight</convert>
+		<convert type="ValueRange">1081,5000</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget backgroundColor="Kravenbg6" source="session.CurrentService" render="Label" font="Regular;20" foregroundColor="KravenFont1" position="310,676" size="56,26" halign="right" transparent="1">
+		<convert type="ServiceInfo">VideoWidth</convert>
+	</widget>
+	<eLabel backgroundColor="Kravenbg6" text="x" font="Regular;20" foregroundColor="KravenFont1" position="366,676" size="14,26" halign="center" transparent="1" />
+	<widget backgroundColor="Kravenbg6" source="session.CurrentService" render="Label" font="Regular;20" foregroundColor="KravenFont1" position="380,676" size="56,26" transparent="1">
+		<convert type="ServiceInfo">VideoHeight</convert>
+	</widget>
+    <widget backgroundColor="Kravenbg6" text="Dolby Digital" source="session.CurrentService" render="FixedLabel" font="Regular;20" foregroundColor="KravenFont1" position="444,676" size="120,26" transparent="1">
+		<convert type="ServiceInfo">IsMultichannel</convert>
+		<convert type="ConditionalShowHide" />
+    </widget>
+	<eLabel backgroundColor="KravenLine" position="210,666" size="808,1" zPosition="1" />
+	<widget source="session.CurrentService" render="Progress" foregroundColor="KravenProgress" position="210,664" size="808,5" zPosition="2" transparent="1">
+		<convert type="ServicePosition">Position</convert>
+	</widget>
+	<eLabel backgroundColor="Kravenbg6" position="0,608" size="1280,112" zPosition="-2" />
+	<eLabel backgroundColor="KravenBorder" position="0,608" size="1280,2" zPosition="-1" />
+	<widget backgroundColor="Kravenbg6" font="Regular;43" foregroundColor="KravenFont1" halign="center" position="1059,600" render="Label" size="65,80" source="global.CurrentTime" valign="center" transparent="1">
+		<convert type="ClockToText">Format:%H</convert>
+	</widget>
+	<eLabel backgroundColor="Kravenbg6" text=":" font="Regular;43" foregroundColor="KravenFont1" position="1116,600" size="15,80" halign="center" valign="center" transparent="1" />
+	<widget backgroundColor="Kravenbg6" source="global.CurrentTime" render="Label" font="Regular;43" foregroundColor="KravenFont1" position="1126,600" size="65,80" halign="center" valign="center" transparent="1">
+		<convert type="ClockToText">Format:%M</convert>
+	</widget>
+	<eLabel backgroundColor="Kravenbg6" text=":" font="Regular;32" foregroundColor="KravenFont1" halign="center" position="1182,614" size="15,60" valign="center" transparent="1" />
+	<widget backgroundColor="Kravenbg6" source="global.CurrentTime" render="Label" font="Regular;32" foregroundColor="KravenFont1" position="1191,614" size="50,60" halign="center" valign="center" transparent="1">
+		<convert type="ClockToText">Format:%S</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg6" source="global.CurrentTime" render="Label" font="Regular;18" foregroundColor="KravenFont2" position="1050,660" size="203,30" halign="center" valign="center" transparent="1">
+		<convert type="ClockToText">Format:%A</convert>
+	</widget>
+	<widget backgroundColor="Kravenbg6" source="global.CurrentTime" render="Label" font="Regular;18" foregroundColor="KravenFont2" position="1050,680" size="203,30" halign="center" valign="center" transparent="1">
+		<convert type="ClockToText">Format:%e. %B</convert>
+	</widget>
+  </screen>
+
+  <screen name="HDFRadioPVRState" position="210,620" size="40,38" flags="wfNoBorder" backgroundColor="Kravenbg6" zPosition="99">
+	<widget backgroundColor="Kravenbg6" name="state" font="Regular;30" foregroundColor="KravenFont2" position="0,0" size="40,38" transparent="1" />
+  </screen>
+
+  <screen name="HDFRadioHelp" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
+	<widget backgroundColor="Kravenbg3" name="help" render="Label" font="Regular;22" foregroundColor="KravenFont1" position="42,80" size="736,513" transparent="1" />
+	<widget backgroundColor="Kravenbg3" source="version" render="Label" font="Regular2;22" foregroundColor="KravenFont2" position="42,604" size="736,27" halign="center" valign="center" transparent="1" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <widget font="Regular;20" halign="left" valign="center" source="key_red" position="47,670" size="220,26" render="Label" backgroundColor="KravenIBbg3" foregroundColor="KravenButton" transparent="1" zPosition="1" />
+    <panel name="Colorbuttons"/>
+    <panel name="Exit"/>
   </screen>

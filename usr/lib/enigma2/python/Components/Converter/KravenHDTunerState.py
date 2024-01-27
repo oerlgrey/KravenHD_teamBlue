@@ -25,7 +25,6 @@ import NavigationInstance
 class KravenHDTunerState(Poll, Converter, object):
 
 	def __init__(self, type):
-	
 		Poll.__init__(self)
 		Converter.__init__(self, type)
 		self.poll_interval = 1000
@@ -54,7 +53,6 @@ class KravenHDTunerState(Poll, Converter, object):
 			
 	@cached
 	def getBoolean(self):
-	
 		self.getBoxes()
 		
 		if self.query == "IsActive":
@@ -79,11 +77,9 @@ class KravenHDTunerState(Poll, Converter, object):
 	
 	@cached
 	def getText(self):
-	
 		self.getBoxes()
 
 		if self.query == "StreamText":
-		
 			if self.availabletuners == 1:
 				txt = "Stream"
 			else:
@@ -102,7 +98,6 @@ class KravenHDTunerState(Poll, Converter, object):
 			return txt + "_" + col
 		
 		else:
-		
 			if self.box >= 0 and self.activetuners > 0 and self.box < self.activetuners:
 				num = self.boxes[self.box].split("_")[0]
 				col = self.boxes[self.box].split("_")[1]
@@ -123,7 +118,6 @@ class KravenHDTunerState(Poll, Converter, object):
 	text = property(getText)
 	
 	def getBoxes(self):
-	
 		self.streamactive = False
 		self.streamrecord = False
 		

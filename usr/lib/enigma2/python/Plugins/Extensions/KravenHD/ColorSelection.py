@@ -4,7 +4,6 @@
 #
 #  Coded/Modified/Adapted by oerlgrey
 #  Based on teamBlue image source code
-#  Thankfully inspired by MyMetrix by iMaxxx
 #
 #  This code is licensed under the Creative Commons 
 #  Attribution-NonCommercial-ShareAlike 3.0 Unported 
@@ -17,14 +16,10 @@
 #  please contact me at ochzoetna@gmail.com
 
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Screens.Standby import TryQuitMainloop
 from Components.ActionMap import ActionMap
-from Components.config import config, configfile, ConfigYesNo, ConfigSubsection, getConfigListEntry, ConfigSelection, ConfigSlider
+from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
-from Components.Input import Input
-from Components.Label import Label
 from Components.Sources.CanvasSource import CanvasSource
 import gettext
 from enigma import getDesktop, eTimer
@@ -48,17 +43,12 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-def translateBlock(block):
-	for x in TranslationHelper:
-		if block.__contains__(x[0]):
-			block = block.replace(x[0], x[1])
-
 #############################################################
 
 class KravenHDColorSelection(ConfigListScreen, Screen):
 
 	if DESKTOP_WIDTH <= 1280:
-	  skin = """
+		skin = """
 <screen name="KravenHDColorSelection" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#FF000000">
   <widget backgroundColor="#00000000" source="Title" render="Label" font="Regular;28" foregroundColor="#00f0a30a" position="286,260" size="540,36" valign="center" transparent="1" zPosition="1" />
   <widget backgroundColor="#00000000" source="Title" render="Label" font="Regular;28" foregroundColor="#00ffffff" position="844,260" size="150,36" halign="right" transparent="1" valign="center">
@@ -74,7 +64,7 @@ class KravenHDColorSelection(ConfigListScreen, Screen):
 </screen>
 """
 	else:
-	  skin = """
+		skin = """
 <screen name="KravenHDColorSelection" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="#FF000000">
   <widget backgroundColor="#00000000" source="Title" render="Label" font="Regular;42" foregroundColor="#00f0a30a" position="429,390" size="810,54" valign="center" transparent="1" zPosition="1" />
   <widget backgroundColor="#00000000" source="Title" render="Label" font="Regular;42" foregroundColor="#00ffffff" position="1266,390" size="225,54" halign="right" transparent="1" valign="center">
@@ -115,9 +105,8 @@ class KravenHDColorSelection(ConfigListScreen, Screen):
 		self["key_green"] = StaticText(_("Save Color"))
 		self["Title"] = StaticText(_("Color Selection"))
 		self["preview"] = CanvasSource()
-		
-		self.newcolor=color
 
+		self.newcolor=color
 		self.newcolor = self.newcolor[-6:]
 		config.plugins.KravenHD.SelfColorR.value = int(self.newcolor[0:2], 16)
 		config.plugins.KravenHD.SelfColorG.value = int(self.newcolor[2:4], 16)

@@ -16,16 +16,14 @@
 #  If you think this license infringes any rights,
 #  please contact me at ochzoetna@gmail.com
 
-from __future__ import absolute_import
-from __future__ import print_function
 from .ColorSelection import KravenHDColorSelection
+from .DirectoryBrowser import KravenHDBrowser
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Standby import TryQuitMainloop
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
 from copy import deepcopy
 from Components.config import config, configfile, getConfigListEntry, ConfigYesNo, ConfigSubsection, ConfigSelection, ConfigText, ConfigClock, ConfigSlider
 from Components.ConfigList import ConfigListScreen
@@ -41,16 +39,6 @@ import gettext, time, subprocess, requests
 from enigma import ePicLoad, getDesktop, eConsoleAppContainer, eTimer
 from Tools.Directories import fileExists, resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 
-python3 = False
-try:
-	import six
-	if six.PY2:
-		python3 = False
-	else:
-		python3 = True
-except ImportError:
-	python3 = False
-
 DESKTOP_WIDTH = getDesktop(0).size().width()
 
 lang = language.getLanguage()
@@ -64,12 +52,6 @@ def _(txt):
 	if t == txt:
 		t = gettext.gettext(txt)
 	return t
-
-def translateBlock(block):
-	for x in TranslationHelper:
-		if block.__contains__(x[0]):
-			block = block.replace(x[0], x[1])
-	return block
 
 ColorSelfList = [
 	("F0A30A", _("amber")),
@@ -160,12 +142,12 @@ TextureList = []
 
 for i in range(1, 50):
 	n=str(i)
-	if fileExists("/usr/share/enigma2/Kraven-user-icons/usertexture"+n+".png") or fileExists("/usr/share/enigma2/Kraven-user-icons/usertexture"+n+".jpg"):
-		TextureList.append(("usertexture"+n, _("user texture")+" "+n))
+	if fileExists("/usr/share/enigma2/Kraven-user-icons/usertexture" + n + ".png") or fileExists("/usr/share/enigma2/Kraven-user-icons/usertexture" + n + ".jpg"):
+		TextureList.append(("usertexture" + n, _("user texture") + " " + n))
 for i in range(1, 50):
 	n=str(i)
-	if fileExists("/usr/share/enigma2/KravenHD/textures/texture"+n+".png") or fileExists("/usr/share/enigma2/KravenHD/textures/texture"+n+".jpg"):
-		TextureList.append(("texture"+n, _("texture")+" "+n))
+	if fileExists("/usr/share/enigma2/KravenHD/textures/texture" + n + ".png") or fileExists("/usr/share/enigma2/KravenHD/textures/texture" + n + ".jpg"):
+		TextureList.append(("texture" + n, _("texture") + " " + n))
 
 BorderSelfList = deepcopy(ColorSelfList)
 BorderSelfList.append(("none", _("off")))
@@ -941,6 +923,12 @@ config.plugins.KravenHD.PopupStyle = ConfigSelection(default="popup-grad-trans",
 				("popup-box", _("box"))
 				])
 
+config.plugins.KravenHD.PosterView = ConfigSelection(default="none", choices = [
+				("on", _("on")),
+				("none", _("off"))
+				])
+config.plugins.KravenHD.PosterPath = ConfigText(default="/media/hdd", fixed_size=False)
+
 config.plugins.KravenHD.IBProgressList = ConfigSelection(default="ffffff", choices = ProgressList)
 config.plugins.KravenHD.IBProgressSelf = ConfigText(default="ffffff")
 config.plugins.KravenHD.IBProgress = ConfigText(default="ffffff")
@@ -1033,7 +1021,6 @@ class KravenHD(ConfigListScreen, Screen):
 		self.dateiTMP = self.datei + ".tmp"
 		self.picPath = "/usr/lib/enigma2/python/Plugins/Extensions/KravenHD/images/"
 		self.profiles = "/etc/enigma2/"
-		self.Scale = AVSwitch().getFramebufferScale()
 		self.PicLoad = ePicLoad()
 		self["helperimage"] = Pixmap()
 		self["Canvas"] = CanvasSource()
@@ -1073,23 +1060,23 @@ class KravenHD(ConfigListScreen, Screen):
 		self.timer.callback.append(self.updateMylist)
 		self.onLayoutFinish.append(self.updateMylist)
 
-		self.lastProfile="0"
+		self.lastProfile = "0"
 
-		self.actClockstyle=""
-		self.actWeatherstyle=""
-		self.actMenustyle=""
-		self.actCity=""
-		self.actCSItemHeight=""
+		self.actClockstyle = ""
+		self.actWeatherstyle = ""
+		self.actMenustyle = ""
+		self.actCity = ""
+		self.actCSItemHeight = 0
 
-		self.skincolorinfobarcolor=""
-		self.skincolorbackgroundcolor=""
+		self.skincolorinfobarcolor = ""
+		self.skincolorbackgroundcolor = ""
 
-		self.actListColorSelection=None
-		self.actSelfColorSelection=None
+		self.actListColorSelection = None
+		self.actSelfColorSelection = None
 
-		self.Tuners=self.getTuners()
-		self.InternetAvailable=self.getInternetAvailable()
-		self.UserMenuIconsAvailable=self.getUserMenuIconsAvailable()
+		self.Tuners = self.getTuners()
+		self.InternetAvailable = self.getInternetAvailable()
+		self.UserMenuIconsAvailable = self.getUserMenuIconsAvailable()
 
 	def mylist(self):
 		self.timer.start(100, True)
@@ -1257,7 +1244,12 @@ class KravenHD(ConfigListScreen, Screen):
 			else:
 				emptyLines+=1
 		list.append(getConfigListEntry(_("System-Infos"), config.plugins.KravenHD.SystemInfo, _("Choose from different additional windows with system informations or deactivate them completely.")))
-		for i in range(emptyLines+7):
+		list.append(getConfigListEntry(_("Show poster"), config.plugins.KravenHD.PosterView, _("Choose whether the poster should be displayed in the infobar or not.")))
+		if config.plugins.KravenHD.PosterView.value == "on":
+			list.append(getConfigListEntry(_("Poster path"), config.plugins.KravenHD.PosterPath, _("Choose the poster path.\nPress OK to open the browser.\nA folder 'poster' is automatically created for the poster path.")))
+		else:
+			emptyLines+=1
+		for i in range(emptyLines+5):
 			list.append(getConfigListEntry(_(" "), ))
 
 		# page 5
@@ -2137,7 +2129,7 @@ class KravenHD(ConfigListScreen, Screen):
 		self.onLayoutFinish.append(self.ShowPicture)
 
 	def ShowPicture(self):
-		self.PicLoad.setPara([self["helperimage"].instance.size().width(), self["helperimage"].instance.size().height(), self.Scale[0], self.Scale[1], 0, 1, "#00000000"])
+		self.PicLoad.setPara([self["helperimage"].instance.size().width(), self["helperimage"].instance.size().height(), 1, 1, 0, 1, "#00000000"])
 		if self.picPath is not None:
 			self.picPath = None
 			self.PicLoad.startDecode(self.picPath)
@@ -2350,8 +2342,6 @@ class KravenHD(ConfigListScreen, Screen):
 		try:
 			if callback:  
 				self["config"].getCurrent()[1].value = callback
-			else:
-				pass
 		except:
 			pass
 
@@ -2361,10 +2351,21 @@ class KravenHD(ConfigListScreen, Screen):
 				self.actSelfColorSelection.value = callback
 				self.actListColorSelection.value = "self"
 				self.mylist()
-			else:
-				pass
 		except:
 			pass
+
+	def BrowserCallBack(self, callback):
+		try:
+			if callback:
+				posterpath = path.join(callback, "poster")
+				if not path.exists(posterpath):
+					makedirs(posterpath)
+				config.plugins.KravenHD.PosterPath.value = callback
+		except:
+			self.session.open(MessageBox, _("You have no permissions.\nPlease choose another path."), MessageBox.TYPE_INFO, timeout=8)
+			config.plugins.KravenHD.PosterPath.value = ""
+			config.plugins.KravenHD.PosterPath.save()
+		self.mylist()
 
 	def keyOK(self):
 		option = self["config"].getCurrent()[1]
@@ -2527,6 +2528,8 @@ class KravenHD(ConfigListScreen, Screen):
 			self.saveProfile(msg=True)
 		elif option == config.plugins.KravenHD.defaultProfile:
 			self.reset()
+		elif option == config.plugins.KravenHD.PosterPath:
+			self.session.openWithCallback(self.BrowserCallBack, KravenHDBrowser, _("Choose the poster path"))
 
 	def faq(self):
 		from Plugins.SystemPlugins.MPHelp.plugin import PluginHelp
@@ -2556,8 +2559,6 @@ class KravenHD(ConfigListScreen, Screen):
 		for x in self["config"].list:
 			if len(x) > 1:
 				x[1].save()
-			else:
-				pass
 
 		self.skinSearchAndReplace = []
 
@@ -2664,12 +2665,12 @@ class KravenHD(ConfigListScreen, Screen):
 				console1 = eConsoleAppContainer()
 				if config.plugins.KravenHD.SkinResolution.value == "hd":
 					console1.execute("tar xf /usr/lib/enigma2/python/Plugins/Extensions/KravenHD/data/HD/share.tar.gz -C /usr/share/enigma2/KravenHD/")
-					print("KravenPlugin: HD graphics now installed")
+					print("[KravenPlugin]: HD graphics now installed")
 				else:
 					console1.execute("tar xf /usr/lib/enigma2/python/Plugins/Extensions/KravenHD/data/FHD/share.tar.gz -C /usr/share/enigma2/KravenHD/")
-					print("KravenPlugin: FHD graphics now installed")
+					print("[KravenPlugin]: FHD graphics now installed")
 			else:
-				print("KravenPlugin: No need to install other graphics")
+				print("[KravenPlugin]: No need to install other graphics")
 
 		### Mainmenu Fontsize
 		if config.plugins.KravenHD.MainmenuFontsize.value == "mainmenu-small":
@@ -3021,26 +3022,32 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['selectionPixmap="KravenHD/graphics/sel_32.png"', " "])
 		else:
 			# ChannelSelection
-			CSlines = ""
-			if config.usage.servicelist_twolines.value == True:
+			CSlines = 1
+			if config.usage.servicelist_twolines.value:
 				CSlines = 2
-			else:
-				CSlines = 1
-			if not config.usage.servicelist_number_of_services.value == "by skin":
+			try:
 				CSitems = int(config.usage.servicelist_number_of_services.value)
-				CSheight = ""
-				if config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-nobile-minitv":
-					CSheight = 348
-				elif config.plugins.KravenHD.ChannelSelectionStyle.value in ("channelselection-style-nobile", "channelselection-style-nobile2"):
-					CSheight = 580
-				elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv2":
-					CSheight = 420
-				elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv-picon":
-					CSheight = 396
+				if CSitems > 0:
+					CSheight = 0
+					if config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-nobile-minitv":
+						CSheight = 348
+					elif config.plugins.KravenHD.ChannelSelectionStyle.value in ("channelselection-style-nobile", "channelselection-style-nobile2"):
+						CSheight = 580
+					elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv2":
+						CSheight = 420
+					elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv-picon":
+						CSheight = 396
+					else:
+						CSheight = 560
+					self.actCSItemHeight = int(((CSheight / CSitems) * CSlines) +1)
 				else:
-					CSheight = 560
-				self.actCSItemHeight = int(((CSheight / CSitems) * CSlines) +1)
-			else:
+					if config.plugins.KravenHD.ChannelSelectionStyle.value in ("channelselection-style-nobile", "channelselection-style-nobile2", "channelselection-style-nobile-minitv"):
+						self.actCSItemHeight = int(29 * CSlines)
+					elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv-picon":
+						self.actCSItemHeight = int(34 * CSlines)
+					else:	
+						self.actCSItemHeight = int(35 * CSlines)
+			except:
 				if config.plugins.KravenHD.ChannelSelectionStyle.value in ("channelselection-style-nobile", "channelselection-style-nobile2", "channelselection-style-nobile-minitv"):
 					self.actCSItemHeight = int(29 * CSlines)
 				elif config.plugins.KravenHD.ChannelSelectionStyle.value == "channelselection-style-minitv-picon":
@@ -3512,6 +3519,41 @@ class KravenHD(ConfigListScreen, Screen):
 			self.skinSearchAndReplace.append(['<!-- Infobar tuners -->', '<panel name="infobar-style-x4-zz1-zzz1-' + self.Tuners + '"/>'])
 			self.skinSearchAndReplace.append(['<!-- Infobar infobox -->', '<panel name="infobar-style-x4-zz1-zzz1-infobox-' + config.plugins.KravenHD.Infobox2.value + '"/>'])
 
+		# show poster
+		if config.plugins.KravenHD.PosterView.value == "on":
+			if config.plugins.KravenHD.InfobarStyle.value == "infobar-style-nopicon":
+				if config.plugins.KravenHD.InfobarChannelName.value == "none":
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-nopicon-poster"/>'])
+				elif config.plugins.KravenHD.InfobarChannelName.value in ("infobar-channelname-small", "infobar-channelname-number-small"):
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-nopicon-poster-smallname"/>'])
+				else:
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-nopicon-poster-bigname"/>'])
+			elif config.plugins.KravenHD.InfobarStyle.value == "infobar-style-x1":
+				if config.plugins.KravenHD.InfobarChannelName.value == "none":
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x1-poster"/>'])
+				elif config.plugins.KravenHD.InfobarChannelName.value in ("infobar-channelname-small", "infobar-channelname-number-small"):
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x1-poster-smallname"/>'])
+				else:
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x1-poster-bigname"/>'])
+			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2", "infobar-style-x3", "infobar-style-z1", "infobar-style-z2"):
+				if config.plugins.KravenHD.InfobarChannelName.value == "none":
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x2-x3-z1-z2-poster"/>'])
+				elif config.plugins.KravenHD.InfobarChannelName.value in ("infobar-channelname-small", "infobar-channelname-number-small"):
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x2-x3-z1-z2-poster-smallname"/>'])
+				else:
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x2-x3-z1-z2-poster-bigname"/>'])
+			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x4", "infobar-style-zz1"):
+				if config.plugins.KravenHD.InfobarChannelName.value == "none":
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x4-zz1-poster"/>'])
+				elif config.plugins.KravenHD.InfobarChannelName.value in ("infobar-channelname-small", "infobar-channelname-number-small"):
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x4-zz1-poster-smallname"/>'])
+				else:
+					self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-x4-zz1-poster-bigname"/>'])
+			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2", "infobar-style-zz3"):
+				self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-zz2-zz3-poster"/>'])
+			elif config.plugins.KravenHD.InfobarStyle.value == "infobar-style-zzz1":
+				self.skinSearchAndReplace.append(['<!-- Poster view -->', '<panel name="infobar-style-zzz1-poster"/>'])
+
 		### SecondInfobar
 		self.skinSearchAndReplace.append(['<!-- SIB style -->', '<panel name="' + config.plugins.KravenHD.SIB.value + '"/>'])
 
@@ -3837,9 +3879,7 @@ class KravenHD(ConfigListScreen, Screen):
 		if answer is True:
 			for x in self["config"].list:
 				if len(x) > 1:
-						x[1].cancel()
-				else:
-						pass
+					x[1].cancel()
 			self.close()
 		else:
 			self.mylist()
@@ -3924,126 +3964,102 @@ class KravenHD(ConfigListScreen, Screen):
 		c.flush()
 
 	def loadProfile(self, loadDefault=False):
-		global python3
-
 		if loadDefault:
-			profile=config.plugins.KravenHD.defaultProfile.value
-			fname=self.profiles+"kravenhd_default_"+profile
+			profile = config.plugins.KravenHD.defaultProfile.value
+			fname = self.profiles + "kravenhd_default_" + profile
 		else:
-			profile=config.plugins.KravenHD.customProfile.value
-			fname=self.profiles+"kravenhd_profile_"+profile
+			profile = config.plugins.KravenHD.customProfile.value
+			fname = self.profiles + "kravenhd_profile_" + profile
 		if profile and fileExists(fname):
-			print("KravenPlugin: Load profile "+fname)
+			print("[KravenPlugin]: Load profile " + fname)
 
-			pFile=open(fname, "r")
+			pFile = open(fname, "r")
 			for line in pFile:
 				try:
-					if python3:
-						line=line.split("|")
-						name=line[0]
-						value=line[1]
-						valuetype=line[2].strip('\n')
-						if not (name in ("customProfile", "DebugNames", "searchby", "cityname", "cityfound", "latitude", "longitude") or (loadDefault and name == "defaultProfile")):
-							# fix for changed value "gradient"/"grad"
-							if name=="IBStyle" and value=="gradient":
-								value="grad"
-							# fix for changed name "InfobarColor"/"InfobarGradientColor"
-							if name == "InfobarColor":
-								config.plugins.KravenHD.InfobarGradientColor.value=value
-							if valuetype == "<class 'int'>":
-								getattr(config.plugins.KravenHD, name).value=int(value)
-							elif valuetype == "<class 'hex'>":
-								getattr(config.plugins.KravenHD, name).value=hex(value)
-							elif valuetype == "<class 'list'>":
-								getattr(config.plugins.KravenHD, name).value=eval(value)
-							else:
-								getattr(config.plugins.KravenHD, name).value=str(value)
-					else:
-						line=line.split("|")
-						name=line[0]
-						value=line[1]
-						type=line[2].strip('\n')
-						if not (name in ("customProfile", "DebugNames", "searchby", "cityname", "cityfound", "latitude", "longitude") or (loadDefault and name == "defaultProfile")):
-							# fix for changed value "gradient"/"grad"
-							if name == "IBStyle" and value == "gradient":
-								value="grad"
-							# fix for changed name "InfobarColor"/"InfobarGradientColor"
-							if name == "InfobarColor":
-								config.plugins.KravenHD.InfobarGradientColor.value=value
-							if type == "<type 'int'>":
-								getattr(config.plugins.KravenHD, name).value=int(value)
-							elif type == "<type 'hex'>":
-								getattr(config.plugins.KravenHD, name).value=hex(value)
-							elif type == "<type 'list'>":
-								getattr(config.plugins.KravenHD, name).value=eval(value)
-							else:
-								getattr(config.plugins.KravenHD, name).value=str(value)
+					line = line.split("|")
+					name = line[0]
+					value = line[1]
+					valuetype = line[2].strip('\n')
+					if not (name in ("customProfile", "DebugNames", "searchby", "cityname", "cityfound", "latitude", "longitude") or (loadDefault and name == "defaultProfile")):
+						# fix for changed value "gradient"/"grad"
+						if name == "IBStyle" and value == "gradient":
+							value="grad"
+						# fix for changed name "InfobarColor"/"InfobarGradientColor"
+						if name == "InfobarColor":
+							config.plugins.KravenHD.InfobarGradientColor.value=value
+						if valuetype == "<class 'int'>":
+							getattr(config.plugins.KravenHD, name).value = int(value)
+						elif valuetype == "<class 'hex'>":
+							getattr(config.plugins.KravenHD, name).value = hex(value)
+						elif valuetype == "<class 'list'>":
+							getattr(config.plugins.KravenHD, name).value = eval(value)
+						else:
+							getattr(config.plugins.KravenHD, name).value = str(value)
 				except:
 					pass
 			pFile.close()
 
 		elif not loadDefault:
-			print("KravenPlugin: Create profile "+fname)
+			print("[KravenPlugin]: Create profile " + fname)
 			self.saveProfile(msg=False)
 
 	def saveProfile(self, msg=True):
-		profile=config.plugins.KravenHD.customProfile.value
+		profile = config.plugins.KravenHD.customProfile.value
 		if profile:
 			try:
-				fname=self.profiles+"kravenhd_profile_"+profile
-				print("KravenPlugin: Save profile "+fname)
-				pFile=open(fname, "w")
+				fname = self.profiles + "kravenhd_profile_" + profile
+				print("[KravenPlugin]: Save profile " + fname)
+				pFile = open(fname, "w")
 				for name in config.plugins.KravenHD.dict():
 					if not name in ("customProfile", "DebugNames", "searchby", "cityname", "cityfound", "latitude", "longitude"):
-						value=getattr(config.plugins.KravenHD, name).value
-						pFile.writelines(name+"|"+str(value)+"|"+str(type(value))+"\n")
+						value = getattr(config.plugins.KravenHD, name).value
+						pFile.writelines(name + "|" + str(value) + "|" + str(type(value)) + "\n")
 				pFile.close()
 				if msg:
-					self.session.open(MessageBox, _("Profile ")+str(profile)+_(" saved successfully."), MessageBox.TYPE_INFO, timeout=5)
+					self.session.open(MessageBox, _("Profile ") + str(profile) + _(" saved successfully."), MessageBox.TYPE_INFO, timeout=5)
 			except:
-				self.session.open(MessageBox, _("Profile ")+str(profile)+_(" could not be saved!"), MessageBox.TYPE_INFO, timeout=15)
+				self.session.open(MessageBox, _("Profile ") + str(profile) + _(" could not be saved!"), MessageBox.TYPE_INFO, timeout=15)
 
 	def installIcons(self, author):
-
-		if self.InternetAvailable == False: 
+		if not self.InternetAvailable:
 			return
 
-		pathname="http://picons.mynonpublic.com/"
-		instname="/usr/share/enigma2/Kraven-menu-icons/iconpackname"
-		versname="Kraven-Menu-Icons-by-"+author+".packname"
+		pathname = "http://picons.mynonpublic.com/"
+		instname = "/usr/share/enigma2/Kraven-menu-icons/iconpackname"
+		versname = "Kraven-Menu-Icons-by-" + author + ".packname"
 
 		# Read iconpack version on box
 		packinstalled = "not installed"
 		if fileExists(instname):
-			pFile=open(instname, "r")
+			pFile = open(instname, "r")
 			for line in pFile:
-				packinstalled=line.strip('\n')
+				packinstalled = line.strip('\n')
 			pFile.close()
-		print("KravenPlugin: Iconpack on box is "+packinstalled)
+		print("[KravenPlugin]: Iconpack on box is " + packinstalled)
 
 		# Read iconpack version on server
 		packonserver = "unknown"
-		fullversname=pathname+versname
-		sub=subprocess.Popen("wget -q "+fullversname+" -O /tmp/"+versname, shell=True)
+		fullversname = pathname + versname
+		sub = subprocess.Popen("wget -q " + fullversname + " -O /tmp/" + versname, shell=True)
 		sub.wait()
-		if fileExists("/tmp/"+versname):
-			pFile=open("/tmp/"+versname, "r")
+		if fileExists("/tmp/" + versname):
+			pFile=open("/tmp/" + versname, "r")
 			for line in pFile:
-				packonserver=line.strip('\n')
+				packonserver = line.strip('\n')
 			pFile.close()
-			popen("rm /tmp/"+versname)
-			print("KravenPlugin: Iconpack on server is "+packonserver)
+			popen("rm /tmp/" + versname)
+			print("[KravenPlugin]: Iconpack on server is " + packonserver)
 
 			# Download an install icon pack, if needed
 			if packinstalled != packonserver:
-				packname=packonserver
-				fullpackname=pathname+packname
-				sub=subprocess.Popen("rm -rf /usr/share/enigma2/Kraven-menu-icons/*.*; rm -rf /usr/share/enigma2/Kraven-menu-icons; wget -q "+fullpackname+" -O /tmp/"+packname+"; tar xf /tmp/"+packname+" -C /usr/share/enigma2/", shell=True)
+				packname = packonserver
+				fullpackname = pathname + packname
+				sub = subprocess.Popen("rm -rf /usr/share/enigma2/Kraven-menu-icons/*.*; rm -rf /usr/share/enigma2/Kraven-menu-icons; wget -q " + fullpackname + " -O /tmp/" + packname + "; tar xf /tmp/" + packname + " -C /usr/share/enigma2/", shell=True)
 				sub.wait()
-				popen("rm /tmp/"+packname)
-				print("KravenPlugin: Installed iconpack "+fullpackname)
+				popen("rm /tmp/" + packname)
+				print("[KravenPlugin]: Installed iconpack " + fullpackname)
 			else:
-				print("KravenPlugin: No need to install other iconpack")
+				print("[KravenPlugin]: No need to install other iconpack")
 
 	def makeTexturePreview(self, style):
 		width = 368

@@ -15,8 +15,6 @@
 #  If you think this license infringes any rights,
 #  please contact me at ochzoetna@gmail.com
 
-from __future__ import absolute_import
-from __future__ import print_function
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.config import config
@@ -29,6 +27,7 @@ from Components.Converter.Poll import Poll
 from Plugins.Extensions.KravenHD import ping
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 from Components.Language import language
+from html import unescape as _unescape
 
 lang = language.getLanguage()
 os.environ["LANGUAGE"] = lang[:2]
@@ -42,21 +41,6 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-python3 = False
-try:
-	import six
-	if six.PY2:
-		python3 = False
-	else:
-		python3 = True
-except ImportError:
-	python3 = False
-
-if python3:
-	from html import unescape as _unescape
-else:
-	from HTMLParser import HTMLParser
-	_unescape = HTMLParser().unescape
 
 WEATHER_DATA = None
 WEATHER_LOAD = True
@@ -64,12 +48,8 @@ WeekDays = [_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun")
 
 def Code_utf8(value):
 	value = "" if value is None else _unescape(value)
-	if python3:
-		value.replace('\x86', '').replace('\x87', '')
-		return value
-	else:
-		value = value.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") or ""
-		return decode(value, 'UTF-8')
+	value.replace('\x86', '').replace('\x87', '')
+	return value
 
 def getDirection(angle):
 	def normalize_angle(angle):

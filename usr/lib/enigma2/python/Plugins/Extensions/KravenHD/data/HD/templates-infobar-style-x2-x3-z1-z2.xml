@@ -75,6 +75,24 @@
 	  <eLabel position="0,69" size="532,2" backgroundColor="KravenIBLine" zPosition="-8" />
 	</screen>
 	
+	<screen name="infobar-style-x2-x3-z1-z2-poster">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="30,252" size="200,300" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
+	<screen name="infobar-style-x2-x3-z1-z2-poster-bigname">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="30,150" size="200,300" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
+	<screen name="infobar-style-x2-x3-z1-z2-poster-smallname">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="30,204" size="200,300" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
 	<screen name="infobar-style-x2-x3-z1-z2">
 	  <widget backgroundColor="KravenIBbg" source="session.Event_Now" render="KravenHDEmptyEpg" foregroundColor="KravenIBFont1" font="Regular;30" position="430,614" size="481,38" halign="left" transparent="1" zPosition="1">
 		<convert type="KravenHDEventName">Name</convert>

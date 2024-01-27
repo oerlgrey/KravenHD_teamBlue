@@ -19,13 +19,9 @@ from enigma import eTimer
 from Screens.InfoBar import InfoBar
 
 class KravenTool:
-
 	def __init__(self):
 		self.fb_proc_path = '/proc/stb/vmpeg'
-		self.fb_info = ['dst_width',
-		 'dst_height',
-		 'dst_left',
-		 'dst_top']
+		self.fb_info = ['dst_width', 'dst_height', 'dst_left', 'dst_top']
 		self.new_fb_size_pos = None
 		self.decoder = None
 		self.delayTimer = None

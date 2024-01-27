@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: KravenHD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-06 23:16+0200\n"
-"PO-Revision-Date: 2023-05-02 12:30+0200\n"
+"PO-Revision-Date: 2024-01-27 20:19+0100\n"
 "Last-Translator: oerlgrey <ochzoetna@gmail.com>\n"
 "Language-Team: oerlgrey\n"
 "Language: de\n"
@@ -1860,3 +1860,49 @@ msgstr "Gewitter mit leichtem Hagel"
 
 msgid "thunderstorm with heavy hail"
 msgstr "Gewitter mit starkem Hagel"
+
+#: KravenHD.py
+msgid "Show poster"
+msgstr "Zeige Poster"
+
+#: KravenHD.py
+msgid "Choose whether the poster should be displayed in the infobar or not."
+msgstr "Wählen Sie, ob das Poster in der Infoleiste angezeigt werden soll oder nicht."
+
+#: KravenHD.py
+msgid "The full path can be seen in the preview text."
+msgstr "Der vollständige Pfad ist im Vorschautext zu sehen."
+
+#: KravenHD.py
+msgid "Choose the poster path"
+msgstr "Wählen Sie den Posterpfad"
+
+#: KravenHD.py
+msgid "apply path"
+msgstr "Pfad übernehmen"
+
+#: KravenHD.py
+msgid "The path is not available"
+msgstr "Der Pfad ist nicht verfügbar"
+
+#: KravenHD.py
+msgid "Poster path"
+msgstr "Posterpfad"
+
+#: KravenHD.py
+msgid ""
+"Choose the poster path.\n"
+"Press OK to open the browser.\n"
+"A folder 'poster' is automatically created for the poster path."
+msgstr ""
+"Wählen Sie den Posterpfad.\n"
+"Drücken Sie OK, um den Browser zu öffnen.\n"
+"Im Posterpfad wird automatisch ein Ordner 'poster' erstellt."
+
+#: KravenHD.py
+msgid ""
+"You have no permissions.\n"
+"Please choose another path."
+msgstr ""
+"Sie haben keine Berechtigungen.\n"
+"Bitte wählen Sie einen anderen Pfad."

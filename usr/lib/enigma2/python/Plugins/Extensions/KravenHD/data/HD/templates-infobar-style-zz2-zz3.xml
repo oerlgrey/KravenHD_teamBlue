@@ -18,6 +18,12 @@
 	  <eLabel position="0,535" size="1280,2" backgroundColor="KravenIBLine" zPosition="-8" />
 	</screen>
 	
+	<screen name="infobar-style-zz2-zz3-poster">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="30,200" size="200,300" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
 	<screen name="infobar-style-zz2">
 	  <widget alphatest="blend" position="20,542" render="Picon" size="400,170" source="session.CurrentService" transparent="1" zPosition="4">
 		<convert type="ServiceName">Reference</convert>

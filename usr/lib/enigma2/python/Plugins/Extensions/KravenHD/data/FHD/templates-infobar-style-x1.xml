@@ -18,6 +18,24 @@
       <eLabel position="0,832" size="1920,3" backgroundColor="KravenIBLine" zPosition="-8" />
 	</screen>
 	
+	<screen name="infobar-style-x1-poster">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="45,330" size="300,450" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
+	<screen name="infobar-style-x1-poster-bigname">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="45,225" size="300,450" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
+	<screen name="infobar-style-x1-poster-smallname">
+	  <widget render="KravenHDpstrRndr" source="session.Event_Now" path="poster" position="45,291" size="300,450" backgroundColor="transparent" zPosition="1" transparent="0">
+        <convert type="KravenHDpstrCnvrt">POSTER</convert>
+	  </widget>
+	</screen>
+	
 	<screen name="infobar-style-x1">
 	  <widget alphatest="blend" position="30,870" size="330,198" render="Picon" source="session.CurrentService" transparent="1" zPosition="4">
 		<convert type="ServiceName">Reference</convert>
