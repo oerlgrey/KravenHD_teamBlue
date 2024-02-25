@@ -780,11 +780,6 @@ config.plugins.KravenHD.SerienRecorder = ConfigSelection(default="none", choices
 				("serienrecorder", _("on"))
 				])
 
-config.plugins.KravenHD.MediaPortal = ConfigSelection(default="none", choices = [
-				("none", _("off")),
-				("mediaportal", _("on"))
-				])
-
 config.plugins.KravenHD.PVRState = ConfigSelection(default="pvrstate-center-big", choices = [
 				("pvrstate-center-big", _("center big")),
 				("pvrstate-center-small", _("center small")),
@@ -1332,17 +1327,13 @@ class KravenHD(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("CoolTVGuide"), config.plugins.KravenHD.CoolTVGuide, _("Choose from different styles for CoolTVGuide.")))
 		list.append(getConfigListEntry(_("MovieSelection"), config.plugins.KravenHD.MovieSelection, _("Choose from different styles for MovieSelection.")))
 		list.append(getConfigListEntry(_("SerienRecorder"), config.plugins.KravenHD.SerienRecorder, _("Choose whether you want the Kraven skin to be applied to 'Serienrecorder' or not. Activation of this option prohibits the skin selection in the SR-plugin.")))
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/plugin.py"):
-			list.append(getConfigListEntry(_("MediaPortal"), config.plugins.KravenHD.MediaPortal, _("Choose whether you want the Kraven skin to be applied to 'MediaPortal' or not. To remove it again, you must deactivate it here and activate another skin in 'MediaPortal'.")))
-		else:
-			emptyLines+=1
 		list.append(getConfigListEntry(_("Popups"), config.plugins.KravenHD.PopupStyle, _("Choose from different styles to display popups like 'MessageBox', 'ChoiceBox', 'ExtensionsList', 'VirtualKeyboard' and more.")))
 		list.append(getConfigListEntry(_("PermanentClock-Color"), config.plugins.KravenHD.PermanentClock, _("Choose the colors of PermanentClock.")))
 		if config.plugins.KravenHD.PermanentClock.value in ("permanentclock-transparent-big", "permanentclock-transparent-small"):
 			list.append(getConfigListEntry(_("PermanentClock-Font"), config.plugins.KravenHD.PermanentClockFontList, _("Choose the font color of PermanentClock. Press OK to define your own RGB color.")))
 		else:
 			emptyLines+=1
-		for i in range(emptyLines+2):
+		for i in range(emptyLines+3):
 			list.append(getConfigListEntry(_(" "), ))
 
 		# page 7
@@ -2803,15 +2794,6 @@ class KravenHD(ConfigListScreen, Screen):
 			else:
 				self.skinSearchAndReplace.append(['<panel name="gradient-ibev"/>', '<panel name="box-ibev"/>'])
 
-			### MediaPortal-Player
-			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/plugin.py") and config.plugins.KravenHD.MediaPortal.value == "mediaportal":
-				if config.plugins.KravenHD.InfobarBoxColor.value == "gradient":
-					self.skinSearchAndReplace.append(['<screen name="box2-mpplayer">', '<screen name="ib-mpplayer">'])
-				elif config.plugins.KravenHD.InfobarBoxColor.value == "texture":
-					self.skinSearchAndReplace.append(['<screen name="texture-mpplayer">', '<screen name="ib-mpplayer">'])
-				else:
-					self.skinSearchAndReplace.append(['<screen name="box-mpplayer">', '<screen name="ib-mpplayer">'])
-
 		else:
 			### Infobar
 			if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2", "infobar-style-z1"):
@@ -2827,10 +2809,6 @@ class KravenHD(ConfigListScreen, Screen):
 				self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="' + config.plugins.KravenHD.InfobarStyle.value + '-gradient"/>'])
 			elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-zz2", "infobar-style-zz3"):
 				self.skinSearchAndReplace.append(['<!-- Infobar ibar -->', '<panel name="infobar-style-zz2-zz3-gradient"/>'])
-
-			### MediaPortal-Player
-			if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/plugin.py") and config.plugins.KravenHD.MediaPortal.value == "mediaportal":
-				self.skinSearchAndReplace.append(['<screen name="gradient-mpplayer">', '<screen name="ib-mpplayer">'])
 
 		### Font Colors
 		self.skinSearchAndReplace.append(['name="KravenFont1" value="#00ffffff', 'name="KravenFont1" value="#00' + config.plugins.KravenHD.Font1.value])
@@ -3186,21 +3164,6 @@ class KravenHD(ConfigListScreen, Screen):
 					self.skinSearchAndReplace.append(['<panel name="gradient-cooltv"/>', '<panel name="box-cooltv"/>'])
 					self.skinSearchAndReplace.append(['<panel name="gradient-emc"/>', '<panel name="box-emc"/>'])
 
-		### MediaPortal IB style
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/plugin.py") and config.plugins.KravenHD.MediaPortal.value == "mediaportal":
-			if config.plugins.KravenHD.IBColor.value == "all-screens":
-				if config.plugins.KravenHD.IBStyle.value == "box":
-					if config.plugins.KravenHD.InfobarBoxColor.value == "gradient":
-						self.skinSearchAndReplace.append(['<screen name="box2-mp">', '<screen name="ib-mp">'])
-					elif config.plugins.KravenHD.InfobarBoxColor.value == "texture":
-						self.skinSearchAndReplace.append(['<screen name="texture-mp">', '<screen name="ib-mp">'])
-					else:
-						self.skinSearchAndReplace.append(['<screen name="box-mp">', '<screen name="ib-mp">'])
-				else:
-					self.skinSearchAndReplace.append(['<screen name="gradient-mp">', '<screen name="ib-mp">'])
-			else:
-				self.skinSearchAndReplace.append(['<screen name="nonib-mp">', '<screen name="ib-mp">'])
-
 		### Tuner
 		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon", "infobar-style-x1", "infobar-style-x2", "infobar-style-x4", "infobar-style-z1", "infobar-style-zz1", "infobar-style-zzz1"):
 
@@ -3352,8 +3315,6 @@ class KravenHD(ConfigListScreen, Screen):
 
 		### Templates xml
 		self.appendSkinFile(self.data + 'templates-main.xml')
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/plugin.py") and config.plugins.KravenHD.MediaPortal.value == "mediaportal":
-			self.appendSkinFile(self.data + 'templates-mediaportal.xml')
 		if config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-nopicon", "infobar-style-x1"):
 			self.appendSkinFile(self.data + 'templates-' + config.plugins.KravenHD.InfobarStyle.value + '.xml')
 		elif config.plugins.KravenHD.InfobarStyle.value in ("infobar-style-x2", "infobar-style-x3", "infobar-style-z1", "infobar-style-z2"):
@@ -3768,22 +3729,6 @@ class KravenHD(ConfigListScreen, Screen):
 			self.appendSkinFile(self.data + config.plugins.KravenHD.SerienRecorder.value + ".xml")
 			self.changeColor("popup_bg", "popup_bg", self.skincolorbackgroundcolor, config.plugins.KravenHD.Border.value)
 
-		### MediaPortal
-		console4 = eConsoleAppContainer()
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/plugin.py"):
-			if config.plugins.KravenHD.SkinResolution.value == "hd":
-				if config.plugins.KravenHD.MediaPortal.value == "mediaportal":
-					console4.execute("tar xf /usr/lib/enigma2/python/Plugins/Extensions/KravenHD/data/HD/MediaPortal.tar.gz -C /usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_720/")
-				else:
-					if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_720/KravenHD/MP_skin.xml"):
-						console4.execute("rm -rf /usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_720/KravenHD")
-			else:
-				if config.plugins.KravenHD.MediaPortal.value == "mediaportal":
-					console4.execute("tar xf /usr/lib/enigma2/python/Plugins/Extensions/KravenHD/data/FHD/MediaPortal.tar.gz -C /usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_1080/")
-				else:
-					if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_1080/KravenHD/MP_skin.xml"):
-						console4.execute("rm -rf /usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_1080/KravenHD")
-
 		### skin-end
 		self.appendSkinFile(self.data + "skin-end.xml")
 
@@ -3820,13 +3765,6 @@ class KravenHD(ConfigListScreen, Screen):
 		# make selection pixmaps
 		if config.plugins.KravenHD.SelectionStyle.value == "pixmap":
 			self.makeSELGradientpng()
-
-		# copy bsWindow to MediaPortal-folder
-		console5 = eConsoleAppContainer()
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_720/KravenHD/MP_skin.xml") and config.plugins.KravenHD.MediaPortal.value == "mediaportal" and config.plugins.KravenHD.SkinResolution.value == "hd":
-			console5.execute("cp /usr/share/enigma2/KravenHD/graphics/bs_* /usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_720/KravenHD/images/")
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_1080/KravenHD/MP_skin.xml") and config.plugins.KravenHD.MediaPortal.value == "mediaportal" and config.plugins.KravenHD.SkinResolution.value == "fhd":
-			console5.execute("cp /usr/share/enigma2/KravenHD/graphics/bs_* /usr/lib/enigma2/python/Plugins/Extensions/MediaPortal/skins_1080/KravenHD/images/")
 
 		# Thats it
 		self.restart()
