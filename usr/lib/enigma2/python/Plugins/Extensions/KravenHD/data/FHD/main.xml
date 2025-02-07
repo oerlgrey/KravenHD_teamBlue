@@ -2251,6 +2251,17 @@
     <panel name="OKExit"/>
   </screen>
 
+  <screen name="SelectImage" position="0,0" size="1920,1080" title="Select Image" flags="wfNoBorder" backgroundColor="transparent">
+	<!--*SelectImage*-->
+    <widget backgroundColor="Kravenbg3" name="list" font="Regular;32" foregroundColor="KravenFont1" itemHeight="45" selectionPixmap="KravenHD/graphics/sel_30.png" position="63,120" size="1104,810" scrollbarMode="showOnDemand" transparent="1" />
+    <panel name="Title-big"/>
+	<!-- Logo -->
+	<panel name="gradient-menu"/>
+    <panel name="Colorbuttons"/>
+    <panel name="SourceRedGreenYellowBlue"/>
+    <panel name="OKExit"/>
+  </screen>
+
   <screen name="doFlashImage" position="0,0" size="1920,1080" title="doFlashImage" flags="wfNoBorder" backgroundColor="transparent">
 	<!--*doFlashImage*-->
     <widget backgroundColor="Kravenbg3" name="imageList" font="Regular;32" foregroundColor="KravenFont1" itemHeight="45" selectionPixmap="KravenHD/graphics/sel_30.png" position="63,120" size="1104,810" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />

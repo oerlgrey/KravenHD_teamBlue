@@ -3784,7 +3784,7 @@ class KravenHD(ConfigListScreen, Screen):
 		skinPartSearchAndReplace:
 		 (optional) a list of search and replace arrays. first element, search, second for replace
 		"""
-		skFile = open(appendFileName, "r", encoding='utf-8')
+		skFile = open(appendFileName, "r")
 		file_lines = skFile.readlines()
 		skFile.close()
 
